@@ -68,15 +68,30 @@ export default function Header() {
     };
   }, []);
 
-  const getLinkColor = (item: (typeof items)[number]) => {
-    if (item.href.startsWith("tel:")) {
-      return pathname === "/"
-        ? "text-blue-900 hover:text-blue-900 font-semibold"
-        : "text-gray-800 hover:text-blue-900 font-semibold";
+  /**
+   * Footer’daki stilleri header linklerine uygular.
+   * - Aktif: text-blue-600 + alt çizgi
+   * - Pasif: text-gray-700 + hover:text-blue-600
+   * Telefon linki için alt çizgi uygulanmaz.
+   */
+  const getLinkClasses = (
+    href: string,
+    { isPhone = false }: { isPhone?: boolean } = {}
+  ) => {
+    const isActive = pathname === href;
+
+    if (isPhone) {
+      // Telefonu sade tutuyoruz; alt çizgi yok.
+      return `transition-colors text-sm font-semibold ${
+        isActive ? "text-blue-600" : "text-gray-700 hover:text-blue-600"
+      }`;
     }
-    return pathname === item.href
-      ? "text-blue-900 hover:text-blue-900 font-medium"
-      : "text-gray-800 hover:text-blue-900 font-medium";
+
+    return `transition-colors text-sm font-medium ${
+      isActive
+        ? "text-blue-600 border-b-2 border-blue-600 pb-1"
+        : "text-gray-700 hover:text-blue-600"
+    }`;
   };
 
   return (
@@ -116,18 +131,23 @@ export default function Header() {
             {/* Geniş ekran nav (≥1180px) */}
             <nav className="hidden min-[1180px]:flex w-full items-center px-0">
               <ul className="flex w-full items-center justify-between">
-                {items.map((item) => (
-                  <li key={item.name} className="whitespace-nowrap">
-                    <Link
-                      href={item.href}
-                      className={`${getLinkColor(
-                        item
-                      )} transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2`}
-                    >
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
+                {items.map((item) => {
+                  const isActive =
+                    pathname === item.href && !item.href.startsWith("tel:");
+                  return (
+                    <li key={item.name} className="whitespace-nowrap">
+                      <Link
+                        href={item.href}
+                        aria-current={isActive ? "page" : undefined}
+                        className={`${getLinkClasses(item.href, {
+                          isPhone: item.href.startsWith("tel:"),
+                        })} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2`}
+                      >
+                        {item.name}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </nav>
 
@@ -135,9 +155,9 @@ export default function Header() {
             <div className="hidden min-[833px]:flex max-[1180px]:flex min-[1180px]:hidden items-center justify-between w-full">
               <Link
                 href={phone.href}
-                className={`${getLinkColor(
-                  phone
-                )} transition-colors duration-200 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2`}
+                className={`${getLinkClasses(phone.href, {
+                  isPhone: true,
+                })} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2`}
               >
                 {phone.name}
               </Link>
@@ -207,20 +227,24 @@ export default function Header() {
         className="absolute top-full left-0 right-0 bg-[#fdf3e7] shadow-lg border-t z-40 overflow-hidden min-[833px]:block max-[1180px]:block min-[1180px]:hidden"
       >
         <nav className="py-2">
-          {navOnly.map((item, index) => (
-            <div key={item.name}>
-              <Link
-                href={item.href}
-                className={`block text-center py-2 px-4 ${getLinkColor(
-                  item
-                )} hover:bg-gray-50 transition-colors duration-200`}
-                onClick={() => setTabletOpen(false)}
-              >
-                {item.name}
-              </Link>
-              {index < navOnly.length - 1 && <Separator className="my-1" />}
-            </div>
-          ))}
+          {navOnly.map((item, index) => {
+            const isActive = pathname === item.href;
+            return (
+              <div key={item.name}>
+                <Link
+                  href={item.href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={`block text-center py-2 px-4 ${getLinkClasses(
+                    item.href
+                  )} hover:bg-gray-50 transition-colors duration-200`}
+                  onClick={() => setTabletOpen(false)}
+                >
+                  {item.name}
+                </Link>
+                {index < navOnly.length - 1 && <Separator className="my-1" />}
+              </div>
+            );
+          })}
         </nav>
       </MenuPanel>
 
@@ -231,20 +255,26 @@ export default function Header() {
         className="absolute top-full left-0 right-0 bg-[#fdf3e7] shadow-lg border-t z-40 overflow-hidden max-[832px]:block"
       >
         <nav className="py-2">
-          {items.map((item, index) => (
-            <div key={item.name}>
-              <Link
-                href={item.href}
-                className={`block text-center py-2 px-4 ${getLinkColor(
-                  item
-                )} hover:bg-gray-50 transition-colors duration-200`}
-                onClick={() => setMobileOpen(false)}
-              >
-                {item.name}
-              </Link>
-              {index < items.length - 1 && <Separator className="my-1" />}
-            </div>
-          ))}
+          {items.map((item, index) => {
+            const isActive =
+              pathname === item.href && !item.href.startsWith("tel:");
+            return (
+              <div key={item.name}>
+                <Link
+                  href={item.href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={`block text-center py-2 px-4 ${getLinkClasses(
+                    item.href,
+                    { isPhone: item.href.startsWith("tel:") }
+                  )} hover:bg-gray-50 transition-colors duration-200`}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {item.name}
+                </Link>
+                {index < items.length - 1 && <Separator className="my-1" />}
+              </div>
+            );
+          })}
         </nav>
       </MenuPanel>
     </div>

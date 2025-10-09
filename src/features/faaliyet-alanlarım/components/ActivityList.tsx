@@ -4,6 +4,7 @@ import { services } from "@/data/service";
 import { Container } from "@/components/Container";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import Section from "@/components/Section";
 
 function slugify(str: string) {
   return str
@@ -20,21 +21,19 @@ function slugify(str: string) {
 
 export default function ActivityListSimple() {
   return (
-    <section className="py-16 bg-gradient-to-br from-gray-50 to-white">
-      <Container className="mx-auto w-full max-w-none">
-        <div className="-mx-4 flex flex-wrap justify-center">
+    <Section className="bg-gradient-to-br from-gray-50 to-white">
+      <Container className="mx-auto w-full ">
+        {/* Satırları saran flex + ortalama */}
+        <div className="flex flex-wrap justify-center gap-6">
           {services.map((service) => {
             const Icon = service.icon;
             const id = slugify(service.title);
 
             return (
+              // Genişlikler: mobilden 1, tablet 2, desktop 3 sütun
               <div
                 key={id}
-                className="
-                  w-full px-4 mb-8
-                  sm:w-1/2
-                  lg:w-1/3
-                "
+                className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
               >
                 <Card className="h-full border border-gray-200 shadow-sm">
                   <CardHeader className="pb-2">
@@ -43,7 +42,6 @@ export default function ActivityListSimple() {
                         className="w-7 h-7 text-blue-700"
                         aria-hidden="true"
                       />
-                      {/* Yaşlı kitle için daha büyük başlık */}
                       <CardTitle className="text-2xl font-bold text-gray-900">
                         {service.title}
                       </CardTitle>
@@ -52,7 +50,6 @@ export default function ActivityListSimple() {
                   </CardHeader>
 
                   <CardContent>
-                    {/* Okunabilirlik için daha büyük metin ve geniş satır aralığı */}
                     <ul className="mt-4 space-y-3 text-[17px] leading-8 text-gray-800">
                       {service.features.map((feature, i) => (
                         <li key={i} className="flex items-start gap-2">
@@ -68,6 +65,6 @@ export default function ActivityListSimple() {
           })}
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

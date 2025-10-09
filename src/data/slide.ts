@@ -1,5 +1,6 @@
 export interface Slide {
   image: string;
+  mobileImage: string;
   title: string;
   description: string;
   features: string[];
@@ -8,6 +9,7 @@ export interface Slide {
 export const slides: Slide[] = [
   {
     image: "/slider/insaat.webp",
+    mobileImage: "/slider/mobile/insaat-mobile.webp",
     title: "İnşaat Hukuku",
     description:
       "Projelerinizde hukiki süreçleri yönetir, sözleşmeler ve uyuşmazlıklarda çözüm üretiriz.",
@@ -20,7 +22,8 @@ export const slides: Slide[] = [
     ],
   },
   {
-    image: "/slider/gayrimenkul2.jpg",
+    image: "/slider/gayrimenkul.webp",
+    mobileImage: "/slider/mobile/gayrimenkul-mobile.webp",
     title: "Gayrimenkul Hukuku",
     description:
       "Taşınmaz mülkiyetinde haklarınızı korur, tapu iptali ve tescil süreçlerini yürütürüz.",
@@ -33,7 +36,8 @@ export const slides: Slide[] = [
     ],
   },
   {
-    image: "/slider/miras.jpg",
+    image: "/slider/miras.webp",
+    mobileImage: "/slider/mobile/miras-mobile.webp",
     title: "Miras Hukuku",
     description:
       "Miras yoluyla intikal eden taşınmazlarda paydaş ihtilaflarını çözer, haklarınızı güvence altına alırız.",
@@ -46,7 +50,8 @@ export const slides: Slide[] = [
     ],
   },
   {
-    image: "/slider/kira.jpg",
+    image: "/slider/kira.webp",
+    mobileImage: "/slider/mobile/kira-mobile.webp",
     title: "Kira Hukuku",
     description:
       "Kira ilişkilerinde hak ve yükümlülüklerinizi korur, uyuşmazlıklarda hukuki destek sağlar ve süreçleri yönetiriz.",
@@ -60,6 +65,7 @@ export const slides: Slide[] = [
   },
   {
     image: "/slider/imar.webp",
+    mobileImage: "/slider/mobile/imar-mobile.webp",
     title: "Kamulaştırma ve İmar Hukuku",
     description:
       "Kamulaştırma ve imar süreçlerinde haklarınızı korur, hukuki strateji ve çözüm odaklı takip yürütürüz.",

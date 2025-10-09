@@ -26,15 +26,28 @@ function usePrefersReducedMotion() {
   return reduced;
 }
 
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mql = window.matchMedia(`(max-width:${breakpoint - 1}px)`);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    setIsMobile(mql.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, [breakpoint]);
+  return isMobile;
+}
+
 export default function HeroSlider() {
   const prefersReducedMotion = usePrefersReducedMotion();
+  const isMobile = useIsMobile(768);
+
   const [isHovered, setHovered] = useState(false);
   const [isFocused, setFocused] = useState(false);
   const [inView, setInView] = useState(true);
 
   const sectionRef = useRef<HTMLElement | null>(null);
 
-  // Autoplay kontrolü
   const autoplayRef = useRef(
     Autoplay({
       delay: SLIDE_DURATION,
@@ -55,7 +68,6 @@ export default function HeroSlider() {
     plugins
   );
 
-  // Görünürlük izleme
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
@@ -80,7 +92,6 @@ export default function HeroSlider() {
     return () => io.disconnect();
   }, [prefersReducedMotion, isHovered, isFocused]);
 
-  // Sekme görünürlüğü
   useEffect(() => {
     const onVis = () => {
       if (document.hidden) {
@@ -93,7 +104,6 @@ export default function HeroSlider() {
     return () => document.removeEventListener("visibilitychange", onVis);
   }, [inView, prefersReducedMotion, isHovered, isFocused]);
 
-  // Hover/Focus kontrol
   const handleMouseEnter = useCallback(() => {
     setHovered(true);
     autoplayRef.current?.stop?.();
@@ -132,23 +142,26 @@ export default function HeroSlider() {
       <div className="embla w-full h-full" ref={emblaRef}>
         <div className="embla__container flex h-full">
           {SLIDES_DATA.map((slide, i) => {
+            const imgSrc = isMobile
+              ? slide.mobileImage || slide.image
+              : slide.image;
+
             return (
               <div
                 key={i}
                 className="embla__slide relative w-full h-full flex-[0_0_100%]"
               >
                 <Image
-                  src={slide.image || "/placeholder.svg"}
+                  src={imgSrc}
                   alt={`${slide.title} görseli`}
                   fill
                   priority={i === 0}
                   loading={i === 0 ? "eager" : undefined}
                   fetchPriority={i === 0 ? "high" : "auto"}
                   sizes="100vw"
-                  className="object-cover object-top"
+                  className="object-cover sm:object-top object-center"
                 />
 
-                {/* overlayler */}
                 <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/20" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
@@ -174,7 +187,6 @@ export default function HeroSlider() {
                         {slide.description}
                       </p>
 
-                      {/* FEATURES -> Badge olarak, tıklanınca /faaliyet-alanlarim */}
                       <div className="flex flex-wrap gap-2">
                         {slide.features.map((f: string, idx: number) => (
                           <Link
@@ -198,11 +210,11 @@ export default function HeroSlider() {
                           <Button
                             size="lg"
                             className="
-    bg-blue-800 text-white font-semibold px-8 py-4 rounded-xl shadow-lg
-    transition-all duration-300 ease-out
-    hover:bg-blue-600 hover:scale-105 hover:shadow-xl
-    focus:ring-2 focus:ring-blue-400 focus:outline-none
-  "
+                              bg-blue-800 text-white font-semibold px-8 py-4 rounded-xl shadow-lg
+                              transition-all duration-300 ease-out
+                              hover:bg-blue-600 hover:scale-105 hover:shadow-xl
+                              focus:ring-2 focus:ring-blue-400 focus:outline-none
+                            "
                           >
                             Detaylı Bilgi
                           </Button>

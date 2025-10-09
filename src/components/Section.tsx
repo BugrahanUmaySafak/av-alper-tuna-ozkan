@@ -1,15 +1,15 @@
 import type { PropsWithChildren } from "react";
 import clsx from "clsx";
 
-export function VerticalContainer({
+export function Section({
   children,
   className,
 }: PropsWithChildren<{ className?: string }>) {
   return (
-    <div className={clsx("max-w-7xl py-6 sm:py-8 lg:py-16", className)}>
+    <section className={clsx("py-4 sm:py-6 lg:py-16", className)}>
       {children}
-    </div>
+    </section>
   );
 }
 
-export default VerticalContainer;
+export default Section;

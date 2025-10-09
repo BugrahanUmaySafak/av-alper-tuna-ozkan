@@ -1,9 +1,10 @@
 import Container from "@/components/Container";
+import Section from "@/components/Section";
 import Image from "next/image";
 
 export default function AboutMe() {
   return (
-    <section className="py-16">
+    <Section>
       <Container>
         <div className="grid md:grid-cols-12 gap-8 items-center">
           {/* Görsel */}
@@ -69,6 +70,6 @@ export default function AboutMe() {
           </div>
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

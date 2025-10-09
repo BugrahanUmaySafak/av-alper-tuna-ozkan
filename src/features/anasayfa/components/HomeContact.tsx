@@ -7,10 +7,11 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Container from "@/components/Container";
+import Section from "@/components/Section";
 
 export default function HomeContact() {
   return (
-    <section className="py-16">
+    <Section>
       <Container className="mx-auto w-full max-w-none">
         <Card className="relative w-full rounded-2xl overflow-hidden shadow-xl border-0 inset-0">
           <div className="absolute inset-0 z-0 blur-xs">
@@ -27,8 +28,11 @@ export default function HomeContact() {
           </div>
 
           <div className="relative z-10 text-center px-6 py-16 md:px-12 lg:px-16">
-            <Badge className="mb-4">Hemen İletişime Geçin</Badge>
-
+            <Link href="/iletisim">
+              <Badge className="mb-4 cursor-pointer ">
+                Hemen İletişime Geçin
+              </Badge>
+            </Link>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
               Hukuki Danışmanlık İçin Bize Ulaşın
             </h2>
@@ -64,6 +68,6 @@ export default function HomeContact() {
           </div>
         </Card>
       </Container>
-    </section>
+    </Section>
   );
 }

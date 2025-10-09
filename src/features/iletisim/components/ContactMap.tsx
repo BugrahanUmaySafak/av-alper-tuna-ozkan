@@ -5,6 +5,7 @@ import Container from "@/components/Container";
 
 import type { Map as LeafletMap, Marker as LeafletMarker } from "leaflet";
 import { Button } from "@/components/ui/button";
+import Section from "@/components/Section";
 
 type Coords = [number, number];
 
@@ -160,7 +161,7 @@ export default function ContactMap() {
   }
 
   return (
-    <section className="py-16">
+    <Section>
       <Container>
         <div className="mb-4 flex items-center gap-2 ">
           <Button
@@ -217,6 +218,6 @@ export default function ContactMap() {
           )}
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

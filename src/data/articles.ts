@@ -215,7 +215,7 @@ export const videoData: Video[] = [
   {
     _id: "video_1",
     title: "Miras Hukuku: Saklı Pay Nedir?",
-    youtubeId: "iN3w0qv4Kpw",
+    youtubeId: "_aZ8bBMI1D0",
     description:
       "Saklı pay kavramı ve muris muvazaası davaları hakkında kısa bilgi.",
     createdAt: "2025-09-20T11:00:00.000Z",
@@ -224,7 +224,7 @@ export const videoData: Video[] = [
   {
     _id: "video_2",
     title: "Gayrimenkul Hukuku: Tapu İptal Davaları",
-    youtubeId: "OEV8gMkCHXQ",
+    youtubeId: "Qw1Fe0RZQV0",
     description: "Tapu iptal ve tescil süreçlerinin temel aşamaları.",
     createdAt: "2025-09-21T13:30:00.000Z",
     updatedAt: "2025-09-21T13:30:00.000Z",

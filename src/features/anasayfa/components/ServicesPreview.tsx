@@ -13,13 +13,16 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { services } from "@/data/service";
 import { Container } from "@/components/Container";
+import Section from "@/components/Section";
 
 export default function ServicesPreview() {
   return (
-    <section className="py-6 sm:py-8 lg:py-16">
+    <Section>
       <Container className="mx-auto w-full max-w-none">
         <div className="text-center mb-8">
-          <Badge className="mb-4">Faaliyet Alanlarım</Badge>
+          <Link href="/faaliyet-alanlarim">
+            <Badge className="mb-4">Faaliyet Alanlarım</Badge>
+          </Link>
           <p className="text-xl max-w-3xl mx-auto leading-relaxed">
             Gayrimenkul Hukuku ve Miras Hukuku alanlarında karşılaştığınız her
             türlü hukuki soruna çözüm üretiyor, sürecin her türlü aşamasında
@@ -80,6 +83,6 @@ export default function ServicesPreview() {
           </Button>
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

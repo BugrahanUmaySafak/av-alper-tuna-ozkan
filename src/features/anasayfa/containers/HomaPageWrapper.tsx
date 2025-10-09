@@ -8,12 +8,12 @@ const ServicesPreview = React.lazy(
   () => import("@/features/anasayfa/components/ServicesPreview")
 );
 
-const HomeContact = React.lazy(
-  () => import("@/features/anasayfa/components/HomeContact")
-);
-
 const InformationContent = React.lazy(
   () => import("@/features/anasayfa/components/InformationContent")
+);
+
+const HomeContact = React.lazy(
+  () => import("@/features/anasayfa/components/HomeContact")
 );
 
 export default function HomePageWrapper() {
@@ -36,6 +36,7 @@ export default function HomePageWrapper() {
       <Container>
         <Separator />
       </Container>
+
       <Suspense fallback={<div>Yükleniyor...</div>}>
         <HomeContact />
       </Suspense>

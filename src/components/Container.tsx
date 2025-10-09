@@ -10,9 +10,7 @@ export function Container({
   className,
 }: PropsWithChildren<{ className?: string }>) {
   return (
-    <div className={clsx("px-4 sm:px-6 lg:px-16", className)}>
-      {children}
-    </div>
+    <div className={clsx("px-4 sm:px-6 lg:px-16", className)}>{children}</div>
   );
 }
 

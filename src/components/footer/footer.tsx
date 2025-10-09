@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import Container from "../Container";
 
 export default function Footer() {
   const pathname = usePathname();
@@ -15,8 +16,8 @@ export default function Footer() {
   ] as const;
 
   return (
-    <footer className="w-full pb-16 md:pb-20 border-t bg-[#fdf3e7] text-sm text-gray-500">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between">
+    <footer className="w-full pb-16 md:pb-20 border-t bg-[#fdf3e7] text-sm text-gray-500 ">
+      <Container className="mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between">
         <p className="text-center sm:text-left text-gray-700">
           © 2025 Özkan Hukuk & Danışmanlık. Tüm hakları saklıdır.
         </p>
@@ -40,7 +41,7 @@ export default function Footer() {
             );
           })}
         </nav>
-      </div>
+      </Container>
     </footer>
   );
 }
