@@ -13,7 +13,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { services } from "@/data/service";
 import { Container } from "@/components/Container";
-import Section from "@/components/Section";
+import Section from "@/components/section/Section";
 
 export default function ServicesPreview() {
   return (

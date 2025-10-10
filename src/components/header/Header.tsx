@@ -30,7 +30,6 @@ export default function Header() {
   const [tabletOpen, setTabletOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // route değişince ve resize olduğunda panelleri kapat
   useEffect(() => {
     setTabletOpen(false);
     setMobileOpen(false);
@@ -45,7 +44,6 @@ export default function Header() {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  // dış tık & ESC ile kapat
   useEffect(() => {
     const onDown = (e: MouseEvent) => {
       if (!containerRef.current) return;
@@ -68,39 +66,29 @@ export default function Header() {
     };
   }, []);
 
-  /**
-   * Footer’daki stilleri header linklerine uygular.
-   * - Aktif: text-blue-600 + alt çizgi
-   * - Pasif: text-gray-700 + hover:text-blue-600
-   * Telefon linki için alt çizgi uygulanmaz.
-   */
   const getLinkClasses = (
     href: string,
     { isPhone = false }: { isPhone?: boolean } = {}
   ) => {
     const isActive = pathname === href;
+    const base = "transition-colors text-base font-medium";
 
     if (isPhone) {
-      // Telefonu sade tutuyoruz; alt çizgi yok.
-      return `transition-colors text-sm font-semibold ${
+      return `${base} ${
         isActive ? "text-blue-600" : "text-gray-700 hover:text-blue-600"
-      }`;
+      } font-semibold`;
     }
 
-    return `transition-colors text-sm font-medium ${
-      isActive
-        ? "text-blue-600 border-b-2 border-blue-600 pb-1"
-        : "text-gray-700 hover:text-blue-600"
+    return `${base} ${
+      isActive ? "text-blue-600" : "text-gray-700 hover:text-blue-600"
     }`;
   };
 
   return (
-    // Sticky kapsayıcı: header + dropdownlar birlikte yapışır
     <div ref={containerRef} className="sticky top-0 z-50">
       <header className="shadow-lg relative">
-        {/* DESKTOP (≥ 833px) */}
+        {/* DESKTOP */}
         <div className="flex max-[832px]:hidden">
-          {/* Sol mavi blok (logo + isim) */}
           <div className="bg-blue-900 text-white py-3 px-16 flex items-center space-x-4">
             <Link
               href="/"
@@ -126,9 +114,7 @@ export default function Header() {
             </Link>
           </div>
 
-          {/* Sağ açık renk blok (nav) */}
           <div className="bg-[#fdf3e7] flex-1 px-16 flex items-center">
-            {/* Geniş ekran nav (≥1180px) */}
             <nav className="hidden min-[1180px]:flex w-full items-center px-0">
               <ul className="flex w-full items-center justify-between">
                 {items.map((item) => {
@@ -151,7 +137,7 @@ export default function Header() {
               </ul>
             </nav>
 
-            {/* Tablet bar (833px–1179px) */}
+            {/* Tablet bar */}
             <div className="hidden min-[833px]:flex max-[1180px]:flex min-[1180px]:hidden items-center justify-between w-full">
               <Link
                 href={phone.href}
@@ -181,9 +167,8 @@ export default function Header() {
           </div>
         </div>
 
-        {/* MOBILE (≤ 832px) */}
+        {/* MOBILE */}
         <div className="hidden max-[832px]:flex items-center justify-between bg-blue-900 text-white px-4 h-[73.3px]">
-          {/* Sol: logo */}
           <Link
             href="/"
             className="flex items-center gap-3 min-w-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-sm"
@@ -191,7 +176,6 @@ export default function Header() {
             <Image src="/logo/logo.svg" alt="Logo" width={28} height={28} />
           </Link>
 
-          {/* Orta: isim */}
           <Link
             href="/"
             className="flex-1 text-center leading-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-sm"
@@ -202,7 +186,6 @@ export default function Header() {
             </p>
           </Link>
 
-          {/* Sağ: menü butonu */}
           <Button
             variant="ghost"
             size="icon"
@@ -226,7 +209,7 @@ export default function Header() {
         id="tablet-menu"
         className="absolute top-full left-0 right-0 bg-[#fdf3e7] shadow-lg border-t z-40 overflow-hidden min-[833px]:block max-[1180px]:block min-[1180px]:hidden"
       >
-        <nav className="py-2">
+        <nav className="py-2 text-center">
           {navOnly.map((item, index) => {
             const isActive = pathname === item.href;
             return (
@@ -234,9 +217,9 @@ export default function Header() {
                 <Link
                   href={item.href}
                   aria-current={isActive ? "page" : undefined}
-                  className={`block text-center py-2 px-4 ${getLinkClasses(
+                  className={`inline-block py-2 ${getLinkClasses(
                     item.href
-                  )} hover:bg-gray-50 transition-colors duration-200`}
+                  )} transition-colors duration-200`}
                   onClick={() => setTabletOpen(false)}
                 >
                   {item.name}
@@ -254,7 +237,7 @@ export default function Header() {
         id="mobile-menu"
         className="absolute top-full left-0 right-0 bg-[#fdf3e7] shadow-lg border-t z-40 overflow-hidden max-[832px]:block"
       >
-        <nav className="py-2">
+        <nav className="py-2 text-center">
           {items.map((item, index) => {
             const isActive =
               pathname === item.href && !item.href.startsWith("tel:");
@@ -263,10 +246,9 @@ export default function Header() {
                 <Link
                   href={item.href}
                   aria-current={isActive ? "page" : undefined}
-                  className={`block text-center py-2 px-4 ${getLinkClasses(
-                    item.href,
-                    { isPhone: item.href.startsWith("tel:") }
-                  )} hover:bg-gray-50 transition-colors duration-200`}
+                  className={`inline-block py-2 ${getLinkClasses(item.href, {
+                    isPhone: item.href.startsWith("tel:"),
+                  })} transition-colors duration-200`}
                   onClick={() => setMobileOpen(false)}
                 >
                   {item.name}

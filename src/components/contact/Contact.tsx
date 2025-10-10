@@ -3,11 +3,10 @@
 import Link from "next/link";
 import { Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Section from "@/components/Section";
 
 export default function Iletisim() {
   return (
-    <Section className="relative">
+    <>
       <Button
         asChild
         className={`
@@ -26,6 +25,6 @@ export default function Iletisim() {
           <span className="whitespace-nowrap">İletişime Geçin</span>
         </Link>
       </Button>
-    </Section>
+    </>
   );
 }

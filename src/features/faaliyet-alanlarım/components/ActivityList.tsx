@@ -4,7 +4,7 @@ import { services } from "@/data/service";
 import { Container } from "@/components/Container";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import Section from "@/components/Section";
+import Section from "@/components/section/Section";
 
 function slugify(str: string) {
   return str

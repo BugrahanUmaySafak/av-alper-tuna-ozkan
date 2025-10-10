@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import type { Blog, Video } from "@/data/articles";
 import Container from "@/components/Container";
-import Section from "@/components/Section";
+import Section from "@/components/section/Section";
 
 interface Props {
   videos: Video[];

@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Container from "@/components/Container";
-import Section from "@/components/Section";
+import Section from "@/components/section/Section";
 
 export default function HomeContact() {
   return (

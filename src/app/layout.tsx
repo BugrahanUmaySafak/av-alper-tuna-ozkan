@@ -1,4 +1,3 @@
-// app/layout.tsx (veya src/app/layout.tsx)
 import Header from "@/components/header/Header";
 import "@/style/globals.css";
 import { Inter } from "next/font/google";
@@ -17,9 +16,24 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"
   ),
   icons: [
-    { rel: "icon", url: "/ico/favicon-16x16.ico", sizes: "16x16" },
-    { rel: "icon", url: "/ico/favicon-32x32.ico", sizes: "32x32" },
-    { rel: "icon", url: "/ico/favicon-48x48.ico", sizes: "48x48" },
+    {
+      rel: "icon",
+      url: "/ico/favicon-16x16.ico",
+      sizes: "16x16",
+      type: "image/x-icon",
+    },
+    {
+      rel: "icon",
+      url: "/ico/favicon-32x32.ico",
+      sizes: "32x32",
+      type: "image/x-icon",
+    },
+    {
+      rel: "icon",
+      url: "/ico/favicon-48x48.ico",
+      sizes: "48x48",
+      type: "image/x-icon",
+    },
   ],
 };
 
@@ -43,9 +57,9 @@ export default function RootLayout({
       <head>
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
       </head>
-      <body>
+      <body className="min-h-screen flex flex-col">
         <Header />
-        {children}
+        <main className="flex-1">{children}</main>
         <IletisimLazy />
         <FooterLazy />
       </body>

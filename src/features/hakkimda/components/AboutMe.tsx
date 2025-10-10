@@ -1,5 +1,5 @@
 import Container from "@/components/Container";
-import Section from "@/components/Section";
+import Section from "@/components/section/Section";
 import Image from "next/image";
 
 export default function AboutMe() {
