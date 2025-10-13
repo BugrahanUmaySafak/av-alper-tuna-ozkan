@@ -5,7 +5,7 @@ import type { Metadata, Viewport } from "next";
 import IletisimLazy from "@/components/contact/ContactLazy";
 import FooterLazy from "@/components/footer/FooterLazy";
 import { Toaster } from "@/components/ui/sonner";
-import { ThemeProvider } from "next-themes"; // ✅ eklendi
+import { ThemeProvider } from "next-themes";
 
 const inter = Inter({
   subsets: ["latin", "latin-ext"],
@@ -43,10 +43,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#ffffff" },
-  ],
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({
@@ -63,11 +60,11 @@ export default function RootLayout({
       <head>
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
       </head>
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-screen flex flex-col bg-white text-black">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="light" // ✅ her zaman açık tema
+          forcedTheme="light" // ✅ kullanıcı değiştiremez
           disableTransitionOnChange
         >
           <Header />
