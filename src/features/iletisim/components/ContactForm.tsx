@@ -1,9 +1,11 @@
+// src/features/iletisim/components/ContactForm.tsx
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { useForm, type FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { contactSchema, type WizardSchema } from "./Form";
+import { contactSchema, type ContactInput } from "@/lib/validation/contact";
+import { useContactSubmit } from "@/features/iletisim/hooks/useContactSubmit";
 import Image from "next/image";
 import { Send, Loader2 } from "lucide-react";
 import { toast } from "sonner";
@@ -27,78 +29,68 @@ interface ContactFormProps {
 }
 
 export default function ContactForm({ onSuccess }: ContactFormProps) {
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
+  const { isSubmitting, submit } = useContactSubmit();
 
-  const schema = contactSchema();
-  const form = useForm<WizardSchema>({
-    resolver: zodResolver(schema),
+  const form = useForm<ContactInput>({
+    resolver: zodResolver(contactSchema),
     mode: "onSubmit",
     defaultValues: { name: "", email: "", phone: "", title: "", content: "" },
   });
 
+  // E-posta/Telefon’dan biri yazılınca iki alanın manuel hataları temizlensin
   const email = form.watch("email");
   const phone = form.watch("phone");
-
   useEffect(() => {
-    if (email || phone) {
-      form.clearErrors(["email", "phone"]);
-    }
+    if (email || phone) form.clearErrors(["email", "phone"]);
   }, [email, phone, form]);
 
-  const onInvalid = (errors: FieldErrors<WizardSchema>) => {
-    const order: (keyof WizardSchema)[] = [
+  // Hata sırası: name → (email/phone) → title → content (Zod mesajlarını kullan)
+  const onInvalid = (errors: FieldErrors<ContactInput>) => {
+    const order: (keyof ContactInput)[] = [
       "name",
       "email",
       "phone",
       "title",
       "content",
     ];
-
     for (const key of order) {
-      const err = errors[key];
-      if (err?.message) {
+      const msg = errors[key]?.message as string | undefined;
+      if (msg) {
+        // email/phone birlikte boşsa ikisini de invalid yap (schema da ekliyor; görsel tutarlılık)
         if (
           key === "email" &&
           !form.getValues("email") &&
           !form.getValues("phone")
         ) {
-          form.setError("phone", { type: "manual", message: err.message });
+          form.setError("phone", { type: "manual", message: msg });
         }
-        toast.error(err.message);
+        toast.error(msg);
         form.setFocus(key);
         return;
       }
     }
-
     toast.error("Lütfen zorunlu alanları kontrol edin.");
   };
 
-  const onSubmit = async () => {
-    setIsSubmitting(true);
-    try {
-      await new Promise<void>((r) => setTimeout(r, 800));
-
-      const message =
-        "Mesajınız başarıyla alındı. En kısa sürede sizinle iletişime geçeceğiz.";
-      toast.success(message);
-      onSuccess?.(message);
-      form.reset();
-
-      requestAnimationFrame(() => {
-        formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-    } catch (error: unknown) {
-      toast.error(
-        error instanceof Error
-          ? error.message
-          : "Mesaj gönderilemedi. Lütfen tekrar deneyin."
-      );
-    } finally {
-      setIsSubmitting(false);
+  const onSubmit = async (data: ContactInput) => {
+    const res = await submit(data);
+    if (!res.ok) {
+      toast.error(res.message);
+      return;
     }
+
+    const message =
+      "Mesajınız başarıyla alındı. En kısa sürede sizinle iletişime geçeceğiz.";
+    toast.success(message);
+    onSuccess?.(message);
+    form.reset();
+    requestAnimationFrame(() => {
+      formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   };
 
+  // invalid state’te kırmızı kenarlığı bastır + focus görselliği
   const invalidOverride =
     "data-[invalid=true]:border-input aria-[invalid=true]:border-input " +
     "data-[invalid=true]:ring-0 aria-[invalid=true]:ring-0 " +
@@ -118,9 +110,6 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
               fill
               className="object-cover object-center"
               priority
-              placeholder="blur"
-              blurDataURL="/images/alpertunaozkan-mobile-480w.webp"
-              sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 90vw, (max-width: 1440px) 80vw, 60vw"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-card/20 to-transparent" />
           </div>
