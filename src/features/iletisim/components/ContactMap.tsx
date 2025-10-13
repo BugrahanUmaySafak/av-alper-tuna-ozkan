@@ -135,7 +135,7 @@ export default function ContactMap() {
   return (
     <Section>
       <Container>
-        <div className="mb-4 flex items-center gap-2">
+        <div className="flex items-center gap-2 pb-4">
           <Button
             variant="outline"
             aria-pressed={key === "ankara"}
