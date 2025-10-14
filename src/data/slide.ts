@@ -12,7 +12,7 @@ export const slides: Slide[] = [
     mobileImage: "/slider/mobile/insaat-mobile.webp",
     title: "İnşaat Hukuku",
     description:
-      "Projelerinizde hukiki süreçleri yönetir, sözleşmeler ve uyuşmazlıklarda çözüm üretiriz.",
+      "Projelerinizde hukuki süreçleri yönetir, sözleşmeler ve uyuşmazlıklarda çözüm üretiriz.",
     features: [
       "Kat Karşılığı İnşaat",
       "Kentsel Dönüşüm",

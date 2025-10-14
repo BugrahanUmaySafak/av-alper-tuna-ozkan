@@ -13,7 +13,7 @@ export default function HomeContact() {
   return (
     <Section>
       <Container className="mx-auto w-full max-w-none">
-        <Card className="relative w-full rounded-2xl overflow-hidden shadow-xl border-0 inset-0">
+        <Card className="relative w-full rounded-xl overflow-hidden shadow-xl border-0 inset-0">
           <div className="absolute inset-0 z-0 blur-xs">
             <Image
               src="/alpertunaozkan.webp"

@@ -7,6 +7,6 @@ export const metadata: Metadata = {
     "Özkan Hukuk Danışmanlık ile iletişime geçin. Profesyonel hukuk danışmanlığı için bize ulaşın.",
 };
 
-export default function Contact() {
+export default function Iletisim() {
   return <ContactWrapper />;
 }

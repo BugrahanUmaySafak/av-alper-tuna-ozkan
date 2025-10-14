@@ -42,13 +42,13 @@ export default function ServicesPreview() {
                   w-full
                   sm:w-1/2         /* 2 kolon */
                   lg:w-1/3         /* 3 kolon  */
-                  focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-2xl
+                  focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-xl
                   block
                 "
               >
                 <Card className="group h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 shadow-lg">
                   <CardHeader className="text-center pb-4">
-                    <div className="mx-auto w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-blue-100 transition-colors">
+                    <div className="mx-auto w-16 h-16 bg-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-100 transition-colors">
                       <IconComponent className="w-8 h-8 text-blue-600" />
                     </div>
                     <CardTitle className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">

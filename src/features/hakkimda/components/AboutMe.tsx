@@ -8,7 +8,7 @@ export default function AboutMe() {
       <Container>
         <div className="grid md:grid-cols-12 gap-8 items-center">
           {/* Görsel */}
-          <div className="md:col-span-6 relative overflow-hidden rounded-2xl shadow-xl w-full aspect-[3/4]">
+          <div className="md:col-span-6 relative overflow-hidden rounded-xl shadow-xl w-full aspect-[3/4]">
             <Image
               src="/alpertunaozkan2.webp"
               alt="Avukat Alper Tuna Özkan"
@@ -25,7 +25,7 @@ export default function AboutMe() {
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-gray-900">
                 Avukat Alper Tuna Özkan
               </h2>
-              <div className="w-20 h-1 bg-blue-600 mb-6"></div>
+              <div className="w-20 h-1 bg-blue-600 mb-6 rounded-2xl"></div>
             </div>
 
             <div className="space-y-8 text-gray-700 leading-relaxed">

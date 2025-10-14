@@ -5,7 +5,7 @@ interface PageHeaderProps {
 
 export default function PageHeader({ title, description }: PageHeaderProps) {
   return (
-    <section className="relative bg-[#fff7ee] py-24 border-b border-gray-200 text-gray-900">
+    <section className="relative bg-[#fff7ee] py-24 border-b border-gray-200 text-gray-900 rounded-b-2xl ">
       <div className="absolute top-10 left-0 h-32 w-1 bg-yellow-600 rounded-r-lg" />
       <div className="container mx-auto px-4 text-center">
         <h1 className="text-4xl md:text-5xl font-extrabold mb-4">{title}</h1>

@@ -101,7 +101,7 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
       <Section>
         <div
           ref={formRef}
-          className="rounded-2xl shadow-xl overflow-hidden border border-border/50 bg-card h-full"
+          className="rounded-xl shadow-xl overflow-hidden border border-border/50 bg-card h-full"
         >
           <div className="relative w-full aspect-[3/1] bg-gradient-to-br from-primary/10 to-primary/5">
             <Image
