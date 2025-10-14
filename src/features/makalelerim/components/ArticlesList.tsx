@@ -3,9 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import Container from "@/components/Container";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import { CalendarDays } from "lucide-react";
 
 import { getAllMock } from "../mock";
@@ -65,25 +64,17 @@ export default function ArticlesList() {
               <Card className="group h-full flex flex-col overflow-hidden transition hover:shadow-lg p-0 border-0 rounded-xl">
                 <SmartCardImage src={a.image.url} alt={a.image.alt} />
 
-                <CardHeader className="pb-2 flex-0">
+                <CardHeader className="flex-1 flex flex-col justify-between gap-3">
                   <CardTitle className="text-lg font-semibold leading-7 h-[3.5rem] overflow-hidden line-clamp-2">
                     {a.title}
                   </CardTitle>
 
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                  <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground h-5">
                     <CalendarDays className="h-4 w-4" />
-                    {formatTR(a.publishedAt)}
+                    <span>{formatTR(a.publishedAt)}</span>
                   </div>
-                </CardHeader>
 
-                <CardContent className="pt-0 flex-1 flex flex-col">
-                  <p className="text-sm text-muted-foreground leading-6 h-[4.5rem] overflow-hidden line-clamp-3">
-                    {a.excerpt}
-                  </p>
-
-                  <Separator className="mt-3 mb-4" />
-
-                  <div className="mt-auto flex flex-wrap gap-2 mb-2">
+                  <div className="flex justify-center gap-2 max-h-7 overflow-hidden mb-3">
                     {a.keywords.slice(0, 3).map((k) => (
                       <Badge
                         key={k}
@@ -93,7 +84,7 @@ export default function ArticlesList() {
                       </Badge>
                     ))}
                   </div>
-                </CardContent>
+                </CardHeader>
               </Card>
             </Link>
           ))}

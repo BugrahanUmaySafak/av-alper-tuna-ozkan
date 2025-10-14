@@ -3,7 +3,6 @@ export type Article = {
   title: string;
   content: string; // HTML
   slug: string;
-  excerpt: string;
   image: { url: string; alt: string };
   keywords: string[];
   publishedAt: string; // ISO

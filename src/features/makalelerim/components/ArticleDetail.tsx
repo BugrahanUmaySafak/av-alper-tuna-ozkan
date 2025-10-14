@@ -2,13 +2,15 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import Container from "@/components/Container";
 import Section from "@/components/section/Section";
 import { useMemo } from "react";
 import { getBySlugMock } from "../mock";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
-import { CalendarDays, Pencil } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft, CalendarDays, Pencil } from "lucide-react";
 
 function formatTR(iso: string) {
   try {
@@ -45,7 +47,7 @@ export default function ArticleDetail({ slug }: { slug: string }) {
           alt=""
           fill
           sizes="100vw"
-          className="object-cover blur-[2px] scale-105 "
+          className="object-cover blur-[2px] scale-105"
           aria-hidden
           priority
         />
@@ -59,17 +61,15 @@ export default function ArticleDetail({ slug }: { slug: string }) {
         />
         <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-background/50 to-transparent pointer-events-none" />
       </div>
+
       <Section>
         <Container>
-          {article.keywords.length > 0 && (
-            <div className="flex flex-wrap gap-2 mb-3">
-              {article.keywords.map((k) => (
-                <Badge key={k} className="text-sm px-3 py-1.5">
-                  {k}
-                </Badge>
-              ))}
-            </div>
-          )}
+          <Button asChild variant="outline" className="gap-2 mb-6">
+            <Link href="/makalelerim">
+              <ArrowLeft className="h-4 w-4" />
+              Tüm yazılara geri dön
+            </Link>
+          </Button>
 
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground mb-6">
             <span className="inline-flex items-center gap-1.5">
@@ -97,6 +97,16 @@ export default function ArticleDetail({ slug }: { slug: string }) {
             ].join(" ")}
             dangerouslySetInnerHTML={{ __html: html }}
           />
+
+          {article.keywords.length > 0 && (
+            <div className="flex flex-wrap gap-2 mt-6">
+              {article.keywords.map((k) => (
+                <Badge key={k} className="text-sm px-3 py-1.5">
+                  {k}
+                </Badge>
+              ))}
+            </div>
+          )}
         </Container>
       </Section>
     </>

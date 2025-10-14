@@ -5,8 +5,6 @@ export const MOCK_ARTICLES: Article[] = [
     id: "1",
     title: "Boşanma Davalarında Mal Paylaşımı Nasıl Olur?",
     slug: "bosanma-davalarinda-mal-paylasimi",
-    excerpt:
-      "Evlilik birliği sona erdiğinde mal paylaşımı, tarafların mal rejimine ve edinim şekline göre belirlenir. Bu yazıda, mal paylaşımının temel ilkelerini ve uygulama örneklerini ele alıyoruz.",
     content: `
       <p>Boşanma davalarında en çok tartışılan konulardan biri mal paylaşımıdır. Türk Medeni Kanunu’na göre eşler arasında <strong>edinilmiş mallara katılma rejimi</strong> geçerlidir. Bu rejim, evlilik süresince edinilen malların yarı yarıya paylaşılmasını öngörür.</p>
       <p>Ancak bazı durumlarda istisnalar söz konusudur. Örneğin, eşlerden birinin evlilikten önce sahip olduğu mallar, miras veya bağış yoluyla edindiği mallar <em>kişisel mal</em> olarak kabul edilir ve paylaşım dışı kalır.</p>
@@ -32,8 +30,6 @@ export const MOCK_ARTICLES: Article[] = [
     id: "2",
     title: "Kira Hukukunda Tahliye Süreci ve Kiracı Hakları",
     slug: "kira-hukukunda-tahliye-sureci",
-    excerpt:
-      "Kira sözleşmesinin feshi ve kiracının tahliyesi belirli yasal koşullara tabidir. Bu makalede tahliye sebeplerini, kiracının haklarını ve dava sürecini açıklıyoruz.",
     content: `
       <p>Kira ilişkilerinde en sık yaşanan anlaşmazlıkların başında tahliye talepleri gelir. Türk Borçlar Kanunu’na göre kiraya veren, kiracıyı ancak <strong>haklı nedenlerle</strong> tahliye ettirebilir.</p>
       <p>Tahliye sebepleri arasında kira bedelinin ödenmemesi, taşınmazın gereksinim nedeniyle istenmesi veya kira süresinin bitimi gibi durumlar yer alır. Ancak bu nedenlerin mahkemede somut olarak ispatlanması gerekir.</p>
@@ -59,8 +55,6 @@ export const MOCK_ARTICLES: Article[] = [
     id: "3",
     title: "Ticari Sözleşmelerde Dikkat Edilmesi Gereken Noktalar",
     slug: "ticari-sozlesmelerde-dikkat-edilmesi-gerekenler",
-    excerpt:
-      "Ticari sözleşmelerde açık, ölçülebilir ve hukuka uygun hükümlerin yer alması tarafların menfaatini korur. Bu makalede ticari sözleşme hazırlamanın püf noktalarını anlatıyoruz.",
     content: `
       <p>Ticari ilişkilerde yapılan sözleşmeler, taraflar arasındaki hak ve yükümlülükleri belirleyen en önemli araçtır. Ancak her sözleşme aynı düzeyde koruma sağlamaz; dikkat edilmediğinde ciddi hukuki ve mali riskler doğabilir.</p>
       <p>Sözleşme hazırlanırken öncelikle tarafların unvanları, yetki belgeleri, vergi numaraları gibi resmi bilgilerin eksiksiz olması gerekir. Ayrıca, <strong>uyuşmazlık çözüm yöntemi</strong> (tahkim, arabuluculuk, mahkeme yetkisi) açıkça belirtilmelidir.</p>
@@ -92,8 +86,6 @@ export const MOCK_ARTICLES: Article[] = [
     id: "4",
     title: "Miras Hukuku ve Vasiyetname Düzenleme Süreci",
     slug: "miras-hukuku-ve-vasiyetname-duzenleme-sureci",
-    excerpt:
-      "Miras hukukunun temel kavramlarını, miras paylaşımında yaşanan sık sorunları ve vasiyetname düzenlerken dikkat edilmesi gereken hukuki ayrıntıları ele alıyoruz.",
     content: `
       <p><strong>Miras hukuku</strong>, bir kişinin ölümüyle birlikte malvarlığının kimlere ve nasıl geçeceğini düzenleyen hukuk dalıdır. Türk Medeni Kanunu'na göre mirasçılar, kanuni mirasçılar ve atanmış mirasçılar olmak üzere ikiye ayrılır. Kanuni mirasçılar arasında altsoy, üstsoy, eş ve belirli durumlarda devlet yer alır.</p>
 

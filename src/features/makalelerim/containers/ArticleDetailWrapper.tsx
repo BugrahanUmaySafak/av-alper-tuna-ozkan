@@ -13,10 +13,7 @@ export default function ArticleDetailWrapper({ slug }: Props) {
 
   return (
     <>
-      <PageHeader
-        title={article?.title ?? "Makale"}
-        description={article?.excerpt ?? "Makale detayları"}
-      />
+      <PageHeader title={article?.title ?? "Makale"} />
 
       {article ? (
         <ArticleDetail slug={slug} />
