@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import Container from "../Container";
+import Container from "../container/Container";
 
 export default function Footer() {
   const pathname = usePathname();

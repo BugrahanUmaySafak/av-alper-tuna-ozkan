@@ -1,7 +1,7 @@
 "use client";
 
 import { services } from "@/data/service";
-import { Container } from "@/components/Container";
+import { Container } from "@/components/container/Container";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import Section from "@/components/section/Section";

@@ -7,7 +7,7 @@ import {
   faFacebook,
 } from "@fortawesome/free-brands-svg-icons";
 import ContactInfoCard from "./ContactInfoCard";
-import Container from "@/components/Container";
+import Container from "@/components/container/Container";
 import Section from "@/components/section/Section";
 
 export default function ContactDetails() {

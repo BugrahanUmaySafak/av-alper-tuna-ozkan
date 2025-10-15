@@ -1,6 +1,6 @@
 "use client";
 
-import PageHeader from "@/components/PageHeader";
+import PageHeader from "@/components/page-header/PageHeader";
 import ArticleDetail from "../components/ArticleDetail";
 import type { Article } from "../types";
 

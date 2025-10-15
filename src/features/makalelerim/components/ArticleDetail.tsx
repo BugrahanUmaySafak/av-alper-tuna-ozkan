@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import Container from "@/components/Container";
+import Container from "@/components/container/Container";
 import Section from "@/components/section/Section";
 import { useMemo } from "react";
 import { notFound } from "next/navigation";

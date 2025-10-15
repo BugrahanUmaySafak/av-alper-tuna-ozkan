@@ -1,7 +1,7 @@
-import PageHeader from "@/components/PageHeader";
+import PageHeader from "@/components/page-header/PageHeader";
 import AboutMe from "../components/AboutMe";
-import AboutInformationContent from "../components/AboutInformationContent";
-import { yaziData as makaleler, videoData as videos } from "@/data/articles";
+
+import InformativeContentWrapper from "@/components/shared/InformativeContentWrapper";
 
 export default function AboutWrapper() {
   return (
@@ -12,7 +12,7 @@ export default function AboutWrapper() {
 "
       />
       <AboutMe />
-      <AboutInformationContent videos={videos} makaleler={makaleler} />
+      <InformativeContentWrapper videoTake={1} articleTake={1} />
     </>
   );
 }

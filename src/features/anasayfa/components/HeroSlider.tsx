@@ -9,7 +9,7 @@ import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Container } from "@/components/Container";
+import { Container } from "@/components/container/Container";
 import { slides as SLIDES_DATA } from "@/data/slide";
 
 const SLIDE_DURATION = 6000;

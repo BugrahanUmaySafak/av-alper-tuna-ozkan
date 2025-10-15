@@ -21,7 +21,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import Container from "@/components/Container";
+import Container from "@/components/container/Container";
 import Section from "@/components/section/Section";
 
 interface ContactFormProps {

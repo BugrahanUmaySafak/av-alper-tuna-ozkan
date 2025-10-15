@@ -1,10 +1,11 @@
-import { Metadata } from "next";
+import VideoListWrapper from "@/features/videolarim/containers/VideoListWrapper";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Özkan Hukuk Danışmanlık",
-  description: "Bu sayfa projenin ana sayfasıdır.",
+  title: "Videolarım | Özkan Hukuk Danışmanlık",
+  description: "Gayrimenkul hukukuna dair güncel ve açıklayıcı içerikler.",
 };
 
-export default function Videolarim() {
-  return <>Videolarim</>;
+export default function VideolarimPage() {
+  return <VideoListWrapper />;
 }

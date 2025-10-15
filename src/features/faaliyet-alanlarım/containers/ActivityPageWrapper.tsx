@@ -1,6 +1,6 @@
 "use client";
 
-import PageHeader from "@/components/PageHeader";
+import PageHeader from "@/components/page-header/PageHeader";
 import ActivityList from "@/features/faaliyet-alanlarım/components/ActivityList";
 
 export default function ActivityPageWrapper() {

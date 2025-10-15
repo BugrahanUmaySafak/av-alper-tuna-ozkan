@@ -22,6 +22,7 @@ export const services: Service[] = [
       "Mirasın Reddi",
       "Ölünce Kadar Bakma Sözleşmeleri",
       "Mirasçılık Belgesi İstemi",
+      "İntikal"
     ],
   },
   {
@@ -39,8 +40,7 @@ export const services: Service[] = [
       "Ecrimisil (Haksız İşgal) Tazminatı Davası",
       "Taşkın Yapı / Olağan-Olağanüstü Zamanaşımı ile Taşınmaz Mülkiyetinin Kazanılması",
       "Elbirliğiyle Mülkiyetin Paylı Mülkiyete Çevrilmesi",
-      "İntifa Hakları",
-      "İntikal",
+      "İntifa Hakları"
     ],
   },
   {

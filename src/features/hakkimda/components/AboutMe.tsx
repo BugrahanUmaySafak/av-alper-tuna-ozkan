@@ -1,4 +1,4 @@
-import Container from "@/components/Container";
+import Container from "@/components/container/Container";
 import Section from "@/components/section/Section";
 import Image from "next/image";
 

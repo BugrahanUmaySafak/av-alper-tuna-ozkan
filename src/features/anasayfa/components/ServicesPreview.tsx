@@ -12,7 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { services } from "@/data/service";
-import { Container } from "@/components/Container";
+import { Container } from "@/components/container/Container";
 import Section from "@/components/section/Section";
 
 export default function ServicesPreview() {

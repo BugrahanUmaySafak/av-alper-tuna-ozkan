@@ -1,8 +1,8 @@
 "use client";
 
-import PageHeader from "@/components/PageHeader";
+import PageHeader from "@/components/page-header/PageHeader";
 import dynamic from "next/dynamic";
-import Container from "@/components/Container";
+import Container from "@/components/container/Container";
 import { Separator } from "@/components/ui/separator";
 import ContactForm from "../components/ContactForm";
 import ContactDetails from "../components/ContactDetails";
