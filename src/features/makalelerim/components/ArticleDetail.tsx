@@ -1,4 +1,3 @@
-// src/features/makalelerim/components/ArticleDetail.tsx
 "use client";
 
 import Image from "next/image";
@@ -6,11 +5,11 @@ import Link from "next/link";
 import Container from "@/components/Container";
 import Section from "@/components/section/Section";
 import { useMemo } from "react";
-import { getBySlugMock } from "../mock";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft, CalendarDays, Pencil } from "lucide-react";
+import { CalendarDays, Pencil, ArrowLeft } from "lucide-react";
+import type { Article } from "../types";
+import { useArticle } from "../hooks/useArticle";
 
 function formatTR(iso: string) {
   try {
@@ -33,8 +32,14 @@ function normalizeHtml(html: string): string {
     .join("");
 }
 
-export default function ArticleDetail({ slug }: { slug: string }) {
-  const article = useMemo(() => getBySlugMock(slug), [slug]);
+export default function ArticleDetail({
+  slug,
+  initialArticle,
+}: {
+  slug: string;
+  initialArticle: Article;
+}) {
+  const { data: article } = useArticle(slug, initialArticle);
   if (!article) notFound();
 
   const html = useMemo(() => normalizeHtml(article.content), [article.content]);
@@ -64,12 +69,16 @@ export default function ArticleDetail({ slug }: { slug: string }) {
 
       <Section>
         <Container>
-          <Button asChild variant="outline" className="gap-2 mb-6">
-            <Link href="/makalelerim">
+          <div className="mb-4">
+            <Link
+              href="/makalelerim"
+              className="inline-flex items-center gap-2 text-sm rounded-md border px-3 py-1.5 hover:bg-accent transition"
+              aria-label="Tüm yazılara geri dön"
+            >
               <ArrowLeft className="h-4 w-4" />
               Tüm yazılara geri dön
             </Link>
-          </Button>
+          </div>
 
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground mb-6">
             <span className="inline-flex items-center gap-1.5">
@@ -99,7 +108,7 @@ export default function ArticleDetail({ slug }: { slug: string }) {
           />
 
           {article.keywords.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-6">
+            <div className="mt-6 flex flex-wrap gap-2">
               {article.keywords.map((k) => (
                 <Badge key={k} className="text-sm px-3 py-1.5">
                   {k}

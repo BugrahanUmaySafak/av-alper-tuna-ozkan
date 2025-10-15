@@ -3,14 +3,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import Container from "@/components/Container";
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CalendarDays } from "lucide-react";
-
-import { getAllMock } from "../mock";
-import type { Article } from "../types";
 import Section from "@/components/section/Section";
 import React from "react";
+import type { Article } from "../types";
+import { useArticles } from "../actions/useArticles";
 
 function formatTR(iso: string) {
   try {
@@ -48,8 +47,13 @@ function SmartCardImage({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-export default function ArticlesList() {
-  const [articles] = React.useState<Article[]>(() => getAllMock());
+export default function ArticlesList({
+  initialItems,
+}: {
+  initialItems: Article[];
+}) {
+  const { data: articles } = useArticles(initialItems);
+  if (!articles) return null;
 
   return (
     <Section>
@@ -64,27 +68,24 @@ export default function ArticlesList() {
               <Card className="group h-full flex flex-col overflow-hidden transition hover:shadow-lg p-0 border-0 rounded-xl">
                 <SmartCardImage src={a.image.url} alt={a.image.alt} />
 
-                <CardHeader className="flex-1 flex flex-col justify-between gap-3">
-                  <CardTitle className="text-lg font-semibold leading-7 h-[3.5rem] overflow-hidden line-clamp-2">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-xl font-semibold leading-8">
                     {a.title}
                   </CardTitle>
 
-                  <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground h-5">
+                  <div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
                     <CalendarDays className="h-4 w-4" />
-                    <span>{formatTR(a.publishedAt)}</span>
-                  </div>
-
-                  <div className="flex justify-center gap-2 max-h-7 overflow-hidden mb-3">
-                    {a.keywords.slice(0, 3).map((k) => (
-                      <Badge
-                        key={k}
-                        className="bg-blue-50 text-blue-700 border border-blue-200 font-medium hover:bg-blue-100 transition"
-                      >
-                        {k}
-                      </Badge>
-                    ))}
+                    {formatTR(a.publishedAt)}
                   </div>
                 </CardHeader>
+
+                <CardContent className="mb-4">
+                  <div className="flex flex-wrap gap-2">
+                    {a.keywords.slice(0, 3).map((k) => (
+                      <Badge key={k}>{k}</Badge>
+                    ))}
+                  </div>
+                </CardContent>
               </Card>
             </Link>
           ))}

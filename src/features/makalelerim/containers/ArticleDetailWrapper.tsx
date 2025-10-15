@@ -2,26 +2,19 @@
 
 import PageHeader from "@/components/PageHeader";
 import ArticleDetail from "../components/ArticleDetail";
-import { getBySlugMock } from "../mock";
+import type { Article } from "../types";
 
-interface Props {
+export default function ArticleDetailWrapper({
+  slug,
+  initialArticle,
+}: {
   slug: string;
-}
-
-export default function ArticleDetailWrapper({ slug }: Props) {
-  const article = getBySlugMock(slug);
-
+  initialArticle: Article;
+}) {
   return (
     <>
-      <PageHeader title={article?.title ?? "Makale"} />
-
-      {article ? (
-        <ArticleDetail slug={slug} />
-      ) : (
-        <div className="py-12 text-center text-muted-foreground">
-          İstediğiniz makale bulunamadı.
-        </div>
-      )}
+      <PageHeader title={initialArticle.title} description="" />
+      <ArticleDetail slug={slug} initialArticle={initialArticle} />
     </>
   );
 }
