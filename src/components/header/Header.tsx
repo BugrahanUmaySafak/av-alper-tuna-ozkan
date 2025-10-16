@@ -87,9 +87,11 @@ export default function Header() {
   return (
     <div ref={containerRef} className="sticky top-0 z-50">
       <header className="shadow-lg relative">
-        {/* DESKTOP */}
+        {/* DESKTOP + TABLET (nav/tablet bar breakpoints korunuyor) */}
         <div className="flex max-[832px]:hidden">
-          <div className="bg-blue-900 text-white py-3 px-16 flex items-center space-x-4">
+          {/* SOL BLOK (Logo) */}
+          {/* DEĞİŞTİ: px-16 -> px-6 lg:px-16 (Container ile uyum) */}
+          <div className="bg-blue-900 text-white py-3 px-6 lg:px-16 flex items-center space-x-4">
             <Link
               href="/"
               prefetch={false}
@@ -114,7 +116,10 @@ export default function Header() {
             </Link>
           </div>
 
-          <div className="bg-[#fdf3e7] flex-1 px-16 flex items-center">
+          {/* SAĞ BLOK (Nav / Tablet bar) */}
+          {/* DEĞİŞTİ: px-16 -> px-6 lg:px-16, ayrıca py-3 eklendi (yükseklik eşitlendi) */}
+          <div className="bg-[#fdf3e7] flex-1 px-6 lg:px-16 py-3 flex items-center">
+            {/* Desktop NAV (≥1180px aynen) */}
             <nav className="hidden min-[1180px]:flex w-full items-center px-0">
               <ul className="flex w-full items-center justify-between">
                 {items.map((item) => {
@@ -137,7 +142,7 @@ export default function Header() {
               </ul>
             </nav>
 
-            {/* Tablet bar */}
+            {/* Tablet bar (833–1179px) – aynı kural, sadece üstteki paddingle simetri düzeldi */}
             <div className="hidden min-[833px]:flex max-[1180px]:flex min-[1180px]:hidden items-center justify-between w-full">
               <Link
                 href={phone.href}
@@ -167,7 +172,7 @@ export default function Header() {
           </div>
         </div>
 
-        {/* MOBILE */}
+        {/* MOBILE (≤832px) – Container base ile uyumlu: px-4 zaten doğru */}
         <div className="hidden max-[832px]:flex items-center justify-between bg-blue-900 text-white px-4 h-[73.3px]">
           <Link
             href="/"
@@ -203,7 +208,7 @@ export default function Header() {
         </div>
       </header>
 
-      {/* TABLET DROPDOWN */}
+      {/* TABLET DROPDOWN (breakpoints korunuyor) */}
       <MenuPanel
         open={tabletOpen}
         id="tablet-menu"

@@ -10,6 +10,7 @@ import Section from "@/components/section/Section";
 import type { Video } from "@/features/videolarim/types";
 import type { Article } from "@/features/makalelerim/types";
 import Container from "../container/Container";
+import SmartFigureImage from "@/components/media/SmartFigureImage";
 
 type Props = {
   videos: Video[];
@@ -17,8 +18,8 @@ type Props = {
   videoTake?: number;
   articleTake?: number;
   title?: string;
-  upperContent?: string | null; // 👈 opsiyonel
-  lowerContent?: string | null; // 👈 opsiyonel
+  upperContent?: string | null;
+  lowerContent?: string | null;
 };
 
 function formatTR(iso: string) {
@@ -144,17 +145,17 @@ export default function InformativeContent({
                     <Card className="group hover:shadow-xl transition-all duration-500 border-0 shadow-md bg-white/80 backdrop-blur-sm hover:bg-white cursor-pointer overflow-hidden">
                       <CardContent className="p-5">
                         <div className="flex gap-4 md:gap-5">
-                          <div className="relative w-44 h-24 md:w-52 md:h-28 lg:w-56 lg:h-32 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden flex-shrink-0 shadow-md">
-                            <Image
-                              src={yazi.image.url}
-                              alt={yazi.image.alt}
-                              fill
-                              sizes="224px"
-                              priority
-                              className="object-cover group-hover:scale-105 transition-transform duration-500"
-                            />
-                            <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors" />
-                          </div>
+                          {/* Görsel alanı: ArticlesList ile aynı tasarım */}
+                          <SmartFigureImage
+                            src={yazi.image.url}
+                            alt={yazi.image.alt}
+                            className="
+                              w-44 h-24
+                              md:w-52 md:h-28
+                              lg:w-56 lg:h-32
+                              rounded-xl shadow-md bg-gray-900 flex-shrink-0
+                            "
+                          />
 
                           <div className="flex-1 min-w-0 flex flex-col justify-center">
                             <h4 className="font-semibold text-gray-900 text-base md:text-lg group-hover:text-emerald-900 line-clamp-2 mb-2 leading-snug">

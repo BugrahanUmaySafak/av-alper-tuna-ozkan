@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import Container from "@/components/container/Container";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -10,6 +9,7 @@ import Section from "@/components/section/Section";
 import React from "react";
 import type { Article } from "../types";
 import { useArticles } from "../actions/useArticles";
+import SmartFigureImage from "@/components/media/SmartFigureImage";
 
 function formatTR(iso: string) {
   try {
@@ -21,30 +21,6 @@ function formatTR(iso: string) {
   } catch {
     return iso;
   }
-}
-
-function SmartCardImage({ src, alt }: { src: string; alt: string }) {
-  return (
-    <div className="relative w-full h-56 sm:h-60 lg:h-64 overflow-hidden rounded-t-xl">
-      <Image
-        src={src}
-        alt=""
-        fill
-        sizes="(max-width: 1024px) 100vw, 33vw"
-        className="object-cover blur-[2px] scale-105"
-        aria-hidden
-      />
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        sizes="(max-width: 1024px) 100vw, 33vw"
-        className="object-contain object-center"
-        priority={false}
-      />
-      <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-background/40 to-transparent pointer-events-none" />
-    </div>
-  );
 }
 
 export default function ArticlesList({
@@ -66,7 +42,11 @@ export default function ArticlesList({
               className="block h-full"
             >
               <Card className="group h-full flex flex-col overflow-hidden transition hover:shadow-lg p-0 border-0 rounded-xl">
-                <SmartCardImage src={a.image.url} alt={a.image.alt} />
+                <SmartFigureImage
+                  src={a.image.url}
+                  alt={a.image.alt}
+                  className="w-full h-56 sm:h-60 lg:h-64 rounded-t-xl"
+                />
 
                 <CardHeader className="pb-2">
                   <CardTitle className="text-xl font-semibold leading-8">
