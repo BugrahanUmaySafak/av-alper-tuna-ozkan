@@ -16,7 +16,7 @@ export default function HomeContact() {
         <Card className="relative w-full rounded-xl overflow-hidden shadow-xl border-0 inset-0">
           <div className="absolute inset-0 z-0 blur-xs">
             <Image
-              src="/alpertunaozkan.webp"
+              src="/alpertunaozkan-homePage-contact.webp"
               alt="Avukat Alper Tuna Özkan"
               fill
               sizes="(max-width: 480px) 480px, (max-width: 768px) 768px, (max-width: 1024px) 1024px, (max-width: 1440px) 1440px, 1920px"

@@ -103,9 +103,9 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
           ref={formRef}
           className="rounded-xl shadow-xl overflow-hidden border border-border/50 bg-card h-full"
         >
-          <div className="relative w-full aspect-[3/1] bg-gradient-to-br from-primary/10 to-primary/5">
+          <div className="relative w-full aspect-[3/1]">
             <Image
-              src="/alpertunaozkan.webp"
+              src="/alpertunaozkan-contactPage.webp"
               alt="Avukat Alper Tuna Özkan - Profesyonel hukuk danışmanlığı"
               fill
               className="object-cover object-center"

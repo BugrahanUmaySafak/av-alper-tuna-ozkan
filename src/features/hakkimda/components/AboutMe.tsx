@@ -10,7 +10,7 @@ export default function AboutMe() {
           {/* Görsel */}
           <div className="md:col-span-6 relative overflow-hidden rounded-xl shadow-xl w-full aspect-[3/4]">
             <Image
-              src="/alpertunaozkan2.webp"
+              src="/alpertunaozkan-aboutPage.webp"
               alt="Avukat Alper Tuna Özkan"
               fill
               className="object-cover object-center"
