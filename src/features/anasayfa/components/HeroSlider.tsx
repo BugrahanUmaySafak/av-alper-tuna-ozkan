@@ -1,11 +1,8 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import useEmblaCarousel from "embla-carousel-react";
-import Autoplay from "embla-carousel-autoplay";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -13,160 +10,227 @@ import { Container } from "@/components/container/Container";
 import { slides as SLIDES_DATA } from "@/data/slide";
 
 const SLIDE_DURATION = 6000;
-
-function usePrefersReducedMotion() {
-  const [reduced, setReduced] = useState(false);
-  useEffect(() => {
-    const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const onChange = () => setReduced(mql.matches);
-    onChange();
-    mql.addEventListener("change", onChange);
-    return () => mql.removeEventListener("change", onChange);
-  }, []);
-  return reduced;
-}
-
-function useIsMobile(breakpoint = 768) {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const mql = window.matchMedia(`(max-width:${breakpoint - 1}px)`);
-    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    setIsMobile(mql.matches);
-    mql.addEventListener("change", handler);
-    return () => mql.removeEventListener("change", handler);
-  }, [breakpoint]);
-  return isMobile;
-}
+const SWIPE_THRESHOLD_RATIO = 0.15;
+const HOLD_DELAY_MS = 150;
+const TAP_SLOP_PX = 6;
 
 export default function HeroSlider() {
-  const prefersReducedMotion = usePrefersReducedMotion();
-  const isMobile = useIsMobile(768);
+  const slidesLen = SLIDES_DATA.length;
+  const [index, setIndex] = useState(0);
+  const [offset, setOffset] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
-  const [isHovered, setHovered] = useState(false);
-  const [isFocused, setFocused] = useState(false);
-  const [inView, setInView] = useState(true);
-
-  const sectionRef = useRef<HTMLElement | null>(null);
-
-  const autoplayRef = useRef(
-    Autoplay({
-      delay: SLIDE_DURATION,
-      stopOnInteraction: false,
-      stopOnMouseEnter: false,
-      stopOnFocusIn: false,
-      rootNode: (emblaRoot) => sectionRef.current ?? emblaRoot,
-    })
-  );
-
-  const plugins = useMemo(
-    () => (!prefersReducedMotion && inView ? [autoplayRef.current] : []),
-    [prefersReducedMotion, inView]
-  );
-
-  const [emblaRef] = useEmblaCarousel(
-    { loop: true, align: "start", skipSnaps: false, dragFree: false },
-    plugins
-  );
+  const trackRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef<HTMLSpanElement>(null);
+  const indexRef = useRef(index);
+  const pausedRef = useRef(false);
+  const draggingRef = useRef(false);
+  const holdTimer = useRef<number | null>(null);
 
   useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        const isIntersecting = entries[0]?.isIntersecting ?? true;
-        setInView(isIntersecting);
-        if (
-          isIntersecting &&
-          !prefersReducedMotion &&
-          !isHovered &&
-          !isFocused
-        ) {
-          autoplayRef.current?.play?.();
-        } else {
-          autoplayRef.current?.stop?.();
+    indexRef.current = index;
+  }, [index]);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  const rafId = useRef<number | null>(null);
+  const last = useRef(0);
+  const acc = useRef(0);
+
+  const tick = useCallback(
+    (ts: number) => {
+      if (!last.current) last.current = ts;
+      const delta = ts - last.current;
+      last.current = ts;
+
+      if (!pausedRef.current && !draggingRef.current) {
+        acc.current += delta;
+        const frac = Math.min(acc.current / SLIDE_DURATION, 1);
+        if (progressRef.current)
+          progressRef.current.style.width = `${frac * 100}%`;
+
+        if (acc.current >= SLIDE_DURATION) {
+          acc.current = 0;
+          if (progressRef.current) progressRef.current.style.width = "0%";
+          if (indexRef.current + 1 >= slidesLen) {
+            setIndex(0); // zıplama
+          } else {
+            setIndex(indexRef.current + 1);
+          }
         }
-      },
-      { threshold: 0.1 }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [prefersReducedMotion, isHovered, isFocused]);
+      }
+
+      rafId.current = requestAnimationFrame(tick);
+    },
+    [slidesLen]
+  );
 
   useEffect(() => {
-    const onVis = () => {
-      if (document.hidden) {
-        autoplayRef.current?.stop?.();
-      } else if (inView && !prefersReducedMotion && !isHovered && !isFocused) {
-        autoplayRef.current?.play?.();
-      }
+    last.current = 0;
+    if (rafId.current) cancelAnimationFrame(rafId.current);
+    rafId.current = requestAnimationFrame(tick);
+    return () => {
+      if (rafId.current) cancelAnimationFrame(rafId.current);
     };
-    document.addEventListener("visibilitychange", onVis);
-    return () => document.removeEventListener("visibilitychange", onVis);
-  }, [inView, prefersReducedMotion, isHovered, isFocused]);
+  }, [tick]);
 
-  const handleMouseEnter = useCallback(() => {
-    setHovered(true);
-    autoplayRef.current?.stop?.();
+  const drag = useRef({
+    active: false,
+    startX: 0,
+    lastX: 0,
+    width: 1,
+    startedDragging: false,
+  });
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const resize = () => (drag.current.width = el.clientWidth || 1);
+    resize();
+    const ro = new ResizeObserver(resize);
+    ro.observe(el);
+    return () => ro.disconnect();
   }, []);
-  const handleMouseLeave = useCallback(() => {
-    setHovered(false);
-    if (inView && !prefersReducedMotion && !isFocused) {
-      autoplayRef.current?.play?.();
+
+  const clearHold = () => {
+    if (holdTimer.current !== null) {
+      clearTimeout(holdTimer.current);
+      holdTimer.current = null;
     }
-  }, [inView, prefersReducedMotion, isFocused]);
-  const handleFocusCapture = useCallback(() => {
-    setFocused(true);
-    autoplayRef.current?.stop?.();
-  }, []);
-  const handleBlurCapture = useCallback(() => {
-    setFocused(false);
-    if (inView && !prefersReducedMotion && !isHovered) {
-      autoplayRef.current?.play?.();
+  };
+
+  const onPointerDown = (e: React.PointerEvent) => {
+    drag.current.active = true;
+    drag.current.startedDragging = false;
+    drag.current.startX = e.clientX;
+    drag.current.lastX = e.clientX;
+
+    clearHold();
+    holdTimer.current = window.setTimeout(() => {
+      if (!drag.current.startedDragging) pausedRef.current = true;
+    }, HOLD_DELAY_MS);
+  };
+
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (!drag.current.active) return;
+    const dx = e.clientX - drag.current.startX;
+    drag.current.lastX = e.clientX;
+
+    if (!drag.current.startedDragging && Math.abs(dx) >= TAP_SLOP_PX) {
+      drag.current.startedDragging = true;
+      clearHold();
+      pausedRef.current = true;
+      draggingRef.current = true;
+      trackRef.current?.setPointerCapture(e.pointerId);
     }
-  }, [inView, prefersReducedMotion, isHovered]);
+
+    if (drag.current.startedDragging) {
+      const offsetPercent = (dx / drag.current.width) * 100;
+      setOffset(offsetPercent);
+    }
+  };
+
+  const finishInteraction = (e?: React.PointerEvent) => {
+    if (!drag.current.active) return;
+
+    if (e?.pointerId !== undefined) {
+      trackRef.current?.releasePointerCapture(e.pointerId);
+    }
+
+    const dx = drag.current.lastX - drag.current.startX;
+    const threshold = drag.current.width * SWIPE_THRESHOLD_RATIO;
+
+    if (drag.current.startedDragging) {
+      if (dx <= -threshold) {
+        if (index < slidesLen - 1) {
+          setIndex((prev) => prev + 1);
+        } else {
+          setIndex(0);
+        }
+      } else if (dx >= threshold && index > 0) {
+        setIndex((prev) => prev - 1);
+      }
+      acc.current = 0;
+      if (progressRef.current) progressRef.current.style.width = "0%";
+    }
+
+    drag.current.active = false;
+    drag.current.startedDragging = false;
+    draggingRef.current = false;
+    setOffset(0);
+    pausedRef.current = false;
+    clearHold();
+  };
+
+  const jumpTo = (i: number) => {
+    setIndex(i);
+    acc.current = 0;
+    if (progressRef.current) progressRef.current.style.width = "0%";
+    pausedRef.current = false;
+  };
+
+  const transform = `translateX(${-index * 100 + offset}%)`;
 
   return (
     <section
-      ref={sectionRef}
-      className="
-        relative w-full
-        h-[calc(100dvh-73.3px)]
-        overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100
-      "
+      className="relative w-full h-[calc(100dvh-73.3px)] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100"
       aria-label="Ana görsel slayt"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onFocusCapture={handleFocusCapture}
-      onBlurCapture={handleBlurCapture}
     >
-      <div className="embla w-full h-full" ref={emblaRef}>
-        <div className="embla__container flex h-full">
+      <div className="w-full h-full select-none">
+        <div
+          ref={trackRef}
+          className={`flex h-full will-change-transform ${
+            offset !== 0
+              ? "transition-none"
+              : "transition-transform duration-700 ease-in-out"
+          }`}
+          style={{
+            transform,
+            touchAction: "pan-y",
+            backfaceVisibility: "hidden",
+          }}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={finishInteraction}
+          onPointerCancel={finishInteraction}
+          onPointerLeave={finishInteraction}
+          onWheel={(e) => {
+            if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+              e.preventDefault();
+              e.stopPropagation();
+            }
+          }}
+        >
           {SLIDES_DATA.map((slide, i) => {
             const imgSrc = isMobile
               ? slide.mobileImage || slide.image
               : slide.image;
-
             return (
               <div
                 key={i}
-                className="embla__slide relative w-full h-full flex-[0_0_100%]"
+                className="relative w-full h-full flex-[0_0_100%]"
+                aria-hidden={i !== index}
               >
                 <Image
                   src={imgSrc}
-                  alt={`${slide.title} görseli`}
+                  alt={slide.title}
                   fill
-                  priority={i === 0}
-                  loading={i === 0 ? "eager" : undefined}
-                  fetchPriority={i === 0 ? "high" : "auto"}
                   sizes="100vw"
-                  className="object-cover sm:object-top object-center"
+                  priority={i === 0}
+                  loading={i === 0 ? "eager" : "lazy"}
+                  draggable={false}
+                  className="object-cover sm:object-top object-center select-none pointer-events-none"
                 />
-
                 <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/20" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-
                 <div className="absolute inset-0 flex justify-start">
-                  <Container className="h-full flex items-start sm:items-center pt-24 sm:pt-0">
+                  <Container className="h-full flex items-start sm:items-center pt-16 sm:pt-0">
                     <div className="space-y-8 max-w-4xl">
                       <div className="space-y-4">
                         <div className="flex items-center">
@@ -182,39 +246,27 @@ export default function HeroSlider() {
                         </div>
                         <Separator className="w-24 h-[3px] bg-yellow-600" />
                       </div>
-
                       <p className="text-xl md:text-2xl text-gray-200 leading-relaxed max-w-2xl font-light">
                         {slide.description}
                       </p>
-
                       <div className="flex flex-wrap gap-2">
-                        {slide.features.map((f: string, idx: number) => (
-                          <Link
-                            key={idx}
-                            href="/faaliyet-alanlarim"
-                            aria-label={`${f} - detayları gör`}
-                          >
+                        {slide.features.map((f, idx) => (
+                          <Link key={idx} href="/faaliyet-alanlarim">
                             <Badge
                               variant="glass"
-                              className="cursor-pointer"
                               size="sm"
+                              className="cursor-pointer"
                             >
                               {f}
                             </Badge>
                           </Link>
                         ))}
                       </div>
-
                       <div className="mt-6">
                         <Link href="/faaliyet-alanlarim">
                           <Button
                             size="lg"
-                            className="
-                              bg-blue-800 text-white font-semibold px-8 py-4 rounded-xl shadow-lg
-                              transition-all duration-300 ease-out
-                              hover:bg-blue-600 hover:scale-105 hover:shadow-xl
-                              focus:ring-2 focus:ring-blue-400 focus:outline-none
-                            "
+                            className="bg-blue-800 text-white font-semibold px-8 py-4 rounded-xl shadow-lg transition-all duration-300 ease-out hover:bg-blue-600 hover:scale-105 focus:ring-2 focus:ring-blue-400 focus:outline-none"
                           >
                             Detaylı Bilgi
                           </Button>
@@ -226,6 +278,41 @@ export default function HeroSlider() {
               </div>
             );
           })}
+        </div>
+      </div>
+
+      {/* Indicators */}
+      <div className="absolute z-20 left-4 bottom-4 md:left-1/2 md:bottom-8 md:-translate-x-1/2">
+        <div className="flex items-center gap-4 rounded-2xl bg-black/50 backdrop-blur px-4 py-2 border border-white/10 shadow">
+          <div className="flex items-center gap-2">
+            {SLIDES_DATA.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => jumpTo(i)}
+                className={`size-3 rounded-full transition ${
+                  i === index
+                    ? "bg-yellow-600"
+                    : "bg-white/40 hover:bg-white/60"
+                }`}
+                aria-label={`${i + 1}. slayda git`}
+              />
+            ))}
+          </div>
+
+          {/* Progress bar sadece md ve üzeri */}
+          <span className="hidden md:block w-px h-5 bg-white/20" />
+          <div className="hidden md:flex w-36 h-2 rounded-full bg-white/10 overflow-hidden">
+            <span
+              ref={progressRef}
+              className="h-full bg-white/60"
+              style={{ width: "0%", transition: "width 80ms linear" }}
+            />
+          </div>
+
+          {/* Slide sırası sadece mobil */}
+          <span className="md:hidden text-white/90 text-sm tabular-nums">
+            {index + 1} / {slidesLen}
+          </span>
         </div>
       </div>
     </section>
