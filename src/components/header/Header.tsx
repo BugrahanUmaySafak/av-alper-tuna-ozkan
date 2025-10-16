@@ -87,24 +87,27 @@ export default function Header() {
   return (
     <div ref={containerRef} className="sticky top-0 z-50">
       <header className="shadow-lg relative">
-        {/* DESKTOP + TABLET (nav/tablet bar breakpoints korunuyor) */}
-        <div className="flex max-[832px]:hidden">
+        {/* DESKTOP + TABLET */}
+        <div className="flex items-stretch max-[832px]:hidden">
           {/* SOL BLOK (Logo) */}
-          {/* DEĞİŞTİ: px-16 -> px-6 lg:px-16 (Container ile uyum) */}
-          <div className="bg-blue-900 text-white py-3 px-6 lg:px-16 flex items-center space-x-4">
+          <div className="bg-blue-900 text-white py-3 px-6 lg:px-16 flex items-center space-x-4 min-h-[72px]">
             <Link
               href="/"
               prefetch={false}
               className="group inline-flex items-center gap-4 hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-sm"
             >
-              <Image
-                src="/logo/logo.svg"
-                alt="Logo"
-                width={30}
-                height={30}
-                priority
-                className="shrink-0"
-              />
+              {/* LOGO: büyük, uyarısız, taşma yok */}
+              <div className="relative w-[40px] h-[40px] sm:w-[44px] sm:h-[44px] lg:w-[48px] lg:h-[48px] shrink-0 overflow-hidden">
+                <Image
+                  src="/logo/logo.svg"
+                  alt="Logo"
+                  fill
+                  priority
+                  sizes="(min-width:1024px) 48px, (min-width:640px) 44px, 40px"
+                  className="object-contain block"
+                />
+              </div>
+
               <span className="block">
                 <span className="block text-lg text-white font-extrabold">
                   AV. ALPER TUNA ÖZKAN
@@ -117,9 +120,8 @@ export default function Header() {
           </div>
 
           {/* SAĞ BLOK (Nav / Tablet bar) */}
-          {/* DEĞİŞTİ: px-16 -> px-6 lg:px-16, ayrıca py-3 eklendi (yükseklik eşitlendi) */}
-          <div className="bg-[#fdf3e7] flex-1 px-6 lg:px-16 py-3 flex items-center">
-            {/* Desktop NAV (≥1180px aynen) */}
+          <div className="bg-[#fdf3e7] flex-1 px-6 lg:px-16 py-3 flex items-center min-h-[72px]">
+            {/* Desktop NAV (≥1180px) */}
             <nav className="hidden min-[1180px]:flex w-full items-center px-0">
               <ul className="flex w-full items-center justify-between">
                 {items.map((item) => {
@@ -142,7 +144,7 @@ export default function Header() {
               </ul>
             </nav>
 
-            {/* Tablet bar (833–1179px) – aynı kural, sadece üstteki paddingle simetri düzeldi */}
+            {/* Tablet bar (833–1179px) */}
             <div className="hidden min-[833px]:flex max-[1180px]:flex min-[1180px]:hidden items-center justify-between w-full">
               <Link
                 href={phone.href}
@@ -172,13 +174,22 @@ export default function Header() {
           </div>
         </div>
 
-        {/* MOBILE (≤832px) – Container base ile uyumlu: px-4 zaten doğru */}
+        {/* MOBILE (≤832px) */}
         <div className="hidden max-[832px]:flex items-center justify-between bg-blue-900 text-white px-4 h-[73.3px]">
           <Link
             href="/"
             className="flex items-center gap-3 min-w-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-sm"
           >
-            <Image src="/logo/logo.svg" alt="Logo" width={28} height={28} />
+            {/* Mobil logo: biraz büyük */}
+            <div className="relative w-[36px] h-[36px] overflow-hidden">
+              <Image
+                src="/logo/logo.svg"
+                alt="Logo"
+                fill
+                sizes="36px"
+                className="object-contain block"
+              />
+            </div>
           </Link>
 
           <Link
@@ -208,7 +219,7 @@ export default function Header() {
         </div>
       </header>
 
-      {/* TABLET DROPDOWN (breakpoints korunuyor) */}
+      {/* TABLET DROPDOWN */}
       <MenuPanel
         open={tabletOpen}
         id="tablet-menu"
