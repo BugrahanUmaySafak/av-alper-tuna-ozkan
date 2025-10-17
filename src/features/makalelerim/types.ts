@@ -5,8 +5,8 @@ export type Article = {
   slug: string;
   image: { url: string; alt: string };
   keywords: string[];
-  publishedAt: string; 
-  updatedAt: string; 
+  publishedAt: string;
+  updatedAt: string;
   seo: {
     title: string;
     description: string;

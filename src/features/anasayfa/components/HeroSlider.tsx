@@ -194,7 +194,7 @@ export default function HeroSlider() {
 
   return (
     <section
-      className="relative w-full h-[calc(100dvh-73.3px)] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100"
+      className="relative w-full h-[calc(100dvh-72px)] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100"
       aria-label="Ana görsel slayt"
     >
       <div className="w-full h-full select-none">
@@ -293,20 +293,41 @@ export default function HeroSlider() {
 
       <div className="absolute z-20 left-4 bottom-4 md:left-1/2 md:bottom-8 md:-translate-x-1/2">
         <div className="flex items-center gap-4 rounded-2xl bg-black/50 backdrop-blur px-4 py-2 border border-white/10 shadow">
+          {/* ... */}
           <div className="flex items-center gap-2">
             {SLIDES_DATA.map((_, i) => (
               <button
                 key={i}
                 onClick={() => jumpTo(i)}
-                className={`size-3 rounded-full transition ${
-                  i === index
-                    ? "bg-yellow-600"
-                    : "bg-white/40 hover:bg-white/60"
-                }`}
                 aria-label={`${i + 1}. slayda git`}
-              />
+                aria-current={i === index ? "true" : "false"}
+                className={`
+        group relative rounded-full transition
+        focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/80
+
+        size-3
+        ${i === index ? "bg-yellow-600" : "bg-white/40 hover:bg-white/60"}
+
+        md:size-auto md:w-10 md:h-10 md:bg-transparent md:p-2 md:-m-2
+      `}
+              >
+                <span
+                  aria-hidden
+                  className={`
+          hidden md:block
+          absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+          rounded-full transition
+          ${
+            i === index
+              ? "size-3.5 bg-yellow-500 shadow"
+              : "size-2.5 bg-white/60 group-hover:bg-white/80"
+          }
+        `}
+                />
+              </button>
             ))}
           </div>
+          {/* ... */}
 
           <span className="hidden md:block w-px h-5 bg-white/20" />
           <div className="hidden md:flex w-36 h-2 rounded-full bg-white/10 overflow-hidden">

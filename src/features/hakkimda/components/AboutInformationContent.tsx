@@ -5,13 +5,14 @@ import { ArrowRight, Calendar, FileText, Play } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import type { Blog, Video } from "@/data/articles";
 import Container from "@/components/container/Container";
 import Section from "@/components/section/Section";
+import { Article } from "@/features/makalelerim/types";
+import { Video } from "@/features/videolarim/types";
 
 interface Props {
   videos: Video[];
-  makaleler: Blog[];
+  makaleler: Article[];
 }
 
 export default function AboutInformationContent({ videos, makaleler }: Props) {
@@ -37,7 +38,7 @@ export default function AboutInformationContent({ videos, makaleler }: Props) {
 
             <div className="space-y-6">
               {previewVideos.map((video) => (
-                <div key={video._id} className="mb-4">
+                <div key={video.id} className="mb-4">
                   <Link href="/videolarim">
                     <Card className="group hover:shadow-xl transition-all duration-500 border-0 shadow-md bg-white/80 backdrop-blur-sm hover:bg-white cursor-pointer overflow-hidden">
                       <CardContent className="p-5">
@@ -106,7 +107,7 @@ export default function AboutInformationContent({ videos, makaleler }: Props) {
 
             <div className="space-y-6">
               {previewYazilar.map((yazi) => (
-                <div key={yazi._id} className="mb-4">
+                <div key={yazi.id} className="mb-4">
                   <Link href={`/makalelerim/${yazi.slug}`}>
                     <Card className="group hover:shadow-xl transition-all duration-500 border-0 shadow-md bg-white/80 backdrop-blur-sm hover:bg-white cursor-pointer overflow-hidden">
                       <CardContent className="p-5">
@@ -114,7 +115,7 @@ export default function AboutInformationContent({ videos, makaleler }: Props) {
                           {/* Makale Kartı */}
                           <div className="relative w-44 h-24 md:w-52 md:h-28 lg:w-56 lg:h-32 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden flex-shrink-0 shadow-md">
                             <Image
-                              src={yazi.image || "/placeholder.svg"}
+                              src={yazi.image.url || "/placeholder.svg"}
                               alt={yazi.title}
                               fill
                               sizes="224px"
@@ -131,7 +132,7 @@ export default function AboutInformationContent({ videos, makaleler }: Props) {
                             <div className="flex items-center text-sm text-gray-500">
                               <Calendar className="w-4 h-4 mr-2 flex-shrink-0" />
                               <span className="truncate">
-                                {new Date(yazi.createdAt).toLocaleDateString(
+                                {new Date(yazi.publishedAt).toLocaleDateString(
                                   "tr-TR"
                                 )}
                               </span>
