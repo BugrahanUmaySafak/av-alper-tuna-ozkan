@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Container } from "@/components/container/Container";
 import { slides as SLIDES_DATA } from "@/data/slide";
 
-const SLIDE_DURATION = 6000;
+const SLIDE_DURATION = 5000;
 const SWIPE_THRESHOLD_RATIO = 0.15;
 const HOLD_DELAY_MS = 150;
 const TAP_SLOP_PX = 6;
@@ -59,7 +59,7 @@ export default function HeroSlider() {
           acc.current = 0;
           if (progressRef.current) progressRef.current.style.width = "0%";
           if (indexRef.current + 1 >= slidesLen) {
-            setIndex(0); // zıplama
+            setIndex(0);
           } else {
             setIndex(indexRef.current + 1);
           }
@@ -177,6 +177,21 @@ export default function HeroSlider() {
 
   const transform = `translateX(${-index * 100 + offset}%)`;
 
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+
+    const onWheel = (e: WheelEvent) => {
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    };
+
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel as EventListener);
+  }, []);
+
   return (
     <section
       className="relative w-full h-[calc(100dvh-73.3px)] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100"
@@ -194,18 +209,13 @@ export default function HeroSlider() {
             transform,
             touchAction: "pan-y",
             backfaceVisibility: "hidden",
+            overscrollBehaviorX: "contain",
           }}
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
           onPointerUp={finishInteraction}
           onPointerCancel={finishInteraction}
           onPointerLeave={finishInteraction}
-          onWheel={(e) => {
-            if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-              e.preventDefault();
-              e.stopPropagation();
-            }
-          }}
         >
           {SLIDES_DATA.map((slide, i) => {
             const imgSrc = isMobile
@@ -230,7 +240,7 @@ export default function HeroSlider() {
                 <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/20" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 <div className="absolute inset-0 flex justify-start">
-                  <Container className="h-full flex items-start sm:items-center pt-16 sm:pt-0">
+                  <Container className="h-full flex items-start sm:items-center pt-8 sm:pt-0">
                     <div className="space-y-8 max-w-4xl">
                       <div className="space-y-4">
                         <div className="flex items-center">
@@ -281,7 +291,6 @@ export default function HeroSlider() {
         </div>
       </div>
 
-      {/* Indicators */}
       <div className="absolute z-20 left-4 bottom-4 md:left-1/2 md:bottom-8 md:-translate-x-1/2">
         <div className="flex items-center gap-4 rounded-2xl bg-black/50 backdrop-blur px-4 py-2 border border-white/10 shadow">
           <div className="flex items-center gap-2">
@@ -299,7 +308,6 @@ export default function HeroSlider() {
             ))}
           </div>
 
-          {/* Progress bar sadece md ve üzeri */}
           <span className="hidden md:block w-px h-5 bg-white/20" />
           <div className="hidden md:flex w-36 h-2 rounded-full bg-white/10 overflow-hidden">
             <span
@@ -309,7 +317,6 @@ export default function HeroSlider() {
             />
           </div>
 
-          {/* Slide sırası sadece mobil */}
           <span className="md:hidden text-white/90 text-sm tabular-nums">
             {index + 1} / {slidesLen}
           </span>

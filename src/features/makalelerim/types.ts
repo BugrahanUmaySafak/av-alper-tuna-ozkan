@@ -1,12 +1,12 @@
 export type Article = {
   id: string;
   title: string;
-  content: string; // HTML
+  content: string;
   slug: string;
   image: { url: string; alt: string };
   keywords: string[];
-  publishedAt: string; // ISO
-  updatedAt: string; // ISO
+  publishedAt: string; 
+  updatedAt: string; 
   seo: {
     title: string;
     description: string;

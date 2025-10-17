@@ -15,28 +15,25 @@ export default function ContactDetails() {
     <Container>
       <Section>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-          {/* Ankara Adres */}
           <ContactInfoCard
             title="Ankara Adres"
             icon={MapPin}
             iconColor="text-red-600"
           >
             <a
-              href="https://www.google.com/maps/search/?api=1&query=Ankara%2C+Türkiye"
+              href="https://www.google.com/maps/search/?api=1&query=Aşağı+Öveçler+Mahallesi+1328.+Cadde+Demirağ+Apt.+No:+14/8+Çankaya+ANKARA"
               target="_blank"
               rel="noopener noreferrer"
               className="block not-italic leading-relaxed text-center pt-2 hover:text-primary transition-colors duration-200 group"
             >
               <address className="not-italic font-medium text-foreground group-hover:text-primary transition-colors">
-                Çankaya / Ankara <br />
-                <span className="text-muted-foreground text-xs mt-1 inline-block">
-                  (Detaylı adres güncellenecek)
-                </span>
+                Aşağı Öveçler Mahallesi 1328. Cadde <br />
+                Demirağ Apartmanı, No: 14/8 <br />
+                Ankara / Çankaya
               </address>
             </a>
           </ContactInfoCard>
 
-          {/* Kırıkkale Adres */}
           <ContactInfoCard
             title="Kırıkkale Adres"
             icon={MapPin}
@@ -51,12 +48,11 @@ export default function ContactDetails() {
               <address className="not-italic font-medium text-foreground group-hover:text-primary transition-colors">
                 Yaylacık Mahallesi Ulubatlıhasan Caddesi <br />
                 Aydınlık Apartmanı, No: 22/9 <br />
-                71000 Kırıkkale / Merkez
+                Kırıkkale / Merkez
               </address>
             </a>
           </ContactInfoCard>
 
-          {/* Telefon */}
           <ContactInfoCard
             title="Telefon"
             icon={Phone}
@@ -73,7 +69,6 @@ export default function ContactDetails() {
             </div>
           </ContactInfoCard>
 
-          {/* E-posta */}
           <ContactInfoCard
             title="E-posta"
             icon={Mail}
@@ -90,7 +85,6 @@ export default function ContactDetails() {
             </div>
           </ContactInfoCard>
 
-          {/* Çalışma Saatleri */}
           <ContactInfoCard
             title="Çalışma Saatleri"
             icon={Clock}
@@ -106,7 +100,6 @@ export default function ContactDetails() {
             </div>
           </ContactInfoCard>
 
-          {/* Sosyal Medya */}
           <ContactInfoCard
             title="Sosyal Medya"
             icon={Users}

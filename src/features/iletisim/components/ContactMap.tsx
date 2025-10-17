@@ -11,7 +11,10 @@ type LocationKey = "ankara" | "kirikkale";
 type Coords = [number, number];
 
 const LOCATIONS: Record<LocationKey, { center: Coords; title: string }> = {
-  ankara: { center: [39.9208, 32.8541], title: "Ankara Ofis" },
+  ankara: {
+    center: [39.9208, 32.8541],
+    title: "Ankara Ofis",
+  },
   kirikkale: {
     center: [39.8413024, 33.4980931],
     title: "DEVA Avukatlık & Danışmanlık (Kırıkkale)",

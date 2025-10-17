@@ -6,7 +6,6 @@ import { useForm, type FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactSchema, type ContactInput } from "@/lib/validation/contact";
 import { useContactSubmit } from "@/features/iletisim/hooks/useContactSubmit";
-import Image from "next/image";
 import { Send, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -38,14 +37,12 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
     defaultValues: { name: "", email: "", phone: "", title: "", content: "" },
   });
 
-  // E-posta/Telefon’dan biri yazılınca iki alanın manuel hataları temizlensin
   const email = form.watch("email");
   const phone = form.watch("phone");
   useEffect(() => {
     if (email || phone) form.clearErrors(["email", "phone"]);
   }, [email, phone, form]);
 
-  // Hata sırası: name → (email/phone) → title → content (Zod mesajlarını kullan)
   const onInvalid = (errors: FieldErrors<ContactInput>) => {
     const order: (keyof ContactInput)[] = [
       "name",
@@ -57,7 +54,6 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
     for (const key of order) {
       const msg = errors[key]?.message as string | undefined;
       if (msg) {
-        // email/phone birlikte boşsa ikisini de invalid yap (schema da ekliyor; görsel tutarlılık)
         if (
           key === "email" &&
           !form.getValues("email") &&
@@ -90,7 +86,6 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
     });
   };
 
-  // invalid state’te kırmızı kenarlığı bastır + focus görselliği
   const invalidOverride =
     "data-[invalid=true]:border-input aria-[invalid=true]:border-input " +
     "data-[invalid=true]:ring-0 aria-[invalid=true]:ring-0 " +
@@ -103,15 +98,8 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
           ref={formRef}
           className="rounded-xl shadow-xl overflow-hidden border border-border/50 bg-card h-full"
         >
-          <div className="relative w-full aspect-[3/1]">
-            <Image
-              src="/alpertunaozkan-contactPage.webp"
-              alt="Avukat Alper Tuna Özkan - Profesyonel hukuk danışmanlığı"
-              fill
-              className="object-cover object-center"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-card/20 to-transparent" />
+          <div className="bg-primary/10 text-primary font-medium text-center py-3 border-b border-border/50 px-2">
+            Hukuki sorularınız için formu doldurun, kısa sürede dönüş yapalım.
           </div>
 
           <div className="p-8 lg:p-10">

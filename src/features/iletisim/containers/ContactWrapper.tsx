@@ -20,12 +20,6 @@ export default function ContactWrapper() {
         description="Hukuki sorularınız için hemen iletişime geçin."
       />
 
-      <ContactForm />
-
-      <Container>
-        <Separator />
-      </Container>
-
       <ContactDetails />
 
       <Container>
@@ -33,6 +27,12 @@ export default function ContactWrapper() {
       </Container>
 
       <ContactMap />
+
+      <Container>
+        <Separator />
+      </Container>
+
+      <ContactForm />
     </>
   );
 }
