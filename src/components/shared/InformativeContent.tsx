@@ -6,11 +6,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Section from "@/components/section/Section";
+import Container from "../container/Container";
+import SmartFigureImage from "@/components/media/SmartFigureImage";
 
 import type { Video } from "@/features/videolarim/types";
 import type { Article } from "@/features/makalelerim/types";
-import Container from "../container/Container";
-import SmartFigureImage from "@/components/media/SmartFigureImage";
 
 type Props = {
   videos: Video[];
@@ -47,60 +47,64 @@ export default function InformativeContent({
   const previewArticles = articles.slice(0, articleTake);
 
   return (
-    <Section>
-      <Container>
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+    <Section className="overflow-x-hidden">
+      <Container className="px-4">
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight">
             {title}
           </h2>
 
           {upperContent && (
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               {upperContent}
             </p>
           )}
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
           {/* VIDEOLAR */}
-          <div className="space-y-8">
-            <div className="flex items-center gap-4 mb-8">
-              <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center shadow-lg">
-                <Play className="w-6 h-6 text-white" />
+          <div className="space-y-6 md:space-y-8">
+            <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-8">
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center shadow-lg">
+                <Play className="w-5 h-5 md:w-6 md:h-6 text-white" />
               </div>
-              <h3 className="text-3xl font-bold text-gray-900">Videolarım</h3>
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
+                Videolarım
+              </h3>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-4 md:space-y-6">
               {previewVideos.map((video) => (
-                <div key={video.id} className="mb-4">
-                  <Link href="/videolarim">
-                    <Card className="group hover:shadow-xl transition-all duration-500 border-0 shadow-md bg-white/80 backdrop-blur-sm hover:bg-white cursor-pointer overflow-hidden">
-                      <CardContent className="p-5">
-                        <div className="flex gap-4 md:gap-5">
-                          <div className="relative w-44 h-24 md:w-52 md:h-28 lg:w-56 lg:h-32 rounded-xl overflow-hidden flex-shrink-0 shadow-md bg-gray-900">
+                <div key={video.id} className="mb-2 md:mb-4">
+                  <Link href="/videolarim" className="block">
+                    <Card className="group hover:shadow-xl transition-all duration-500 border-0 shadow-md bg-white/80 backdrop-blur-sm hover:bg-white cursor-pointer overflow-hidden max-w-full">
+                      <CardContent className="p-4 md:p-5">
+                        <div className="flex gap-3 md:gap-5 items-stretch">
+                          {/* THUMBNAIL */}
+                          <div className="relative w-32 sm:w-44 md:w-52 lg:w-56 aspect-video rounded-xl overflow-hidden flex-shrink-0 shadow-md bg-gray-900">
                             <Image
                               src={`https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`}
                               alt={video.title}
                               fill
-                              sizes="224px"
+                              sizes="(max-width: 640px) 128px, (max-width: 768px) 176px, 224px"
                               className="object-cover"
                             />
                             <div className="absolute inset-0 flex items-center justify-center">
-                              <div className="w-12 h-12 bg-red-600/90 rounded-full flex items-center justify-center group-hover:bg-red-600 transition-colors">
+                              <div className="w-10 h-10 md:w-12 md:h-12 bg-red-600/90 rounded-full flex items-center justify-center group-hover:bg-red-600 transition-colors">
                                 <Play
-                                  className="w-6 h-6 text-white ml-1"
+                                  className="w-5 h-5 md:w-6 md:h-6 text-white ml-0.5"
                                   fill="white"
                                 />
                               </div>
                             </div>
                           </div>
 
+                          {/* TEXT */}
                           <div className="flex-1 min-w-0 flex flex-col justify-center">
-                            <h4 className="font-semibold text-gray-900 text-base md:text-lg group-hover:text-red-600 line-clamp-2 mb-2 leading-snug">
+                            <h4 className="font-semibold text-gray-900 text-sm md:text-lg group-hover:text-red-600 line-clamp-2 mb-1 md:mb-2 leading-snug break-words">
                               {video.title}
                             </h4>
-                            <div className="flex items-center text-sm text-gray-500">
+                            <div className="flex items-center text-xs md:text-sm text-gray-500 min-w-0">
                               <Calendar className="w-4 h-4 mr-2 flex-shrink-0" />
                               <span className="truncate">
                                 {formatTR(video.createdAt)}
@@ -118,7 +122,7 @@ export default function InformativeContent({
             <Button
               asChild
               variant="outline"
-              className="w-full group bg-white/50 backdrop-blur-sm hover:bg-white border-red-200 text-red-600 hover:text-red-700 py-6 text-base font-medium"
+              className="w-full group bg-white/50 backdrop-blur-sm hover:bg-white border-red-200 text-red-600 hover:text-red-700 py-5 md:py-6 text-base font-medium"
             >
               <Link href="/videolarim">
                 <span className="inline-flex items-center">
@@ -130,38 +134,35 @@ export default function InformativeContent({
           </div>
 
           {/* MAKALELER */}
-          <div className="space-y-8">
-            <div className="flex items-center gap-4 mb-8">
-              <div className="w-12 h-12 bg-gradient-to-br from-emerald-700 to-emerald-900 rounded-xl flex items-center justify-center shadow-lg">
-                <FileText className="w-6 h-6 text-white" />
+          <div className="space-y-6 md:space-y-8">
+            <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-8">
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-emerald-700 to-emerald-900 rounded-xl flex items-center justify-center shadow-lg">
+                <FileText className="w-5 h-5 md:w-6 md:h-6 text-white" />
               </div>
-              <h3 className="text-3xl font-bold text-gray-900">Makalelerim</h3>
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
+                Makalelerim
+              </h3>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-4 md:space-y-6">
               {previewArticles.map((yazi) => (
-                <div key={yazi.id} className="mb-4">
-                  <Link href={`/makalelerim`}>
-                    <Card className="group hover:shadow-xl transition-all duration-500 border-0 shadow-md bg-white/80 backdrop-blur-sm hover:bg-white cursor-pointer overflow-hidden">
-                      <CardContent className="p-5">
-                        <div className="flex gap-4 md:gap-5">
-                          {/* Görsel alanı: ArticlesList ile aynı tasarım */}
+                <div key={yazi.id} className="mb-2 md:mb-4">
+                  <Link href="/makalelerim" className="block">
+                    <Card className="group hover:shadow-xl transition-all duration-500 border-0 shadow-md bg-white/80 backdrop-blur-sm hover:bg-white cursor-pointer overflow-hidden max-w-full">
+                      <CardContent className="p-4 md:p-5">
+                        <div className="flex gap-3 md:gap-5 items-stretch">
+                          {/* Görsel alanı */}
                           <SmartFigureImage
                             src={yazi.image.url}
                             alt={yazi.image.alt}
-                            className="
-                              w-44 h-24
-                              md:w-52 md:h-28
-                              lg:w-56 lg:h-32
-                              rounded-xl shadow-md bg-gray-900 flex-shrink-0
-                            "
+                            className="w-32 sm:w-44 md:w-52 lg:w-56 aspect-video rounded-xl shadow-md bg-gray-900 flex-shrink-0 overflow-hidden"
                           />
 
                           <div className="flex-1 min-w-0 flex flex-col justify-center">
-                            <h4 className="font-semibold text-gray-900 text-base md:text-lg group-hover:text-emerald-900 line-clamp-2 mb-2 leading-snug">
+                            <h4 className="font-semibold text-gray-900 text-sm md:text-lg group-hover:text-emerald-900 line-clamp-2 mb-1 md:mb-2 leading-snug break-words">
                               {yazi.title}
                             </h4>
-                            <div className="flex items-center text-sm text-gray-500">
+                            <div className="flex items-center text-xs md:text-sm text-gray-500 min-w-0">
                               <Calendar className="w-4 h-4 mr-2 flex-shrink-0" />
                               <span className="truncate">
                                 {formatTR(yazi.publishedAt)}
@@ -179,7 +180,7 @@ export default function InformativeContent({
             <Button
               asChild
               variant="outline"
-              className="w-full group bg-white/50 backdrop-blur-sm hover:bg-white border-emerald-300 text-emerald-900 hover:text-emerald-800 py-6 text-base font-medium"
+              className="w-full group bg-white/50 backdrop-blur-sm hover:bg-white border-emerald-300 text-emerald-900 hover:text-emerald-800 py-5 md:py-6 text-base font-medium"
             >
               <Link href="/makalelerim">
                 <span className="inline-flex items-center">
@@ -192,9 +193,9 @@ export default function InformativeContent({
         </div>
 
         {lowerContent && (
-          <div className="mt-12 text-center">
+          <div className="mt-10 md:mt-12 text-center">
             <div className="max-w-3xl mx-auto">
-              <p className="text-lg text-gray-600 leading-relaxed">
+              <p className="text-base md:text-lg text-gray-600 leading-relaxed">
                 {lowerContent}
               </p>
             </div>

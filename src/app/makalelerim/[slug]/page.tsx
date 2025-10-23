@@ -11,7 +11,7 @@ function absoluteUrl(pathOrUrl: string) {
   try {
     return new URL(pathOrUrl).toString();
   } catch {
-    return new URL(pathOrUrl, SITE_URL).toString(); 
+    return new URL(pathOrUrl, SITE_URL).toString();
   }
 }
 

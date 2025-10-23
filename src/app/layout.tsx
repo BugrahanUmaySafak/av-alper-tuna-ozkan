@@ -63,8 +63,8 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col bg-white text-black">
         <ThemeProvider
           attribute="class"
-          defaultTheme="light" // ✅ her zaman açık tema
-          forcedTheme="light" // ✅ kullanıcı değiştiremez
+          defaultTheme="light"
+          forcedTheme="light"
           disableTransitionOnChange
         >
           <Header />

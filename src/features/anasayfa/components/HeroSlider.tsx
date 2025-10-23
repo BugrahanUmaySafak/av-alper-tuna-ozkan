@@ -244,7 +244,7 @@ export default function HeroSlider() {
                     <div className="space-y-8 max-w-4xl">
                       <div className="space-y-4">
                         <div className="flex items-center">
-                          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+                          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
                             <span className="block bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent">
                               {slide.title}
                             </span>
@@ -256,7 +256,7 @@ export default function HeroSlider() {
                         </div>
                         <Separator className="w-24 h-[3px] bg-yellow-600" />
                       </div>
-                      <p className="text-xl md:text-2xl text-gray-200 leading-relaxed max-w-2xl font-light">
+                      <p className="text-l md:text-xl lg:text-2xl text-gray-200 leading-relaxed max-w-2xl font-light">
                         {slide.description}
                       </p>
                       <div className="flex flex-wrap gap-2">
