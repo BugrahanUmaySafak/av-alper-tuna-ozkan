@@ -1,16 +1,17 @@
-"use client";
-
+// src/components/shared/InformativeContent.tsx
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Calendar, FileText, Play } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Section from "@/components/section/Section";
-import Container from "../container/Container";
+import Container from "@/components/container/Container";
 import SmartFigureImage from "@/components/media/SmartFigureImage";
+import YouTubeThumb from "@/components/media/YouTubeThumb";
 
 import type { Video } from "@/features/videolarim/types";
 import type { Article } from "@/features/makalelerim/types";
+
+// SSR: "use client" yok
 
 type Props = {
   videos: Video[];
@@ -53,7 +54,6 @@ export default function InformativeContent({
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight">
             {title}
           </h2>
-
           {upperContent && (
             <p className="text-base md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               {upperContent}
@@ -74,20 +74,23 @@ export default function InformativeContent({
             </div>
 
             <div className="space-y-4 md:space-y-6">
-              {previewVideos.map((video) => (
+              {previewVideos.map((video, idx) => (
                 <div key={video.id} className="mb-2 md:mb-4">
-                  <Link href="/videolarim" className="block">
+                  <Link href="/videolarim" className="block" prefetch={false}>
                     <Card className="group hover:shadow-xl transition-all duration-500 border-0 shadow-md bg-white/80 backdrop-blur-sm hover:bg-white cursor-pointer overflow-hidden max-w-full">
                       <CardContent className="p-4 md:p-5">
                         <div className="flex gap-3 md:gap-5 items-stretch">
                           {/* THUMBNAIL */}
                           <div className="relative w-32 sm:w-44 md:w-52 lg:w-56 aspect-video rounded-xl overflow-hidden flex-shrink-0 shadow-md bg-gray-900">
-                            <Image
-                              src={`https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`}
+                            <YouTubeThumb
+                              youtubeId={video.youtubeId}
                               alt={video.title}
-                              fill
-                              sizes="(max-width: 640px) 128px, (max-width: 768px) 176px, 224px"
-                              className="object-cover"
+                              // kart genişlikleri için uygun sizes
+                              sizes="(min-width:1024px) 224px, (min-width:768px) 208px, (min-width:640px) 176px, 128px"
+                              // ilk kartı önceliklendirebilirsin:
+                              priority={idx === 0}
+                              // istersen kaliteyi 60–72 arası kullan
+                              quality={60}
                             />
                             <div className="absolute inset-0 flex items-center justify-center">
                               <div className="w-10 h-10 md:w-12 md:h-12 bg-red-600/90 rounded-full flex items-center justify-center group-hover:bg-red-600 transition-colors">
@@ -99,7 +102,7 @@ export default function InformativeContent({
                             </div>
                           </div>
 
-                          {/* TEXT */}
+                          {/* METİN */}
                           <div className="flex-1 min-w-0 flex flex-col justify-center">
                             <h4 className="font-semibold text-gray-900 text-sm md:text-lg group-hover:text-red-600 line-clamp-2 mb-1 md:mb-2 leading-snug break-words">
                               {video.title}
@@ -124,7 +127,7 @@ export default function InformativeContent({
               variant="outline"
               className="w-full group bg-white/50 backdrop-blur-sm hover:bg-white border-red-200 text-red-600 hover:text-red-700 py-5 md:py-6 text-base font-medium"
             >
-              <Link href="/videolarim">
+              <Link href="/videolarim" prefetch={false}>
                 <span className="inline-flex items-center">
                   Tüm Videoları İzle
                   <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -147,17 +150,15 @@ export default function InformativeContent({
             <div className="space-y-4 md:space-y-6">
               {previewArticles.map((yazi) => (
                 <div key={yazi.id} className="mb-2 md:mb-4">
-                  <Link href="/makalelerim" className="block">
+                  <Link href="/makalelerim" className="block" prefetch={false}>
                     <Card className="group hover:shadow-xl transition-all duration-500 border-0 shadow-md bg-white/80 backdrop-blur-sm hover:bg-white cursor-pointer overflow-hidden max-w-full">
                       <CardContent className="p-4 md:p-5">
                         <div className="flex gap-3 md:gap-5 items-stretch">
-                          {/* Görsel alanı */}
                           <SmartFigureImage
                             src={yazi.image.url}
                             alt={yazi.image.alt}
                             className="w-32 sm:w-44 md:w-52 lg:w-56 aspect-video rounded-xl shadow-md bg-gray-900 flex-shrink-0 overflow-hidden"
                           />
-
                           <div className="flex-1 min-w-0 flex flex-col justify-center">
                             <h4 className="font-semibold text-gray-900 text-sm md:text-lg group-hover:text-emerald-900 line-clamp-2 mb-1 md:mb-2 leading-snug break-words">
                               {yazi.title}
@@ -182,7 +183,7 @@ export default function InformativeContent({
               variant="outline"
               className="w-full group bg-white/50 backdrop-blur-sm hover:bg-white border-emerald-300 text-emerald-900 hover:text-emerald-800 py-5 md:py-6 text-base font-medium"
             >
-              <Link href="/makalelerim">
+              <Link href="/makalelerim" prefetch={false}>
                 <span className="inline-flex items-center">
                   Tüm Makaleleri Oku
                   <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />

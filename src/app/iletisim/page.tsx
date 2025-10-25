@@ -7,6 +7,10 @@ export const metadata: Metadata = {
     "Özkan Hukuk Danışmanlık ile iletişime geçin. Profesyonel hukuk danışmanlığı için bize ulaşın.",
 };
 
+// SSG + bfcache dostu
+export const revalidate = 900;
+export const dynamic = "force-static";
+
 export default function Iletisim() {
   return <ContactWrapper />;
 }

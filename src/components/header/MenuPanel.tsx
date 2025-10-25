@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import {
   AnimatePresence,
   motion,
@@ -15,7 +16,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function MenuPanel({ open, id, className, children }: Props) {
+function MenuPanelBase({ open, id, className, children }: Props) {
   const prefersReduced = useReducedMotion();
 
   const variants: Variants = prefersReduced
@@ -63,3 +64,6 @@ export default function MenuPanel({ open, id, className, children }: Props) {
     </AnimatePresence>
   );
 }
+
+const MenuPanel = memo(MenuPanelBase);
+export default MenuPanel;

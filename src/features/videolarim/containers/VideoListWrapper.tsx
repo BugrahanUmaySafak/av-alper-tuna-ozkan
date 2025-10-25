@@ -4,7 +4,7 @@ import Link from "next/link";
 import { getVideos } from "../actions/videos";
 
 export default async function VideoListWrapper() {
-  const videos = await getVideos(); // ✅ API’den server-side
+  const videos = await getVideos();
 
   return (
     <>
@@ -24,7 +24,6 @@ export default async function VideoListWrapper() {
           </p>
         }
       />
-
       <VideoList videos={videos} />
     </>
   );

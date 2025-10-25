@@ -1,11 +1,10 @@
-"use client";
-
 import Image from "next/image";
 import React from "react";
 import clsx from "clsx";
 
 type Props = {
-  src: string;
+  src: string; // asıl görsel (Cloudinary tam URL)
+  tinySrc?: string; // Cloudinary tiny (q_20,w_96,e_blur vs.) – arka plan
   alt: string;
   className?: string;
   withBottomGradient?: boolean;
@@ -15,18 +14,21 @@ type Props = {
 
 export default function SmartFigureImage({
   src,
+  tinySrc,
   alt,
   className,
   withBottomGradient = true,
   priority = false,
-  sizes = `(min-width: 1024px) calc(100vw - 8rem),
-           (min-width: 640px) calc(100vw - 3rem),
-           calc(100vw - 2rem)`,
+  // Kart kullanımına uygun, küçük ama esnek default sizes
+  sizes = "(min-width:1024px) 224px, (min-width:768px) 208px, (min-width:640px) 176px, 128px",
 }: Props) {
+  const bgSrc = tinySrc || src;
+
   return (
     <div className={clsx("relative overflow-hidden rounded-xl", className)}>
+      {/* Arka plan (bulanık) — tinySrc çok küçük byte ile gelir */}
       <Image
-        src={src}
+        src={bgSrc}
         alt=""
         aria-hidden
         fill
@@ -34,9 +36,11 @@ export default function SmartFigureImage({
         className="object-cover blur-[2px] scale-105 will-change-transform"
         decoding="async"
         draggable={false}
+        loading={priority ? undefined : "lazy"}
         priority={priority}
       />
 
+      {/* Ön plan (net görsel) */}
       <Image
         src={src}
         alt={alt}
@@ -45,6 +49,7 @@ export default function SmartFigureImage({
         className="object-contain object-center"
         decoding="async"
         draggable={false}
+        loading={priority ? undefined : "lazy"}
         priority={priority}
       />
 

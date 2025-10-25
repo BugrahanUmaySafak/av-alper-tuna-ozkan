@@ -41,10 +41,10 @@ export default function Footer() {
                 <Link
                   href={link.href}
                   aria-current={isActive ? "page" : undefined}
-                  className={`px-2 transition-colors font-medium inline-flex text-sm text-gray-700 hover:text-blue-600 ${
+                  className={`px-2 transition-colors font-medium inline-flex text-sm ${
                     isActive
-                      ? "text-blue-600 border-b-2 border-blue-600 pb-1"
-                      : ""
+                      ? "text-blue-600"
+                      : "text-gray-700 hover:text-blue-600"
                   }`}
                 >
                   {link.name}

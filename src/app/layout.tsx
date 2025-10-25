@@ -59,6 +59,17 @@ export default function RootLayout({
     >
       <head>
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
+        {/* YouTube/görsel kaynakları için erken bağlantı */}
+        <link rel="preconnect" href="https://i.ytimg.com" crossOrigin="" />
+        <link rel="preconnect" href="https://img.youtube.com" crossOrigin="" />
+        <link
+          rel="preconnect"
+          href="https://www.youtube-nocookie.com"
+          crossOrigin=""
+        />
+        <link rel="dns-prefetch" href="//i.ytimg.com" />
+        <link rel="dns-prefetch" href="//img.youtube.com" />
+        <link rel="dns-prefetch" href="//www.youtube-nocookie.com" />
       </head>
       <body className="min-h-screen flex flex-col bg-white text-black">
         <ThemeProvider
@@ -71,7 +82,6 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <IletisimLazy />
           <FooterLazy />
-
           <Toaster
             closeButton
             richColors

@@ -94,9 +94,9 @@ export default function Header() {
             <Link
               href="/"
               prefetch={false}
-              className="group inline-flex items-center gap-4 hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-sm"
+              className="group inline-flex items-center gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-sm"
             >
-              {/* LOGO: büyük, uyarısız, taşma yok */}
+              {/* LOGO */}
               <div className="relative w-[40px] h-[40px] sm:w-[44px] sm:h-[44px] lg:w-[48px] lg:h-[48px] shrink-0 overflow-hidden">
                 <Image
                   src="/logo/logo.svg"
@@ -180,7 +180,6 @@ export default function Header() {
             href="/"
             className="flex items-center gap-3 min-w-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-sm"
           >
-            {/* Mobil logo: biraz büyük */}
             <div className="relative w-[36px] h-[36px] overflow-hidden">
               <Image
                 src="/logo/logo.svg"

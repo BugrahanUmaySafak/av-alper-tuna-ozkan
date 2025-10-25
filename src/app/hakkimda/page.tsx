@@ -7,6 +7,9 @@ export const metadata: Metadata = {
     "Özkan Hukuk Danışmanlık olarak, müvekkillerimize güvenilir ve etkili hukuki çözümler sunuyoruz.",
 };
 
+export const revalidate = 900;
+export const dynamic = "force-static";
+
 export default function Hakkimda() {
   return <AboutWrapper />;
 }

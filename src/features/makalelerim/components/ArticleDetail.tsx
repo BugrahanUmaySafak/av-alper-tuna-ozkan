@@ -44,25 +44,33 @@ export default function ArticleDetail({
 
   const html = useMemo(() => normalizeHtml(article.content), [article.content]);
 
+  const heroSrc = article.image.url;
+  const heroTiny = article.image.tinyUrl ?? heroSrc;
+
   return (
     <>
+      {/* HERO: tiny (arka plan, blur) + asıl görsel (önde) */}
       <div className="relative w-full h-[260px] sm:h-[340px] lg:h-[420px] overflow-hidden mt-2 sm:mt-4 lg:mt-6 rounded-xl">
+        {/* BLUR BACKDROP: tinyUrl ile çok hafif ve küçük byte */}
         <Image
-          src={article.image.url}
+          src={heroTiny}
           alt=""
+          aria-hidden
           fill
           sizes="100vw"
           className="object-cover blur-[2px] scale-105"
-          aria-hidden
           priority
+          decoding="async"
         />
+        {/* FOREGROUND: asıl görsel */}
         <Image
-          src={article.image.url}
+          src={heroSrc}
           alt={article.image.alt}
           fill
           sizes="100vw"
           className="object-contain object-center"
           priority
+          decoding="async"
         />
         <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-background/50 to-transparent pointer-events-none" />
       </div>
@@ -74,6 +82,7 @@ export default function ArticleDetail({
               href="/makalelerim"
               className="inline-flex items-center gap-2 text-sm rounded-md border px-3 py-1.5 hover:bg-accent transition"
               aria-label="Tüm yazılara geri dön"
+              prefetch={false}
             >
               <ArrowLeft className="h-4 w-4" />
               Tüm yazılara geri dön

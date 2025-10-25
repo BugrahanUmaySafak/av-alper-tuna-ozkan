@@ -6,7 +6,6 @@ interface Props {
   title: string;
   icon: LucideIcon;
   children: React.ReactNode;
-  variant?: "default" | "compact";
   iconColor?: string;
 }
 
@@ -19,7 +18,6 @@ export default function ContactInfoCard({
   return (
     <Card className="group relative overflow-hidden border-border/50 bg-card transition-all duration-300 hover:shadow-lg hover:border-primary/20">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
       <CardHeader className="relative pb-2 pt-4">
         <CardTitle className="flex items-center gap-2 text-base font-semibold text-foreground">
           <div className={`flex items-center justify-center ${iconColor}`}>
@@ -28,7 +26,6 @@ export default function ContactInfoCard({
           <span className="text-balance">{title}</span>
         </CardTitle>
       </CardHeader>
-
       <CardContent className="relative text-sm text-muted-foreground leading-relaxed pb-4">
         {children}
       </CardContent>

@@ -1,20 +1,17 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Container from "@/components/container/Container";
-import { Button } from "@/components/ui/button";
 import type { Map as LeafletMap, Marker as LeafletMarker } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import Section from "@/components/section/Section";
+import Container from "@/components/container/Container";
+import { Button } from "@/components/ui/button";
 
 type LocationKey = "ankara" | "kirikkale";
 type Coords = [number, number];
 
 const LOCATIONS: Record<LocationKey, { center: Coords; title: string }> = {
-  ankara: {
-    center: [39.9208, 32.8541],
-    title: "Ankara Ofis",
-  },
+  ankara: { center: [39.9208, 32.8541], title: "Ankara Ofis" },
   kirikkale: {
     center: [39.8413024, 33.4980931],
     title: "DEVA Avukatlık & Danışmanlık (Kırıkkale)",
@@ -125,6 +122,7 @@ export default function ContactMap() {
     );
   }
 
+  // temizle
   useEffect(() => {
     return () => {
       if (mapRef.current) {
@@ -142,11 +140,11 @@ export default function ContactMap() {
           <Button
             variant="outline"
             aria-pressed={key === "ankara"}
-            className={`transition-all ${
+            className={
               key === "ankara"
-                ? "bg-blue-600 text-white border-blue-600 hover:bg-blue-700 hover:text-white"
+                ? "bg-blue-600 text-white border-blue-600 hover:bg-blue-700"
                 : ""
-            }`}
+            }
             onClick={() => handleLocationChange("ankara")}
           >
             Ankara
@@ -154,11 +152,11 @@ export default function ContactMap() {
           <Button
             variant="outline"
             aria-pressed={key === "kirikkale"}
-            className={`transition-all ${
+            className={
               key === "kirikkale"
-                ? "bg-blue-600 text-white border-blue-600 hover:bg-blue-700 hover:text-white"
+                ? "bg-blue-600 text-white border-blue-600 hover:bg-blue-700"
                 : ""
-            }`}
+            }
             onClick={() => handleLocationChange("kirikkale")}
           >
             Kırıkkale
@@ -189,7 +187,7 @@ export default function ContactMap() {
                 <div role="status" aria-live="polite" className="text-center">
                   <div
                     className="inline-block w-12 h-12 mb-4 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"
-                    aria-hidden="true"
+                    aria-hidden
                   />
                   <p className="text-gray-600 font-medium">
                     Harita yükleniyor...
@@ -199,7 +197,7 @@ export default function ContactMap() {
                 <div className="text-center">
                   <div
                     className="inline-flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-blue-600 text-white"
-                    aria-hidden="true"
+                    aria-hidden
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -208,7 +206,6 @@ export default function ContactMap() {
                       strokeWidth={2}
                       stroke="currentColor"
                       className="w-8 h-8"
-                      aria-hidden="true"
                     >
                       <path
                         strokeLinecap="round"

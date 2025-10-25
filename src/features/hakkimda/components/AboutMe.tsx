@@ -2,20 +2,34 @@ import Container from "@/components/container/Container";
 import Section from "@/components/section/Section";
 import Image from "next/image";
 
+const BLUR_SVG =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 4'%3E%3Cdefs%3E%3ClinearGradient id='g'%3E%3Cstop stop-color='%23e5e5e5'/%3E%3Cstop offset='1' stop-color='%23f3f3f3'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='3' height='4' fill='url(%23g)'/%3E%3C/svg%3E";
+
 export default function AboutMe() {
   return (
     <Section>
       <Container>
         <div className="grid md:grid-cols-12 gap-8 items-center">
           {/* Görsel */}
-          <div className="md:col-span-6 relative overflow-hidden rounded-xl shadow-xl w-full aspect-[3/4]">
+          <div className="md:col-span-6 relative overflow-hidden rounded-xl shadow-xl w-full aspect-[3/4] md:max-w-[720px]">
             <Image
               src="/alpertunaozkan-aboutPage.webp"
               alt="Avukat Alper Tuna Özkan"
               fill
               className="object-cover object-center"
               priority
-              sizes="(min-width: 1024px) 540px, (min-width: 768px) 50vw, 100vw"
+              fetchPriority="high"
+              sizes="
+                (min-width:1536px) 720px,
+                (min-width:1280px) 680px,
+                (min-width:1024px) 560px,
+                (min-width:768px) 50vw,
+                92vw
+              "
+              quality={78}
+              placeholder="blur"
+              blurDataURL={BLUR_SVG}
+              decoding="async"
             />
           </div>
 

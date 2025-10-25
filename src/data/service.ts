@@ -22,11 +22,11 @@ export const services: Service[] = [
       "Mirasın Reddi",
       "Ölünce Kadar Bakma Sözleşmeleri",
       "Mirasçılık Belgesi İstemi",
-      "İntikal"
+      "İntikal",
     ],
   },
   {
-    title: "Gayrimenkuk Hukuku",
+    title: "Gayrimenkul Hukuku",
     icon: Building2,
     features: [
       "Tapu İptal ve Tescil Davaları",
@@ -40,7 +40,7 @@ export const services: Service[] = [
       "Ecrimisil (Haksız İşgal) Tazminatı Davası",
       "Taşkın Yapı / Olağan-Olağanüstü Zamanaşımı ile Taşınmaz Mülkiyetinin Kazanılması",
       "Elbirliğiyle Mülkiyetin Paylı Mülkiyete Çevrilmesi",
-      "İntifa Hakları"
+      "İntifa Hakları",
     ],
   },
   {

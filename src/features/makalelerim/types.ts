@@ -3,7 +3,7 @@ export type Article = {
   title: string;
   content: string;
   slug: string;
-  image: { url: string; alt: string };
+  image: { url: string; alt: string; tinyUrl?: string };
   keywords: string[];
   publishedAt: string;
   updatedAt: string;

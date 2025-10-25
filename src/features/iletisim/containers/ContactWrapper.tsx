@@ -1,16 +1,9 @@
-"use client";
-
 import PageHeader from "@/components/page-header/PageHeader";
-import dynamic from "next/dynamic";
 import Container from "@/components/container/Container";
-import { Separator } from "@/components/ui/separator";
+import Section from "@/components/section/Section";
 import ContactForm from "../components/ContactForm";
 import ContactDetails from "../components/ContactDetails";
-
-const ContactMap = dynamic(
-  () => import("@/features/iletisim/components/ContactMap"),
-  { ssr: false }
-);
+import ContactMapClient from "../components/ContactMapClient";
 
 export default function ContactWrapper() {
   return (
@@ -20,19 +13,21 @@ export default function ContactWrapper() {
         description="Hukuki sorularınız için hemen iletişime geçin."
       />
 
-      <ContactDetails />
+      {/* İletişim kartları */}
+      <Section>
+        <Container>
+          <ContactDetails />
+        </Container>
+      </Section>
 
-      <Container>
-        <Separator />
-      </Container>
+      <ContactMapClient />
 
-      <ContactMap />
-
-      <Container>
-        <Separator />
-      </Container>
-
-      <ContactForm />
+      {/* Form */}
+      <Section>
+        <Container>
+          <ContactForm />
+        </Container>
+      </Section>
     </>
   );
 }

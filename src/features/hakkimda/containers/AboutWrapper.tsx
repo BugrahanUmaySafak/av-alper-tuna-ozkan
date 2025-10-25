@@ -1,6 +1,5 @@
 import PageHeader from "@/components/page-header/PageHeader";
 import AboutMe from "../components/AboutMe";
-
 import InformativeContentWrapper from "@/components/shared/InformativeContentWrapper";
 
 export default function AboutWrapper() {
@@ -8,8 +7,7 @@ export default function AboutWrapper() {
     <>
       <PageHeader
         title="Hakkımda"
-        description="Gayrimenkul hukukunda uzmanlık ve güven.
-"
+        description="Gayrimenkul hukukunda uzmanlık ve güven."
       />
       <AboutMe />
       <InformativeContentWrapper videoTake={1} articleTake={1} />

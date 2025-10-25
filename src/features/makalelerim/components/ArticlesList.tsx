@@ -40,10 +40,13 @@ export default function ArticlesList({
               key={a.id}
               href={`/makalelerim/${a.slug}`}
               className="block h-full"
+              prefetch={false}
             >
               <Card className="group h-full flex flex-col overflow-hidden transition hover:shadow-lg p-0 border-0 rounded-xl">
+                {/* Kart resmi: tinyUrl arka plan + ana görsel */}
                 <SmartFigureImage
                   src={a.image.url}
+                  tinySrc={a.image.tinyUrl ?? a.image.url}
                   alt={a.image.alt}
                   className="w-full h-56 sm:h-60 lg:h-64 rounded-t-xl"
                 />

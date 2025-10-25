@@ -1,4 +1,3 @@
-// app/makalelerim/[slug]/page.tsx
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ArticleDetailWrapper from "@/features/makalelerim/containers/ArticleDetailWrapper";
@@ -22,7 +21,6 @@ export async function generateMetadata({
 }: {
   params: ParamsPromise;
 }): Promise<Metadata> {
-  // 🔴 ÖNEMLİ: params Promise olduğu için await et
   const { slug } = await params;
 
   const article = await getArticleBySlug(slug);
@@ -68,7 +66,6 @@ export default async function SlugPage({ params }: { params: ParamsPromise }) {
   const article = await getArticleBySlug(slug);
   if (!article) notFound();
 
-  // JSON-LD (Article)
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",

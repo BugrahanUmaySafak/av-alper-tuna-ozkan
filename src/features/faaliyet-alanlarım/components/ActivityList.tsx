@@ -1,7 +1,5 @@
-"use client";
-
 import { services } from "@/data/service";
-import { Container } from "@/components/container/Container";
+import Container from "@/components/container/Container";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import Section from "@/components/section/Section";
@@ -19,20 +17,20 @@ function slugify(str: string) {
     .replace(/^-+|-+$/g, "");
 }
 
-export default function ActivityListSimple() {
+export default function ActivityList() {
   return (
     <Section className="bg-gradient-to-br from-gray-50 to-white">
-      <Container className="mx-auto w-full ">
-        {/* Satırları saran flex + ortalama */}
+      <Container className="mx-auto w-full">
+        {/* responsive 1/2/3 sütun; gap aynı, DOM sade */}
         <div className="flex flex-wrap justify-center gap-6">
           {services.map((service) => {
             const Icon = service.icon;
             const id = slugify(service.title);
 
             return (
-              // Genişlikler: mobilden 1, tablet 2, desktop 3 sütun
-              <div
+              <article
                 key={id}
+                aria-labelledby={`${id}-title`}
                 className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
               >
                 <Card className="h-full border border-gray-200 shadow-sm">
@@ -42,7 +40,10 @@ export default function ActivityListSimple() {
                         className="w-7 h-7 text-blue-700"
                         aria-hidden="true"
                       />
-                      <CardTitle className="text-2xl font-bold text-gray-900">
+                      <CardTitle
+                        id={`${id}-title`}
+                        className="text-2xl font-bold text-gray-900"
+                      >
                         {service.title}
                       </CardTitle>
                     </div>
@@ -60,7 +61,7 @@ export default function ActivityListSimple() {
                     </ul>
                   </CardContent>
                 </Card>
-              </div>
+              </article>
             );
           })}
         </div>

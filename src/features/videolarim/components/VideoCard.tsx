@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Dialog,
@@ -10,8 +11,6 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import LiteYouTubeEmbed from "react-lite-youtube-embed";
-import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
 
 type Props = {
   id: string;
@@ -19,6 +18,8 @@ type Props = {
   youtubeId: string;
   createdAt: string;
   priority?: boolean;
+  coverUrl?: string;
+  coverBlurDataUrl?: string;
 };
 
 function formatTR(iso: string) {
@@ -33,66 +34,108 @@ function formatTR(iso: string) {
   }
 }
 
-export default function VideoCard({ title, youtubeId, createdAt }: Props) {
+export default function VideoCard({
+  title,
+  youtubeId,
+  createdAt,
+  priority = false,
+  coverUrl,
+  coverBlurDataUrl,
+}: Props) {
   const [open, setOpen] = useState(false);
+
+  const YT = useMemo(
+    () => ({
+      maxres: `https://i.ytimg.com/vi/${youtubeId}/maxresdefault.jpg`,
+      sd: `https://i.ytimg.com/vi/${youtubeId}/sddefault.jpg`,
+      hq: `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`,
+    }),
+    [youtubeId]
+  );
+
+  const [src, setSrc] = useState<string>(coverUrl ?? YT.maxres);
+
+  function handleThumbError() {
+    if (!coverUrl) {
+      if (src === YT.maxres) setSrc(YT.sd);
+      else if (src === YT.sd) setSrc(YT.hq);
+    }
+  }
+
+  const sizes = "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 640px";
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <Card className="w-full overflow-hidden rounded-2xl p-0 transition hover:shadow-lg hover:bg-slate-50">
-        <div className="relative w-full aspect-video rounded-t-2xl overflow-hidden">
-          <div className="absolute inset-0">
-            <LiteYouTubeEmbed
-              id={youtubeId}
-              title={title}
-              noCookie
-              poster="hqdefault"
-              adNetwork={false}
-              wrapperClass="yt-lite w-full h-full !m-0 !p-0 rounded-t-2xl"
-            />
-          </div>
-        </div>
-
+        {/* KART: sadece görsel + play icon (yüksek kalite + fallback) */}
         <DialogTrigger asChild>
           <div
-            className="flex flex-col cursor-pointer"
+            className="relative w-full aspect-video rounded-t-2xl overflow-hidden cursor-pointer"
             role="button"
-            tabIndex={0}
             aria-label={`Videoyu aç: ${title}`}
+            tabIndex={0}
             onKeyDown={(e) => {
               if (e.key === "Enter" || e.key === " ") setOpen(true);
             }}
           >
-            <CardHeader className="pt-4 pb-2 px-4">
-              <CardTitle className="text-lg sm:text-xl truncate" title={title}>
-                {title}
-              </CardTitle>
-            </CardHeader>
-
-            <CardContent className="px-4 pb-4 space-y-3">
-              <p className="text-xs text-muted-foreground">
-                {formatTR(createdAt)}
-              </p>
-              <Button variant="default" size="sm" className="w-full">
-                Tamamını Gör
-              </Button>
-            </CardContent>
+            <Image
+              src={src}
+              alt={title}
+              fill
+              className="object-cover"
+              onError={handleThumbError}
+              priority={priority}
+              fetchPriority={priority ? "high" : undefined}
+              sizes={sizes}
+              quality={72} // 70–75 arası iyi denge
+              placeholder={coverBlurDataUrl ? "blur" : "empty"}
+              blurDataURL={coverBlurDataUrl}
+            />
+            <div className="absolute inset-0 grid place-items-center">
+              <div className="w-12 h-12 rounded-full bg-red-600/90 text-white grid place-items-center shadow-md">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden
+                >
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+            </div>
           </div>
         </DialogTrigger>
+
+        <CardHeader className="pt-4 pb-2 px-4">
+          <CardTitle className="text-lg sm:text-xl truncate" title={title}>
+            {title}
+          </CardTitle>
+        </CardHeader>
+
+        <CardContent className="px-4 pb-4 space-y-3">
+          <p className="text-xs text-muted-foreground">{formatTR(createdAt)}</p>
+          <Button variant="default" size="sm" className="w-full">
+            Videoyu İzlemek İçin Tıklayın
+          </Button>
+        </CardContent>
       </Card>
 
+      {/* DIALOG: sadece iframe (autoplay) */}
       <DialogContent className="w-full max-w-sm sm:max-w-2xl md:max-w-3xl p-0 rounded-lg">
         <div className="p-4 sm:p-6 md:p-8">
-          <div className="relative w-full aspect-[16/9] rounded-md overflow-hidden">
-            <div className="absolute inset-0">
-              <LiteYouTubeEmbed
-                id={youtubeId}
+          <div className="relative w-full aspect-[16/9] rounded-md overflow-hidden bg-black">
+            {open && (
+              <iframe
+                key={youtubeId}
+                className="absolute inset-0 h-full w-full"
+                src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1`}
                 title={title}
-                noCookie
-                poster="maxresdefault"
-                adNetwork={false}
-                wrapperClass="yt-lite w-full h-full !m-0 !p-0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                loading="eager"
               />
-            </div>
+            )}
           </div>
 
           <div className="pt-4 sm:pt-6">
