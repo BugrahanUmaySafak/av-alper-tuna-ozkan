@@ -59,17 +59,6 @@ export default function RootLayout({
     >
       <head>
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
-        {/* K R I T I K  C S S – üst katman ölçüleri (render-blocking etkisini azaltır) */}
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-              header{min-height:72px}
-              #hero-slider{min-height:calc(100dvh - 72px)}
-              #hero-slider .absolute.inset-0{contain:layout}
-            `,
-          }}
-        />
-        {/* YouTube preconnectleri kullanılacak sayfada eklenecek (bkz. YouTubePreconnect) */}
       </head>
       <body className="min-h-screen flex flex-col bg-white text-black">
         <ThemeProvider

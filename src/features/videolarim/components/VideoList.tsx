@@ -24,7 +24,7 @@ export default function VideoList({ videos }: { videos: Video[] }) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {videos.map((v, i) => (
             <VideoCard
-              key={v.id || v.youtubeId || i}
+              key={v.id ?? `yt-${v.youtubeId}-${i}`}
               {...v}
               priority={i === 0}
             />

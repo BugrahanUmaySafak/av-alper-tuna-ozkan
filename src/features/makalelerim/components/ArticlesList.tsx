@@ -35,7 +35,7 @@ export default function ArticlesList({
     <Section>
       <Container>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {articles.map((a) => (
+          {articles.map((a, idx) => (
             <Link
               key={a.id}
               href={`/makalelerim/${a.slug}`}
@@ -47,6 +47,8 @@ export default function ArticlesList({
                   src={a.image.url}
                   tinySrc={a.image.tinyUrl ?? a.image.url}
                   alt={a.image.alt}
+                  /* 👇 sadece ilk karta öncelik ver */
+                  priority={idx === 0}
                   className="w-full h-56 sm:h-60 lg:h-64 rounded-t-xl"
                 />
 
