@@ -59,17 +59,17 @@ export default function RootLayout({
     >
       <head>
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
-        {/* YouTube/görsel kaynakları için erken bağlantı */}
-        <link rel="preconnect" href="https://i.ytimg.com" crossOrigin="" />
-        <link rel="preconnect" href="https://img.youtube.com" crossOrigin="" />
-        <link
-          rel="preconnect"
-          href="https://www.youtube-nocookie.com"
-          crossOrigin=""
+        {/* K R I T I K  C S S – üst katman ölçüleri (render-blocking etkisini azaltır) */}
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              header{min-height:72px}
+              #hero-slider{min-height:calc(100dvh - 72px)}
+              #hero-slider .absolute.inset-0{contain:layout}
+            `,
+          }}
         />
-        <link rel="dns-prefetch" href="//i.ytimg.com" />
-        <link rel="dns-prefetch" href="//img.youtube.com" />
-        <link rel="dns-prefetch" href="//www.youtube-nocookie.com" />
+        {/* YouTube preconnectleri kullanılacak sayfada eklenecek (bkz. YouTubePreconnect) */}
       </head>
       <body className="min-h-screen flex flex-col bg-white text-black">
         <ThemeProvider

@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
+// src/app/makalelerim/[slug]/page.tsx
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import ArticleDetailWrapper from "@/features/makalelerim/containers/ArticleDetailWrapper";
 import { getArticleBySlug } from "@/features/makalelerim/actions/articles";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://ozkanhukukdanismanlik.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 function absoluteUrl(pathOrUrl: string) {
   try {
@@ -22,16 +22,13 @@ export async function generateMetadata({
   params: ParamsPromise;
 }): Promise<Metadata> {
   const { slug } = await params;
-
   const article = await getArticleBySlug(slug);
   if (!article) return {};
 
-  const { seo, title, image, keywords, publishedAt, updatedAt } = article;
-
-  const pageTitle = seo?.title || `${title} | Özkan Hukuk & Danışmanlık`;
-  const description =
-    seo?.description || `${title} – Özkan Hukuk & Danışmanlık`;
-  const canonical = absoluteUrl(seo?.canonicalUrl || `/makalelerim/${slug}`);
+  const { title, image, keywords, createdAt, updatedAt, summary } = article;
+  const pageTitle = `${title} | Özkan Hukuk & Danışmanlık`;
+  const description = summary || title;
+  const canonical = absoluteUrl(`/makalelerim/${slug}`);
 
   return {
     title: pageTitle,
@@ -46,7 +43,7 @@ export async function generateMetadata({
       title: pageTitle,
       description,
       images: image?.url ? [{ url: absoluteUrl(image.url) }] : undefined,
-      publishedTime: publishedAt,
+      publishedTime: createdAt,
       modifiedTime: updatedAt,
       authors: ["Alper Tuna Ozkan"],
     },
@@ -62,21 +59,20 @@ export async function generateMetadata({
 
 export default async function SlugPage({ params }: { params: ParamsPromise }) {
   const { slug } = await params;
-
   const article = await getArticleBySlug(slug);
   if (!article) notFound();
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: article.seo?.title || article.title,
-    description: article.seo?.description || article.title,
+    headline: article.title,
+    description: article.summary || article.title,
     image: article.image?.url ? [absoluteUrl(article.image.url)] : undefined,
-    datePublished: article.publishedAt,
+    datePublished: article.createdAt,
     dateModified: article.updatedAt,
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": absoluteUrl(article.seo?.canonicalUrl || `/makalelerim/${slug}`),
+      "@id": absoluteUrl(`/makalelerim/${slug}`),
     },
     author: [{ "@type": "Person", name: "Alper Tuna Ozkan" }],
     publisher: {

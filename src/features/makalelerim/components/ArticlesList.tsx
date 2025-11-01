@@ -8,8 +8,8 @@ import { CalendarDays } from "lucide-react";
 import Section from "@/components/section/Section";
 import React from "react";
 import type { Article } from "../types";
-import { useArticles } from "../actions/useArticles";
 import SmartFigureImage from "@/components/media/SmartFigureImage";
+import { useArticles } from "../actions/useArticles";
 
 function formatTR(iso: string) {
   try {
@@ -43,7 +43,6 @@ export default function ArticlesList({
               prefetch={false}
             >
               <Card className="group h-full flex flex-col overflow-hidden transition hover:shadow-lg p-0 border-0 rounded-xl">
-                {/* Kart resmi: tinyUrl arka plan + ana görsel */}
                 <SmartFigureImage
                   src={a.image.url}
                   tinySrc={a.image.tinyUrl ?? a.image.url}
@@ -56,9 +55,11 @@ export default function ArticlesList({
                     {a.title}
                   </CardTitle>
 
-                  <div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
-                    <CalendarDays className="h-4 w-4" />
-                    {formatTR(a.publishedAt)}
+                  <div className="mt-2 flex items-center gap-3 text-sm text-muted-foreground">
+                    <span className="inline-flex items-center gap-1.5">
+                      <CalendarDays className="h-4 w-4" />
+                      {formatTR(a.createdAt)}
+                    </span>
                   </div>
                 </CardHeader>
 

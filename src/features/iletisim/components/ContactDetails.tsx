@@ -20,7 +20,7 @@ export default function ContactDetails() {
           href="https://www.google.com/maps/search/?api=1&query=Aşağı+Öveçler+Mahallesi+1328.+Cadde+Demirağ+Apt.+No:+14/8+Çankaya+ANKARA"
           target="_blank"
           rel="noopener noreferrer"
-          className="block not-italic leading-relaxed text-center pt-2 hover:text-primary transition-colors duration-200 group"
+          className="block not-italic text-center py-3 px-3 leading-relaxed hover:text-primary transition-colors duration-200 rounded-md group"
         >
           <address className="not-italic font-medium text-foreground group-hover:text-primary transition-colors">
             Aşağı Öveçler Mahallesi 1328. Cadde <br />
@@ -39,7 +39,7 @@ export default function ContactDetails() {
           href="https://www.google.com/maps/place/Avukat+Alper+Tuna+Özkan/@39.8406944,33.4994228,17z/data=!4m15!1m8!3m7!1s0x4081df7569936f09:0x5db73b4f4e8e2b46!2zRmFicmlrYWxhciwgVWx1YmF0bMSxIEhhc2FuIENkLiBObzoyMiwgNzExMDAgS8SxcsSxa2thbGUgTWVya2V6L0vEsXLEsWtrYWxl!3b1!8m2!3d39.8406944!4d33.4994228!16s%2Fg%2F11nnkxmqty!3m5!1s0x4081dfc47d45dad9:0x14c2d5e99e2f7579!8m2!3d39.8413091!4d33.5002971!16s%2Fg%2F11pzbkt940?entry=ttu"
           target="_blank"
           rel="noopener noreferrer"
-          className="block not-italic leading-relaxed text-center pt-2 hover:text-primary transition-colors duration-200 group"
+          className="block not-italic text-center py-3 px-3 leading-relaxed hover:text-primary transition-colors duration-200 rounded-md group"
         >
           <address className="not-italic font-medium text-foreground group-hover:text-primary transition-colors">
             Yaylacık Mahallesi Ulubatlıhasan Caddesi <br />

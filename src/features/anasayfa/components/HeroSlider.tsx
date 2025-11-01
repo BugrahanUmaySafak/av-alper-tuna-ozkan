@@ -14,14 +14,20 @@ const SWIPE_THRESHOLD_RATIO = 0.15;
 const HOLD_DELAY_MS = 150;
 const TAP_SLOP_PX = 6;
 
+/** 442px altında progress bar dots'tan ayrılıp en alta iner */
+const TIGHT_WIDTH_PX = 442;
+
 export default function HeroSlider() {
   const slidesLen = SLIDES_DATA.length;
   const [index, setIndex] = useState(0);
   const [offset, setOffset] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [tightProgress, setTightProgress] = useState(false); // progress altta
 
   const trackRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLSpanElement>(null);
+  const bottomProgressRef = useRef<HTMLSpanElement>(null);
+
   const indexRef = useRef(index);
   const pausedRef = useRef(false);
   const draggingRef = useRef(false);
@@ -31,12 +37,20 @@ export default function HeroSlider() {
     indexRef.current = index;
   }, [index]);
 
+  // Ekran genişliği & "progress alta" modu
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 767px)");
-    setIsMobile(mq.matches);
-    const onChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
+    const mq = window.matchMedia("(max-width: 831px)");
+    const apply = () => {
+      setIsMobile(mq.matches);
+      setTightProgress(window.innerWidth < TIGHT_WIDTH_PX);
+    };
+    apply();
+    mq.addEventListener("change", apply);
+    window.addEventListener("resize", apply);
+    return () => {
+      mq.removeEventListener("change", apply);
+      window.removeEventListener("resize", apply);
+    };
   }, []);
 
   const rafId = useRef<number | null>(null);
@@ -52,23 +66,23 @@ export default function HeroSlider() {
       if (!pausedRef.current && !draggingRef.current) {
         acc.current += delta;
         const frac = Math.min(acc.current / SLIDE_DURATION, 1);
-        if (progressRef.current)
-          progressRef.current.style.width = `${frac * 100}%`;
+
+        // aktif bar’ı güncelle (üstteki ya da alttaki)
+        const bar = tightProgress
+          ? bottomProgressRef.current
+          : progressRef.current;
+        if (bar) bar.style.width = `${frac * 100}%`;
 
         if (acc.current >= SLIDE_DURATION) {
           acc.current = 0;
-          if (progressRef.current) progressRef.current.style.width = "0%";
-          if (indexRef.current + 1 >= slidesLen) {
-            setIndex(0);
-          } else {
-            setIndex(indexRef.current + 1);
-          }
+          if (bar) bar.style.width = "0%";
+          setIndex((prev) => (prev + 1) % slidesLen);
         }
       }
 
       rafId.current = requestAnimationFrame(tick);
     },
-    [slidesLen]
+    [slidesLen, tightProgress]
   );
 
   useEffect(() => {
@@ -148,16 +162,16 @@ export default function HeroSlider() {
 
     if (drag.current.startedDragging) {
       if (dx <= -threshold) {
-        if (index < slidesLen - 1) {
-          setIndex((prev) => prev + 1);
-        } else {
-          setIndex(0);
-        }
-      } else if (dx >= threshold && index > 0) {
-        setIndex((prev) => prev - 1);
+        setIndex((prev) => (prev < SLIDES_DATA.length - 1 ? prev + 1 : 0));
+      } else if (dx >= threshold) {
+        setIndex((prev) => (prev > 0 ? prev - 1 : slidesLen - 1));
       }
       acc.current = 0;
+
+      // iki barı da sıfırla
       if (progressRef.current) progressRef.current.style.width = "0%";
+      if (bottomProgressRef.current)
+        bottomProgressRef.current.style.width = "0%";
     }
 
     drag.current.active = false;
@@ -172,6 +186,7 @@ export default function HeroSlider() {
     setIndex(i);
     acc.current = 0;
     if (progressRef.current) progressRef.current.style.width = "0%";
+    if (bottomProgressRef.current) bottomProgressRef.current.style.width = "0%";
     pausedRef.current = false;
   };
 
@@ -194,6 +209,7 @@ export default function HeroSlider() {
 
   return (
     <section
+      id="hero-slider"
       className="relative w-full h-[calc(100dvh-72px)] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100"
       aria-label="Ana görsel slayt"
     >
@@ -233,7 +249,9 @@ export default function HeroSlider() {
                   fill
                   sizes="100vw"
                   priority={i === 0}
+                  fetchPriority={i === 0 ? "high" : "auto"}
                   loading={i === 0 ? "eager" : "lazy"}
+                  quality={i === 0 ? 55 : 60}
                   draggable={false}
                   className="object-cover sm:object-top object-center select-none pointer-events-none"
                 />
@@ -256,7 +274,7 @@ export default function HeroSlider() {
                         </div>
                         <Separator className="w-24 h-[3px] bg-yellow-600" />
                       </div>
-                      <p className="text-l md:text-xl lg:text-2xl text-gray-200 leading-relaxed max-w-2xl font-light">
+                      <p className="text-lg md:text-xl lg:text-2xl text-gray-200 leading-relaxed max-w-2xl font-light">
                         {slide.description}
                       </p>
                       <div className="flex flex-wrap gap-2">
@@ -291,58 +309,75 @@ export default function HeroSlider() {
         </div>
       </div>
 
-      <div className="absolute z-20 left-4 bottom-4 md:left-1/2 md:bottom-8 md:-translate-x-1/2">
-        <div className="flex items-center gap-4 rounded-2xl bg-black/50 backdrop-blur px-4 py-2 border border-white/10 shadow">
-          {/* ... */}
-          <div className="flex items-center gap-2">
-            {SLIDES_DATA.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => jumpTo(i)}
-                aria-label={`${i + 1}. slayda git`}
-                aria-current={i === index ? "true" : "false"}
-                className={`
-        group relative rounded-full transition
-        focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/80
+      {/* Üst kontrol grubu */}
+      <div className="absolute inset-x-0 bottom-8 z-20">
+        <Container>
+          <div className="flex justify-center">
+            <div className="flex items-center gap-4 rounded-2xl bg-black/50 backdrop-blur px-4 py-2 border border-white/10 shadow">
+              {/* Dots */}
+              <div className="flex items-center gap-2">
+                {SLIDES_DATA.map((_, i) => {
+                  const active = i === index;
+                  return (
+                    <button
+                      key={i}
+                      onClick={() => jumpTo(i)}
+                      aria-label={`${i + 1}. slayda git`}
+                      aria-current={active ? "true" : "false"}
+                      className={`
+                        group relative inline-flex items-center justify-center
+                        w-10 h-10 rounded-full transition
+                        focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/80
+                        bg-transparent
+                      `}
+                    >
+                      <span
+                        aria-hidden
+                        className={`
+                          block rounded-full transition
+                          ${
+                            active
+                              ? "size-3 bg-yellow-500 shadow"
+                              : "size-2.5 bg-white/70 group-hover:bg-white"
+                          }
+                        `}
+                      />
+                    </button>
+                  );
+                })}
+              </div>
 
-        size-3
-        ${i === index ? "bg-yellow-600" : "bg-white/40 hover:bg-white/60"}
-
-        md:size-auto md:w-10 md:h-10 md:bg-transparent md:p-2 md:-m-2
-      `}
-              >
-                <span
-                  aria-hidden
-                  className={`
-          hidden md:block
-          absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
-          rounded-full transition
-          ${
-            i === index
-              ? "size-3.5 bg-yellow-500 shadow"
-              : "size-2.5 bg-white/60 group-hover:bg-white/80"
-          }
-        `}
-                />
-              </button>
-            ))}
+              {/* Ayraç & yan progress */}
+              {!tightProgress && (
+                <>
+                  <span className="w-px h-5 bg-white/20" />
+                  <div className="flex w-28 md:w-36 h-2 rounded-full bg-white/10 overflow-hidden">
+                    <span
+                      ref={progressRef}
+                      className="h-full bg-white/70"
+                      style={{ width: "0%", transition: "width 80ms linear" }}
+                    />
+                  </div>
+                </>
+              )}
+            </div>
           </div>
-          {/* ... */}
-
-          <span className="hidden md:block w-px h-5 bg-white/20" />
-          <div className="hidden md:flex w-36 h-2 rounded-full bg-white/10 overflow-hidden">
-            <span
-              ref={progressRef}
-              className="h-full bg-white/60"
-              style={{ width: "0%", transition: "width 80ms linear" }}
-            />
-          </div>
-
-          <span className="md:hidden text-white/90 text-sm tabular-nums">
-            {index + 1} / {slidesLen}
-          </span>
-        </div>
+        </Container>
       </div>
+
+      {tightProgress && (
+        <div className="absolute inset-x-0 bottom-[16px] z-20">
+          <Container>
+            <div className="w-full max-w-md mx-auto h-2 rounded-full bg-black/30 backdrop-blur border border-white/10 overflow-hidden">
+              <span
+                ref={bottomProgressRef}
+                className="block h-full bg-white/70"
+                style={{ width: "0%", transition: "width 80ms linear" }}
+              />
+            </div>
+          </Container>
+        </div>
+      )}
     </section>
   );
 }

@@ -22,12 +22,7 @@ export default function ContactWrapper() {
 
       <ContactMapClient />
 
-      {/* Form */}
-      <Section>
-        <Container>
-          <ContactForm />
-        </Container>
-      </Section>
+      <ContactForm />
     </>
   );
 }

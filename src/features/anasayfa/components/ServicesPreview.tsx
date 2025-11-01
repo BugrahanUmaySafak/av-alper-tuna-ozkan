@@ -12,7 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { services } from "@/data/service";
-import { Container } from "@/components/container/Container";
+import Container from "@/components/container/Container";
 import Section from "@/components/section/Section";
 
 export default function ServicesPreview() {
@@ -20,7 +20,7 @@ export default function ServicesPreview() {
     <Section>
       <Container className="mx-auto w-full max-w-none">
         <div className="text-center mb-8">
-          <Link href="/faaliyet-alanlarim">
+          <Link href="/faaliyet-alanlarim" prefetch={false}>
             <Badge className="mb-4">Faaliyet Alanlarım</Badge>
           </Link>
           <p className="text-xl max-w-3xl mx-auto leading-relaxed">
@@ -37,11 +37,12 @@ export default function ServicesPreview() {
               <Link
                 key={service.title}
                 href="/faaliyet-alanlarim"
+                prefetch={false}
                 className="
                   px-4 mb-8
                   w-full
-                  sm:w-1/2         /* 2 kolon */
-                  lg:w-1/3         /* 3 kolon  */
+                  sm:w-1/2
+                  lg:w-1/3
                   focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-xl
                   block
                 "
@@ -56,7 +57,7 @@ export default function ServicesPreview() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="text-center">
-                    <CardDescription className="text-gray-600 leading-relaxed"></CardDescription>
+                    <CardDescription className="text-gray-600 leading-relaxed" />
                   </CardContent>
                 </Card>
               </Link>
@@ -68,15 +69,9 @@ export default function ServicesPreview() {
           <Button
             asChild
             size="lg"
-            className="
-              group
-              bg-blue-600 text-white font-semibold px-8 py-4 rounded-xl shadow-lg
-              transition-all duration-300 ease-out
-              hover:bg-blue-700 hover:scale-105 hover:shadow-xl
-              focus:ring-2 focus:ring-blue-400 focus:outline-none
-            "
+            className="group bg-blue-600 text-white font-semibold px-8 py-4 rounded-xl shadow-lg transition-all duration-300 ease-out hover:bg-blue-700 hover:scale-105 hover:shadow-xl focus:ring-2 focus:ring-blue-400 focus:outline-none"
           >
-            <Link href="/faaliyet-alanlarim">
+            <Link href="/faaliyet-alanlarim" prefetch={false}>
               Tüm Faaliyet Alanlarını Görüntüle
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </Link>

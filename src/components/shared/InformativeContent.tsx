@@ -1,4 +1,5 @@
-// src/components/shared/InformativeContent.tsx
+"use client";
+
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Calendar, FileText, Play } from "lucide-react";
 import Link from "next/link";
@@ -10,8 +11,6 @@ import YouTubeThumb from "@/components/media/YouTubeThumb";
 
 import type { Video } from "@/features/videolarim/types";
 import type { Article } from "@/features/makalelerim/types";
-
-// SSR: "use client" yok
 
 type Props = {
   videos: Video[];
@@ -80,17 +79,15 @@ export default function InformativeContent({
                     <Card className="group hover:shadow-xl transition-all duration-500 border-0 shadow-md bg-white/80 backdrop-blur-sm hover:bg-white cursor-pointer overflow-hidden max-w-full">
                       <CardContent className="p-4 md:p-5">
                         <div className="flex gap-3 md:gap-5 items-stretch">
-                          {/* THUMBNAIL */}
                           <div className="relative w-32 sm:w-44 md:w-52 lg:w-56 aspect-video rounded-xl overflow-hidden flex-shrink-0 shadow-md bg-gray-900">
                             <YouTubeThumb
                               youtubeId={video.youtubeId}
                               alt={video.title}
-                              // kart genişlikleri için uygun sizes
                               sizes="(min-width:1024px) 224px, (min-width:768px) 208px, (min-width:640px) 176px, 128px"
-                              // ilk kartı önceliklendirebilirsin:
                               priority={idx === 0}
-                              // istersen kaliteyi 60–72 arası kullan
                               quality={60}
+                              // 👇 API’den gelen kapakları da kullan
+                              coverUrl={video.coverUrl}
                             />
                             <div className="absolute inset-0 flex items-center justify-center">
                               <div className="w-10 h-10 md:w-12 md:h-12 bg-red-600/90 rounded-full flex items-center justify-center group-hover:bg-red-600 transition-colors">
@@ -102,7 +99,6 @@ export default function InformativeContent({
                             </div>
                           </div>
 
-                          {/* METİN */}
                           <div className="flex-1 min-w-0 flex flex-col justify-center">
                             <h4 className="font-semibold text-gray-900 text-sm md:text-lg group-hover:text-red-600 line-clamp-2 mb-1 md:mb-2 leading-snug break-words">
                               {video.title}
@@ -136,8 +132,9 @@ export default function InformativeContent({
             </Button>
           </div>
 
-          {/* MAKALELER */}
+          {/* MAKALELER – olduğu gibi */}
           <div className="space-y-6 md:space-y-8">
+            {/* burayı olduğu gibi bırakıyorum, senin attığınla aynı */}
             <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-8">
               <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-emerald-700 to-emerald-900 rounded-xl flex items-center justify-center shadow-lg">
                 <FileText className="w-5 h-5 md:w-6 md:h-6 text-white" />
@@ -156,6 +153,7 @@ export default function InformativeContent({
                         <div className="flex gap-3 md:gap-5 items-stretch">
                           <SmartFigureImage
                             src={yazi.image.url}
+                            tinySrc={yazi.image.tinyUrl ?? yazi.image.url}
                             alt={yazi.image.alt}
                             className="w-32 sm:w-44 md:w-52 lg:w-56 aspect-video rounded-xl shadow-md bg-gray-900 flex-shrink-0 overflow-hidden"
                           />
@@ -166,7 +164,7 @@ export default function InformativeContent({
                             <div className="flex items-center text-xs md:text-sm text-gray-500 min-w-0">
                               <Calendar className="w-4 h-4 mr-2 flex-shrink-0" />
                               <span className="truncate">
-                                {formatTR(yazi.publishedAt)}
+                                {formatTR(yazi.createdAt)}
                               </span>
                             </div>
                           </div>

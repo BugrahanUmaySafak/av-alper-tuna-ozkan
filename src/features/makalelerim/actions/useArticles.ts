@@ -10,7 +10,8 @@ export function useArticles(initial?: Article[]) {
   useEffect(() => {
     if (initial && initial.length) return;
     const ac = new AbortController();
-    const API = process.env.NEXT_PUBLIC_API_BASE_URL!;
+    const API =
+      process.env.API_BASE_URL ?? process.env.NEXT_PUBLIC_API_BASE_URL;
     fetch(`${API}/makalelerim`, { signal: ac.signal })
       .then(async (r) => {
         if (!r.ok) throw new Error("Makaleler alınamadı");

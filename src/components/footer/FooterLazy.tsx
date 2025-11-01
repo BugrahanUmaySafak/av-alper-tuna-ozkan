@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 
-const Footer = dynamic(() => import("@/components/footer/footer"), {
+const Footer = dynamic(() => import("@/components/footer/Footer"), {
   ssr: false,
   loading: () => (
     <footer className="w-full border-t bg-[#fdf3e7]">

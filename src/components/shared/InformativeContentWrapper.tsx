@@ -2,8 +2,7 @@ import InformativeContent from "./InformativeContent";
 import { getArticles } from "@/features/makalelerim/actions/articles";
 import { getVideos } from "@/features/videolarim/actions/videos";
 
-// Bu wrapper server component; periyodik revalidate ile cache dostu
-export const revalidate = 900; // 15 dakika – içerik sayfası için yeterli segmente etme
+export const revalidate = 900;
 
 export default async function InformativeContentWrapper({
   videoTake = 2,
@@ -21,14 +20,16 @@ export default async function InformativeContentWrapper({
   const [articles, videos] = await Promise.all([getArticles(), getVideos()]);
 
   return (
-    <InformativeContent
-      videos={videos}
-      articles={articles}
-      videoTake={videoTake}
-      articleTake={articleTake}
-      title={title}
-      upperContent={upperContent}
-      lowerContent={lowerContent}
-    />
+    <>
+      <InformativeContent
+        videos={videos}
+        articles={articles}
+        videoTake={videoTake}
+        articleTake={articleTake}
+        title={title}
+        upperContent={upperContent}
+        lowerContent={lowerContent}
+      />
+    </>
   );
 }

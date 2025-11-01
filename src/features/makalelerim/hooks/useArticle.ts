@@ -10,8 +10,12 @@ export function useArticle(slug: string, initial?: Article) {
   useEffect(() => {
     if (initial) return;
     const ac = new AbortController();
-    const API = process.env.NEXT_PUBLIC_API_BASE_URL!;
-    fetch(`${API}/makalelerim/${slug}`, { signal: ac.signal })
+    const API =
+      process.env.API_BASE_URL ?? process.env.NEXT_PUBLIC_API_BASE_URL;
+
+    fetch(`${API}/makalelerim/${encodeURIComponent(slug)}`, {
+      signal: ac.signal,
+    })
       .then(async (r) => {
         if (!r.ok) throw new Error("Makale bulunamadı");
         const json = (await r.json()) as Article;

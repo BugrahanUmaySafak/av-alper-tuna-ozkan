@@ -17,7 +17,6 @@ export default function AboutMe() {
               alt="Avukat Alper Tuna Özkan"
               fill
               className="object-cover object-center"
-              priority
               fetchPriority="high"
               sizes="
                 (min-width:1536px) 720px,

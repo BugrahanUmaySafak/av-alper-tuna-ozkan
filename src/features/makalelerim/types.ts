@@ -1,15 +1,19 @@
 export type Article = {
   id: string;
   title: string;
-  content: string;
   slug: string;
-  image: { url: string; alt: string; tinyUrl?: string };
-  keywords: string[];
-  publishedAt: string;
-  updatedAt: string;
-  seo: {
-    title: string;
-    description: string;
-    canonicalUrl: string;
+  content: string;
+  image: {
+    url: string;
+    alt: string;
+    tinyUrl?: string;
+    publicId?: string;
   };
+  summary?: string;
+  category?: { id: string; name: string };
+  keywords: string[];
+  // ikisini de tut
+  createdAt: string;
+  updatedAt?: string;
+  readingMinutes?: number;
 };

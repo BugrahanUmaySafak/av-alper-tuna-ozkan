@@ -21,7 +21,6 @@ export default function ActivityList() {
   return (
     <Section className="bg-gradient-to-br from-gray-50 to-white">
       <Container className="mx-auto w-full">
-        {/* responsive 1/2/3 sütun; gap aynı, DOM sade */}
         <div className="flex flex-wrap justify-center gap-6">
           {services.map((service) => {
             const Icon = service.icon;

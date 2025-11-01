@@ -15,7 +15,7 @@ export default function PageHeader({
 
       <div className="container mx-auto px-4 text-center">
         <h1 className="text-4xl md:text-5xl font-extrabold mb-4">{title}</h1>
-        <div className="h-1 w-15 bg-yellow-600 mx-auto rounded mb-6" />
+        <div className="h-1 w-[60px] bg-yellow-600 mx-auto rounded mb-6" />
 
         {description && (
           <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto mb-3">

@@ -186,6 +186,8 @@ export default function Header() {
                 alt="Logo"
                 fill
                 sizes="36px"
+                loading="lazy"
+                decoding="async"
                 className="object-contain block"
               />
             </div>
@@ -218,62 +220,66 @@ export default function Header() {
         </div>
       </header>
 
-      {/* TABLET DROPDOWN */}
-      <MenuPanel
-        open={tabletOpen}
-        id="tablet-menu"
-        className="absolute top-full left-0 right-0 bg-[#fdf3e7] shadow-lg border-t z-40 overflow-hidden min-[833px]:block max-[1180px]:block min-[1180px]:hidden"
-      >
-        <nav className="py-2 text-center">
-          {navOnly.map((item, index) => {
-            const isActive = pathname === item.href;
-            return (
-              <div key={item.name}>
-                <Link
-                  href={item.href}
-                  aria-current={isActive ? "page" : undefined}
-                  className={`inline-block py-2 ${getLinkClasses(
-                    item.href
-                  )} transition-colors duration-200`}
-                  onClick={() => setTabletOpen(false)}
-                >
-                  {item.name}
-                </Link>
-                {index < navOnly.length - 1 && <Separator className="my-1" />}
-              </div>
-            );
-          })}
-        </nav>
-      </MenuPanel>
+      {/* TABLET DROPDOWN – sadece açıkken mount */}
+      {tabletOpen && (
+        <MenuPanel
+          open
+          id="tablet-menu"
+          className="absolute top-full left-0 right-0 bg-[#fdf3e7] shadow-lg border-t z-40 overflow-hidden min-[833px]:block max-[1180px]:block min-[1180px]:hidden"
+        >
+          <nav className="py-2 text-center">
+            {navOnly.map((item, index) => {
+              const isActive = pathname === item.href;
+              return (
+                <div key={item.name}>
+                  <Link
+                    href={item.href}
+                    aria-current={isActive ? "page" : undefined}
+                    className={`inline-block py-2 ${getLinkClasses(
+                      item.href
+                    )} transition-colors duration-200`}
+                    onClick={() => setTabletOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                  {index < navOnly.length - 1 && <Separator className="my-1" />}
+                </div>
+              );
+            })}
+          </nav>
+        </MenuPanel>
+      )}
 
-      {/* MOBILE DROPDOWN */}
-      <MenuPanel
-        open={mobileOpen}
-        id="mobile-menu"
-        className="absolute top-full left-0 right-0 bg-[#fdf3e7] shadow-lg border-t z-40 overflow-hidden max-[832px]:block"
-      >
-        <nav className="py-2 text-center">
-          {items.map((item, index) => {
-            const isActive =
-              pathname === item.href && !item.href.startsWith("tel:");
-            return (
-              <div key={item.name}>
-                <Link
-                  href={item.href}
-                  aria-current={isActive ? "page" : undefined}
-                  className={`inline-block py-2 ${getLinkClasses(item.href, {
-                    isPhone: item.href.startsWith("tel:"),
-                  })} transition-colors duration-200`}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {item.name}
-                </Link>
-                {index < items.length - 1 && <Separator className="my-1" />}
-              </div>
-            );
-          })}
-        </nav>
-      </MenuPanel>
+      {/* MOBILE DROPDOWN – sadece açıkken mount */}
+      {mobileOpen && (
+        <MenuPanel
+          open
+          id="mobile-menu"
+          className="absolute top-full left-0 right-0 bg-[#fdf3e7] shadow-lg border-t z-40 overflow-hidden max-[832px]:block"
+        >
+          <nav className="py-2 text-center">
+            {items.map((item, index) => {
+              const isActive =
+                pathname === item.href && !item.href.startsWith("tel:");
+              return (
+                <div key={item.name}>
+                  <Link
+                    href={item.href}
+                    aria-current={isActive ? "page" : undefined}
+                    className={`inline-block py-2 ${getLinkClasses(item.href, {
+                      isPhone: item.href.startsWith("tel:"),
+                    })} transition-colors duration-200`}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                  {index < items.length - 1 && <Separator className="my-1" />}
+                </div>
+              );
+            })}
+          </nav>
+        </MenuPanel>
+      )}
     </div>
   );
 }

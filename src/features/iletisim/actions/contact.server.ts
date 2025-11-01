@@ -4,14 +4,9 @@ import type { ContactInput } from "@/lib/validation/contact";
 
 export async function postContactServer(data: ContactInput) {
   const API_BASE =
-    process.env.API_BASE_URL ?? process.env.NEXT_PUBLIC_API_BASE_URL;
-  if (!API_BASE) {
-    throw new Error(
-      "API_BASE_URL veya NEXT_PUBLIC_API_BASE_URL tanımlı değil."
-    );
-  }
+    process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4001";
 
-  const res = await fetch(`${API_BASE}/contact`, {
+  const res = await fetch(`${API_BASE}/api/iletisim`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     cache: "no-store",

@@ -1,4 +1,3 @@
-// src/features/iletisim/actions/contact.client.ts
 "use client";
 
 import type { ContactInput } from "@/lib/validation/contact";
@@ -8,19 +7,17 @@ export type ApiError = {
   message?: string;
 };
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL!;
-
-if (!API_BASE) {
-  console.warn(
-    "NEXT_PUBLIC_API_BASE_URL bulunamadı. .env.local dosyanızı kontrol edin."
-  );
-}
-
 export async function postContactClient(data: ContactInput) {
+  const API_BASE =
+    process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4001";
+  // panelde de kullandığın pattern:
+  const url = `${API_BASE}/api/iletisim`;
+
   try {
-    const res = await fetch(`${API_BASE}/iletisim`, {
+    const res = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      // public form olduğu için credentials gerekmez → istersen ekleyebilirsin
       body: JSON.stringify(data),
     });
 
@@ -28,14 +25,15 @@ export async function postContactClient(data: ContactInput) {
       let err: ApiError | undefined;
       try {
         err = await res.json();
-      } catch {}
+      } catch {
+        // no-op
+      }
       return { ok: false as const, error: err };
     }
 
     const json = await res.json();
     return { ok: true as const, data: json };
   } catch {
-    // ağ hatası vb.
     return {
       ok: false as const,
       error: { message: "Sunucuya bağlanılamadı. Lütfen tekrar deneyin." },

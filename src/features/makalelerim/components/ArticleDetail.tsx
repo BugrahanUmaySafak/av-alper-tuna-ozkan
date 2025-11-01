@@ -7,11 +7,12 @@ import Section from "@/components/section/Section";
 import { useMemo } from "react";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
-import { CalendarDays, Pencil, ArrowLeft } from "lucide-react";
+import { CalendarDays, Pencil, ArrowLeft, Tag, Timer } from "lucide-react";
 import type { Article } from "../types";
 import { useArticle } from "../hooks/useArticle";
 
-function formatTR(iso: string) {
+function formatTR(iso?: string) {
+  if (!iso) return "";
   try {
     return new Date(iso).toLocaleDateString("tr-TR", {
       year: "numeric",
@@ -49,9 +50,8 @@ export default function ArticleDetail({
 
   return (
     <>
-      {/* HERO: tiny (arka plan, blur) + asıl görsel (önde) */}
+      {/* HERO */}
       <div className="relative w-full h-[260px] sm:h-[340px] lg:h-[420px] overflow-hidden mt-2 sm:mt-4 lg:mt-6 rounded-xl">
-        {/* BLUR BACKDROP: tinyUrl ile çok hafif ve küçük byte */}
         <Image
           src={heroTiny}
           alt=""
@@ -59,10 +59,8 @@ export default function ArticleDetail({
           fill
           sizes="100vw"
           className="object-cover blur-[2px] scale-105"
-          priority
           decoding="async"
         />
-        {/* FOREGROUND: asıl görsel */}
         <Image
           src={heroSrc}
           alt={article.image.alt}
@@ -89,15 +87,34 @@ export default function ArticleDetail({
             </Link>
           </div>
 
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground mb-6">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground mb-6">
             <span className="inline-flex items-center gap-1.5">
               <CalendarDays className="h-4 w-4" />
-              {formatTR(article.publishedAt)}
+              {formatTR(article.createdAt)}
             </span>
-            <span className="inline-flex items-center gap-1.5">
-              <Pencil className="h-4 w-4" />
-              Güncellendi: {formatTR(article.updatedAt)}
-            </span>
+
+            {article.updatedAt && (
+              <span className="inline-flex items-center gap-1.5">
+                <Pencil className="h-4 w-4" />
+                Güncellendi: {formatTR(article.updatedAt)}
+              </span>
+            )}
+
+            {article.category && (
+              <span className="inline-flex items-center gap-1.5 text-black">
+                <Badge variant="category" size="sm">
+                  <Tag className="h-4 w-4 mr-2" />
+                  {article.category.name}
+                </Badge>
+              </span>
+            )}
+
+            {typeof article.readingMinutes === "number" && (
+              <span className="inline-flex items-center gap-1.5">
+                <Timer className="h-4 w-4" />
+                {article.readingMinutes} dk
+              </span>
+            )}
           </div>
 
           <article

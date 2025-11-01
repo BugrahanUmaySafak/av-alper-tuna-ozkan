@@ -14,21 +14,21 @@ export default function HomeContact() {
     <Section>
       <Container className="mx-auto w-full max-w-none">
         <Card className="relative w-full rounded-xl overflow-hidden shadow-xl border-0 inset-0">
-          <div className="absolute inset-0 z-0 blur-xs">
+          <div className="absolute inset-0 z-0">
             <Image
               src="/alpertunaozkan-homePage-contact.webp"
-              alt="Avukat Alper Tuna Özkan"
+              alt=""
+              aria-hidden
               fill
-              sizes="(max-width: 480px) 480px, (max-width: 768px) 768px, (max-width: 1024px) 1024px, (max-width: 1440px) 1440px, 1920px"
-              className="object-cover object-center"
+              sizes="100vw"
+              className="object-cover object-center blur-[2px] scale-105 will-change-transform"
               decoding="async"
-              fetchPriority="low"
             />
             <div className="absolute inset-0 bg-black/35" aria-hidden="true" />
           </div>
 
           <div className="relative z-10 text-center px-6 py-16 md:px-12 lg:px-16">
-            <Link href="/iletisim">
+            <Link href="/iletisim" prefetch={false}>
               <Badge className="mb-4 cursor-pointer ">
                 Hemen İletişime Geçin
               </Badge>
@@ -48,14 +48,14 @@ export default function HomeContact() {
                 size="lg"
                 className="bg-blue-800 hover:bg-blue-700"
               >
-                <Link href="tel:+905340181933">
+                <Link href="tel:+905340181933" prefetch={false}>
                   <Phone className="h-5 w-5 mr-2" />
                   +90 (534) 018 19 33
                 </Link>
               </Button>
 
               <Button asChild variant="outline" size="lg">
-                <Link href="/iletisim">
+                <Link href="/iletisim" prefetch={false}>
                   <Mail className="h-5 w-5 mr-2" />
                   İletişim Formu
                 </Link>
