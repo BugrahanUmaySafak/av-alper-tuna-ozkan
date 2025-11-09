@@ -1,7 +1,10 @@
 {
   "name": "Özkan Hukuk & Danışmanlık",
   "short_name": "Özkan Hukuk",
-  "description": "Kırıkkale ve Ankara gayrimenkul avukatı Alper Tuna Özkan'dan hukuki danışmanlık.",
+  "description": "Av. Alper Tuna Özkan ile Kırıkkale ve Ankara’da gayrimenkul, inşaat, kira ve kamulaştırma davalarında uzman hukuki danışmanlık.",
+  "lang": "tr",
+  "dir": "ltr",
+  "scope": "/",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -10,12 +13,14 @@
     {
       "src": "/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "/android-chrome-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }

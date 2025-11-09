@@ -4,7 +4,7 @@ import { buildMetadata } from "@/config/seo";
 export const metadata = buildMetadata({
   title: "Kırıkkale ve Ankara Gayrimenkul Avukatı",
   description:
-    "Tapu iptali, inşaat sözleşmeleri, kira uyuşmazlıkları ve kamulaştırma davalarında deneyimli Kırıkkale ve Ankara gayrimenkul avukatı ekibiyle çözüm üretin.",
+    "Av. Alper Tuna Özkan, Kırıkkale ve Ankara’da tapu iptali, inşaat sözleşmeleri, kira uyuşmazlıkları ve kamulaştırma davalarında uzman gayrimenkul avukatlığı hizmeti sunar.",
   path: "/",
   keywords: [
     "tapu iptal avukatı",

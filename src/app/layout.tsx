@@ -68,6 +68,11 @@ export default function RootLayout({
     >
       <head>
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
+        <link rel="icon" href="/favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" href="/favicon-16x16.png" sizes="16x16" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="mask-icon" href="/logo/logo.svg" color="#0b2540" />
         <script
           type="application/ld+json"
           suppressHydrationWarning

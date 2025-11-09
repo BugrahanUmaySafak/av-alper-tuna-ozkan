@@ -9,7 +9,7 @@ export const seoConfig = {
   shortName: "Alper Tuna Özkan",
   defaultTitle: "Kırıkkale ve Ankara Gayrimenkul Avukatı | Özkan Hukuk",
   defaultDescription:
-    "Kırıkkale ve Ankara gayrimenkul avukatı Av. Alper Tuna Özkan, tapu iptali, inşaat, kira ve kamulaştırma davalarında stratejik çözümler üretir.",
+    "Av. Alper Tuna Özkan, Kırıkkale ve Ankara’da gayrimenkul, inşaat, kira ve kamulaştırma davalarında stratejik hukuki danışmanlık sunar.",
   twitterHandle: "@alpertunaozkan",
   baseKeywords: [
     "Kırıkkale gayrimenkul avukatı",
