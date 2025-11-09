@@ -1,3 +1,4 @@
+// app/layout.tsx
 import Header from "@/components/header/Header";
 import "@/style/globals.css";
 import { Inter } from "next/font/google";
@@ -17,26 +18,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"
   ),
-  icons: [
-    {
-      rel: "icon",
-      url: "/ico/favicon-16x16.ico",
-      sizes: "16x16",
-      type: "image/x-icon",
-    },
-    {
-      rel: "icon",
-      url: "/ico/favicon-32x32.ico",
-      sizes: "32x32",
-      type: "image/x-icon",
-    },
-    {
-      rel: "icon",
-      url: "/ico/favicon-48x48.ico",
-      sizes: "48x48",
-      type: "image/x-icon",
-    },
-  ],
+  icons: [{ rel: "icon", url: "/ico/favicon-32x32.ico" }],
 };
 
 export const viewport: Viewport = {
@@ -59,6 +41,12 @@ export default function RootLayout({
     >
       <head>
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
+        <link
+          rel="icon"
+          href="/ico/favicon-32x32.ico"
+          sizes="32x32"
+          type="image/x-icon"
+        />
       </head>
       <body className="min-h-screen flex flex-col bg-white text-black">
         <ThemeProvider
