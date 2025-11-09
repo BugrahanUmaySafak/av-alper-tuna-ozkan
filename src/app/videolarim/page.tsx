@@ -1,10 +1,17 @@
 import VideoListWrapper from "@/features/videolarim/containers/VideoListWrapper";
-import type { Metadata } from "next";
+import { buildMetadata } from "@/config/seo";
 
-export const metadata: Metadata = {
-  title: "Videolarım | Özkan Hukuk Danışmanlık",
-  description: "Gayrimenkul hukukuna dair güncel ve açıklayıcı içerikler.",
-};
+export const metadata = buildMetadata({
+  title: "Gayrimenkul Hukuku Videoları",
+  description:
+    "Gayrimenkul davaları, kira artışı, kat karşılığı sözleşmeler ve kamulaştırma süreçlerine dair uzman videoları izleyin.",
+  path: "/videolarim",
+  keywords: [
+    "gayrimenkul hukuku videoları",
+    "kira artış videosu",
+    "kat karşılığı video",
+  ],
+});
 
 // SSG + 15 dk ISR
 export const revalidate = 900;

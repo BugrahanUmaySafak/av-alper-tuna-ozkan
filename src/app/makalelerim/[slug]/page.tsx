@@ -3,16 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import ArticleDetailWrapper from "@/features/makalelerim/containers/ArticleDetailWrapper";
 import { getArticleBySlug } from "@/features/makalelerim/actions/articles";
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-
-function absoluteUrl(pathOrUrl: string) {
-  try {
-    return new URL(pathOrUrl).toString();
-  } catch {
-    return new URL(pathOrUrl, SITE_URL).toString();
-  }
-}
+import { absoluteUrl, buildMetadata } from "@/config/seo";
 
 type ParamsPromise = Promise<{ slug: string }>;
 
@@ -23,36 +14,44 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const article = await getArticleBySlug(slug);
-  if (!article) return {};
+  if (!article) {
+    return buildMetadata({
+      title: "Makale Bulunamadı",
+      description: "Aradığınız makale yayından kaldırılmış olabilir.",
+      path: `/makalelerim/${slug}`,
+      noIndex: true,
+    });
+  }
 
   const { title, image, keywords, createdAt, updatedAt, summary } = article;
-  const pageTitle = `${title} | Özkan Hukuk & Danışmanlık`;
   const description = summary || title;
-  const canonical = absoluteUrl(`/makalelerim/${slug}`);
+  const path = `/makalelerim/${slug}`;
+  const baseMetadata = buildMetadata({
+    title,
+    description,
+    path,
+    keywords,
+    type: "article",
+    images: image?.url
+      ? [
+          {
+            url: image.url,
+            width: 1200,
+            height: 630,
+            alt: image.alt,
+          },
+        ]
+      : undefined,
+  });
 
   return {
-    title: pageTitle,
-    description,
-    alternates: { canonical },
-    keywords,
-    robots: { index: true, follow: true },
+    ...baseMetadata,
     openGraph: {
+      ...baseMetadata.openGraph,
       type: "article",
-      url: canonical,
-      siteName: "Özkan Hukuk & Danışmanlık",
-      title: pageTitle,
-      description,
-      images: image?.url ? [{ url: absoluteUrl(image.url) }] : undefined,
       publishedTime: createdAt,
       modifiedTime: updatedAt,
-      authors: ["Alper Tuna Ozkan"],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: pageTitle,
-      description,
-      images: image?.url ? [absoluteUrl(image.url)] : undefined,
-      creator: "Alper Tuna Ozkan",
+      authors: ["Alper Tuna Özkan"],
     },
   };
 }
@@ -74,7 +73,7 @@ export default async function SlugPage({ params }: { params: ParamsPromise }) {
       "@type": "WebPage",
       "@id": absoluteUrl(`/makalelerim/${slug}`),
     },
-    author: [{ "@type": "Person", name: "Alper Tuna Ozkan" }],
+    author: [{ "@type": "Person", name: "Alper Tuna Özkan" }],
     publisher: {
       "@type": "Organization",
       name: "Özkan Hukuk & Danışmanlık",

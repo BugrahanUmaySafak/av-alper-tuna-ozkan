@@ -1,11 +1,17 @@
 import AboutWrapper from "@/features/hakkimda/containers/AboutWrapper";
-import type { Metadata } from "next";
+import { buildMetadata } from "@/config/seo";
 
-export const metadata: Metadata = {
-  title: "Özkan Hukuk Danışmanlık - Hakkımda",
+export const metadata = buildMetadata({
+  title: "Avukat Alper Tuna Özkan",
   description:
-    "Özkan Hukuk Danışmanlık olarak, müvekkillerimize güvenilir ve etkili hukuki çözümler sunuyoruz.",
-};
+    "Kırıkkale doğumlu Av. Alper Tuna Özkan, Ankara ve İç Anadolu’da gayrimenkul hukuku, inşaat ve kira uyuşmazlıklarında stratejik danışmanlık sağlar.",
+  path: "/hakkimda",
+  keywords: [
+    "avukat alper tuna özkan",
+    "Kırıkkale avukat",
+    "Ankara gayrimenkul hukuku",
+  ],
+});
 
 export const revalidate = 900;
 export const dynamic = "force-static";

@@ -1,11 +1,13 @@
 import ContactWrapper from "@/features/iletisim/containers/ContactWrapper";
-import type { Metadata } from "next";
+import { buildMetadata } from "@/config/seo";
 
-export const metadata: Metadata = {
-  title: "İletişim | Özkan Hukuk Danışmanlık",
+export const metadata = buildMetadata({
+  title: "İletişim",
   description:
-    "Özkan Hukuk Danışmanlık ile iletişime geçin. Profesyonel hukuk danışmanlığı için bize ulaşın.",
-};
+    "Kırıkkale ve Ankara gayrimenkul avukatı olarak tapu, kira, inşaat ve kamulaştırma uyuşmazlıkları için randevu ve danışmanlık talep edin.",
+  path: "/iletisim",
+  keywords: ["gayrimenkul avukatı iletişim", "hukuki danışmanlık randevusu"],
+});
 
 // SSG + bfcache dostu
 export const revalidate = 900;
