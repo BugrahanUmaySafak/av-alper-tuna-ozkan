@@ -11,7 +11,6 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "res.cloudinary.com",
-        // bulut adın farklıysa burayı değiştir
         pathname: "/dhd5qma6b/image/upload/**",
       },
       { protocol: "https", hostname: "img.youtube.com", pathname: "/vi/**" },
@@ -22,6 +21,17 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     optimizePackageImports: ["lucide-react"],
+  },
+
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "alpertunaozkan.com" }],
+        destination: "https://www.alpertunaozkan.com/:path*",
+        permanent: true,
+      },
+    ];
   },
 };
 
