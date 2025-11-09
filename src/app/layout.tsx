@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     },
     {
       rel: "icon",
-      url: "/favicon-32x32.ico",
+      url: "/favicon.ico",
       sizes: "32x32",
       type: "image/x-icon",
     },
@@ -61,7 +61,7 @@ export default function RootLayout({
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
         <link
           rel="icon"
-          href="/favicon-32x32.ico"
+          href="/favicon.ico"
           sizes="32x32"
           type="image/x-icon"
         />
