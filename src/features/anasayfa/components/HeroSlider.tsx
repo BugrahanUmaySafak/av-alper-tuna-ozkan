@@ -192,12 +192,18 @@ export default function HeroSlider() {
   };
 
   const onPointerDown = (e: React.PointerEvent) => {
-    if (drag.current.active && drag.current.activeType === "touch") return;
+    if (e.pointerType !== "mouse") return; // touch/pen'leri sadece native touch handler yönetsin
     startInteraction(e.clientX, "pointer", e.pointerId);
   };
 
   const onPointerMove = (e: React.PointerEvent) => {
-    if (!drag.current.active || drag.current.activeType !== "pointer") return;
+    if (
+      e.pointerType !== "mouse" ||
+      !drag.current.active ||
+      drag.current.activeType !== "pointer"
+    ) {
+      return;
+    }
     const startedNow = moveInteraction(e.clientX, () => e.preventDefault());
 
     const el = trackRef.current;
@@ -317,9 +323,15 @@ export default function HeroSlider() {
           }}
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
-          onPointerUp={() => finishInteraction("pointer")}
-          onPointerCancel={() => finishInteraction("pointer")}
-          onPointerLeave={() => finishInteraction("pointer")}
+          onPointerUp={(e) => {
+            if (e.pointerType === "mouse") finishInteraction("pointer");
+          }}
+          onPointerCancel={(e) => {
+            if (e.pointerType === "mouse") finishInteraction("pointer");
+          }}
+          onPointerLeave={(e) => {
+            if (e.pointerType === "mouse") finishInteraction("pointer");
+          }}
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
