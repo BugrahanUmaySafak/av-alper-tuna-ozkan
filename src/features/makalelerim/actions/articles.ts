@@ -68,7 +68,8 @@ function normalizeArticle(a: ApiArticle): Article {
 
 export async function getArticles(): Promise<Article[]> {
   const res = await fetch(`${API_BASE}/makalelerim`, {
-    next: { revalidate: 60 },
+    next: { revalidate: 900 },
+    cache: "force-cache",
   });
   if (!res.ok) throw new Error("Makaleler alınamadı");
   const json = (await res.json()) as ApiList;
@@ -80,7 +81,8 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
   const res = await fetch(
     `${API_BASE}/makalelerim/${encodeURIComponent(slug)}`,
     {
-      next: { revalidate: 60 },
+      next: { revalidate: 900 },
+      cache: "force-cache",
     }
   );
   if (res.status === 404) return null;

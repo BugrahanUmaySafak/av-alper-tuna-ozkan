@@ -1,5 +1,6 @@
 import HomePageWrapper from "@/features/anasayfa/containers/HomaPageWrapper";
 import { buildMetadata } from "@/config/seo";
+import { serviceLocationKeywords } from "@/data/service";
 
 export const metadata = buildMetadata({
   title: "Kırıkkale ve Ankara Gayrimenkul Avukatı",
@@ -10,6 +11,7 @@ export const metadata = buildMetadata({
     "tapu iptal avukatı",
     "inşaat hukuku avukatı",
     "kamulaştırma avukatı",
+    ...serviceLocationKeywords,
   ],
 });
 

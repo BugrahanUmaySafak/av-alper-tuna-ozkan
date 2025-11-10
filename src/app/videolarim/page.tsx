@@ -1,15 +1,16 @@
 import VideoListWrapper from "@/features/videolarim/containers/VideoListWrapper";
 import { buildMetadata } from "@/config/seo";
+import { serviceLocationKeywords } from "@/data/service";
 
 export const metadata = buildMetadata({
   title: "Gayrimenkul Hukuku Videoları",
-  description:
-    "Gayrimenkul davaları, kira artışı, kat karşılığı sözleşmeler ve kamulaştırma süreçlerine dair uzman videoları izleyin.",
+  description: "Gayrimenkul hukukuna dair güncel ve açıklayıcı içerikler.",
   path: "/videolarim",
   keywords: [
     "gayrimenkul hukuku videoları",
     "kira artış videosu",
     "kat karşılığı video",
+    ...serviceLocationKeywords,
   ],
 });
 

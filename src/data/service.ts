@@ -91,3 +91,11 @@ export const services: Service[] = [
     ],
   },
 ];
+
+export const serviceTitles = services.map((service) => service.title);
+
+const SERVICE_LOCATIONS = ["Kırıkkale", "Ankara"] as const;
+
+export const serviceLocationKeywords = SERVICE_LOCATIONS.flatMap((city) =>
+  serviceTitles.map((title) => `${city} ${title}`)
+);

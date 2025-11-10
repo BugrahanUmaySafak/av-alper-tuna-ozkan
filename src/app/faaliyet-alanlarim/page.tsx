@@ -1,6 +1,7 @@
 // src/app/faaliyet-alanlarim/page.tsx
 import ActivityPageWrapper from "@/features/faaliyet-alanlarim/containers/ActivityPageWrapper";
 import { buildMetadata } from "@/config/seo";
+import { serviceLocationKeywords } from "@/data/service";
 
 export const metadata = buildMetadata({
   title: "Faaliyet Alanları",
@@ -11,6 +12,7 @@ export const metadata = buildMetadata({
     "gayrimenkul dava avukatı",
     "kentsel dönüşüm hukuku",
     "kamulaştırmasız el atma",
+    ...serviceLocationKeywords,
   ],
 });
 

@@ -147,7 +147,11 @@ export default function InformativeContent({
             <div className="space-y-4 md:space-y-6">
               {previewArticles.map((yazi) => (
                 <div key={yazi.id} className="mb-2 md:mb-4">
-                  <Link href="/makalelerim" className="block" prefetch={false}>
+                  <Link
+                    href={`/makalelerim/${yazi.slug}`}
+                    className="block"
+                    prefetch={false}
+                  >
                     <Card className="group hover:shadow-xl transition-all duration-500 border-0 shadow-md bg-white/80 backdrop-blur-sm hover:bg-white cursor-pointer overflow-hidden max-w-full">
                       <CardContent className="p-4 md:p-5">
                         <div className="flex gap-3 md:gap-5 items-stretch">

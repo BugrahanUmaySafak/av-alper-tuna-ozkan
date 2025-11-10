@@ -2,10 +2,25 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import ArticleDetailWrapper from "@/features/makalelerim/containers/ArticleDetailWrapper";
-import { getArticleBySlug } from "@/features/makalelerim/actions/articles";
+import {
+  getArticleBySlug,
+  getArticles,
+} from "@/features/makalelerim/actions/articles";
 import { absoluteUrl, buildMetadata } from "@/config/seo";
 
 type ParamsPromise = Promise<{ slug: string }>;
+
+export const revalidate = 900;
+
+export async function generateStaticParams() {
+  try {
+    const articles = await getArticles();
+    return articles.map((article) => ({ slug: article.slug }));
+  } catch (error) {
+    console.warn("[makalelerim][slug] Failed to prebuild articles:", error);
+    return [];
+  }
+}
 
 export async function generateMetadata({
   params,
@@ -52,6 +67,7 @@ export async function generateMetadata({
       publishedTime: createdAt,
       modifiedTime: updatedAt,
       authors: ["Alper Tuna Özkan"],
+      tags: keywords,
     },
   };
 }
@@ -61,7 +77,15 @@ export default async function SlugPage({ params }: { params: ParamsPromise }) {
   const article = await getArticleBySlug(slug);
   if (!article) notFound();
 
-  const jsonLd = {
+  const canonicalUrl = absoluteUrl(`/makalelerim/${slug}`);
+  const estimatedWordCount = article.content
+    ? article.content
+        .replace(/<[^>]+>/g, " ")
+        .split(/\s+/)
+        .filter(Boolean).length
+    : undefined;
+
+  const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: article.title,
@@ -69,9 +93,10 @@ export default async function SlugPage({ params }: { params: ParamsPromise }) {
     image: article.image?.url ? [absoluteUrl(article.image.url)] : undefined,
     datePublished: article.createdAt,
     dateModified: article.updatedAt,
+    url: canonicalUrl,
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": absoluteUrl(`/makalelerim/${slug}`),
+      "@id": canonicalUrl,
     },
     author: [{ "@type": "Person", name: "Alper Tuna Özkan" }],
     publisher: {
@@ -79,7 +104,37 @@ export default async function SlugPage({ params }: { params: ParamsPromise }) {
       name: "Özkan Hukuk & Danışmanlık",
       logo: { "@type": "ImageObject", url: absoluteUrl("/logo/logo.png") },
     },
+    articleSection: article.category?.name,
     keywords: article.keywords?.join(", "),
+    wordCount: estimatedWordCount,
+    timeRequired: article.readingMinutes
+      ? `PT${Math.max(1, Math.round(article.readingMinutes))}M`
+      : undefined,
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Ana Sayfa",
+        item: absoluteUrl("/"),
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Makaleler",
+        item: absoluteUrl("/makalelerim"),
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: article.title,
+        item: canonicalUrl,
+      },
+    ],
   };
 
   return (
@@ -87,7 +142,12 @@ export default async function SlugPage({ params }: { params: ParamsPromise }) {
       <script
         type="application/ld+json"
         suppressHydrationWarning
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <ArticleDetailWrapper slug={slug} initialArticle={article} />
     </>

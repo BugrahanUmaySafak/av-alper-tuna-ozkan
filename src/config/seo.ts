@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { serviceLocationKeywords } from "@/data/service";
 
 const FALLBACK_URL = "https://www.alpertunaozkan.com";
 
@@ -19,6 +20,7 @@ export const seoConfig = {
     "kira hukuku",
     "kamulaştırma hukuku",
     "Özkan Hukuk",
+    ...serviceLocationKeywords,
   ],
   defaultOgImage: {
     url: "/alpertunaozkan-homePage-contact.webp",

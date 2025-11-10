@@ -1,5 +1,6 @@
 import AboutWrapper from "@/features/hakkimda/containers/AboutWrapper";
 import { buildMetadata } from "@/config/seo";
+import { serviceLocationKeywords } from "@/data/service";
 
 export const metadata = buildMetadata({
   title: "Avukat Alper Tuna Özkan",
@@ -10,6 +11,7 @@ export const metadata = buildMetadata({
     "avukat alper tuna özkan",
     "Kırıkkale avukat",
     "Ankara gayrimenkul hukuku",
+    ...serviceLocationKeywords,
   ],
 });
 
