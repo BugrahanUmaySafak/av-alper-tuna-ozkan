@@ -92,14 +92,14 @@ export default function ContactDetails() {
         <div className="flex justify-center gap-3 pt-3">
           {[
             {
-              href: "https://instagram.com",
+              href: "https://www.instagram.com/av.alpertunaozkan",
               icon: faInstagram,
               label: "Instagram",
               className:
                 "bg-gradient-to-br from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700",
             },
             {
-              href: "https://twitter.com",
+              href: "https://x.com/alpertunaozkan",
               icon: faXTwitter,
               label: "Twitter / X",
               className: "bg-slate-900 hover:bg-slate-800",
