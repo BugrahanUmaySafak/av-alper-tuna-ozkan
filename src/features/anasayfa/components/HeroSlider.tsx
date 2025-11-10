@@ -13,8 +13,6 @@ const SLIDE_DURATION = 5000;
 const SWIPE_THRESHOLD_RATIO = 0.15;
 const HOLD_DELAY_MS = 150;
 const TAP_SLOP_PX = 6;
-
-/** 442px altında progress bar dots'tan ayrılıp en alta iner */
 const TIGHT_WIDTH_PX = 442;
 
 export default function HeroSlider() {
@@ -145,6 +143,7 @@ export default function HeroSlider() {
     }
 
     if (drag.current.startedDragging) {
+      e.preventDefault();
       const offsetPercent = (dx / drag.current.width) * 100;
       setOffset(offsetPercent);
     }
@@ -210,7 +209,7 @@ export default function HeroSlider() {
   return (
     <section
       id="hero-slider"
-      className="relative w-full h-[calc(100dvh-72px)] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100"
+      className="relative w-full h-[calc(100dvh-72px)] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 touch-pan-y [&_*]:touch-pan-y"
       aria-label="Ana görsel slayt"
     >
       <div className="w-full h-full select-none">
