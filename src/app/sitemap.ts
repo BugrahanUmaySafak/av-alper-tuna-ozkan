@@ -2,8 +2,10 @@ import type { MetadataRoute } from "next";
 import { absoluteUrl } from "@/config/seo";
 import { getArticles } from "@/features/makalelerim/actions/articles";
 
+export const revalidate = 3600;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const now = new Date();
+  const now = new Date(); // Date veya ISO string kabul edilir
 
   const staticPages: MetadataRoute.Sitemap = [
     { path: "/", priority: 1 },

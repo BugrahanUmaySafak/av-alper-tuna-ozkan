@@ -11,6 +11,7 @@ import YouTubeThumb from "@/components/media/YouTubeThumb";
 
 import type { Video } from "@/features/videolarim/types";
 import type { Article } from "@/features/makalelerim/types";
+import { getDisplayDate } from "@/lib/date";
 
 type Props = {
   videos: Video[];
@@ -21,18 +22,6 @@ type Props = {
   upperContent?: string | null;
   lowerContent?: string | null;
 };
-
-function formatTR(iso: string) {
-  try {
-    return new Date(iso).toLocaleDateString("tr-TR", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  } catch {
-    return iso;
-  }
-}
 
 export default function InformativeContent({
   videos,
@@ -106,7 +95,12 @@ export default function InformativeContent({
                             <div className="flex items-center text-xs md:text-sm text-gray-500 min-w-0">
                               <Calendar className="w-4 h-4 mr-2 flex-shrink-0" />
                               <span className="truncate">
-                                {formatTR(video.createdAt)}
+                                {
+                                  getDisplayDate(
+                                    video.createdAt,
+                                    video.updatedAt
+                                  ).text
+                                }
                               </span>
                             </div>
                           </div>
@@ -168,7 +162,12 @@ export default function InformativeContent({
                             <div className="flex items-center text-xs md:text-sm text-gray-500 min-w-0">
                               <Calendar className="w-4 h-4 mr-2 flex-shrink-0" />
                               <span className="truncate">
-                                {formatTR(yazi.createdAt)}
+                                {
+                                  getDisplayDate(
+                                    yazi.createdAt,
+                                    yazi.updatedAt
+                                  ).text
+                                }
                               </span>
                             </div>
                           </div>

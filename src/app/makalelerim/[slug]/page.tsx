@@ -12,6 +12,23 @@ type ParamsPromise = Promise<{ slug: string }>;
 
 export const revalidate = 900;
 
+/* ---------- helpers ---------- */
+function normalizeSpaces(s: string) {
+  return s.trim().replace(/\s+/g, " ");
+}
+function clampDescription(input?: string, max = 155) {
+  if (!input) return undefined;
+  const s = normalizeSpaces(input);
+  if (s.length <= max) return s; 
+  const cut = s.slice(0, max - 1);
+  const i = cut.lastIndexOf(" ");
+  return (i > 120 ? cut.slice(0, i) : cut) + "…";
+}
+function minutesToISO(minutes?: number) {
+  return minutes && minutes > 0 ? `PT${Math.round(minutes)}M` : undefined;
+}
+
+/* ---------- SSG ---------- */
 export async function generateStaticParams() {
   try {
     const articles = await getArticles();
@@ -22,6 +39,7 @@ export async function generateStaticParams() {
   }
 }
 
+/* ---------- Metadata ---------- */
 export async function generateMetadata({
   params,
 }: {
@@ -29,6 +47,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const article = await getArticleBySlug(slug);
+
   if (!article) {
     return buildMetadata({
       title: "Makale Bulunamadı",
@@ -38,46 +57,53 @@ export async function generateMetadata({
     });
   }
 
-  const { title, image, keywords, createdAt, updatedAt, summary } = article;
-  const description = summary || title;
+  const { title, image, createdAt, updatedAt, summary } = article;
+  const description = summary ? clampDescription(summary) : title;
   const path = `/makalelerim/${slug}`;
-  const baseMetadata = buildMetadata({
+  const url = absoluteUrl(path);
+
+  // buildMetadata: keywords gönderilmez; meta keywords kaldırıldı.
+  const base = buildMetadata({
     title,
     description,
     path,
-    keywords,
     type: "article",
     images: image?.url
-      ? [
-          {
-            url: image.url,
-            width: 1200,
-            height: 630,
-            alt: image.alt,
-          },
-        ]
+      ? [{ url: image.url, width: 1200, height: 630, alt: image.alt || title }]
       : undefined,
   });
 
   return {
-    ...baseMetadata,
+    ...base,
+    alternates: { canonical: url, languages: { tr: url } },
+    robots: { index: true, follow: true },
     openGraph: {
-      ...baseMetadata.openGraph,
+      ...base.openGraph,
       type: "article",
+      url,
       publishedTime: createdAt,
-      modifiedTime: updatedAt,
-      authors: ["Alper Tuna Özkan"],
-      tags: keywords,
+      modifiedTime: updatedAt ?? createdAt,
+      // OG tags alanına keywords/tags eklenmiyor
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: (base.title as string) || title,
+      description: description,
+      images: image?.url ? [image.url] : undefined,
+      site: "@alpertunaozkan",
+      creator: "@alpertunaozkan",
     },
   };
 }
 
+/* ---------- Page ---------- */
 export default async function SlugPage({ params }: { params: ParamsPromise }) {
   const { slug } = await params;
   const article = await getArticleBySlug(slug);
   if (!article) notFound();
 
   const canonicalUrl = absoluteUrl(`/makalelerim/${slug}`);
+
   const estimatedWordCount = article.content
     ? article.content
         .replace(/<[^>]+>/g, " ")
@@ -89,15 +115,12 @@ export default async function SlugPage({ params }: { params: ParamsPromise }) {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: article.title,
-    description: article.summary || article.title,
+    description: clampDescription(article.summary || article.title),
     image: article.image?.url ? [absoluteUrl(article.image.url)] : undefined,
     datePublished: article.createdAt,
-    dateModified: article.updatedAt,
+    dateModified: article.updatedAt ?? article.createdAt,
     url: canonicalUrl,
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": canonicalUrl,
-    },
+    mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },
     author: [{ "@type": "Person", name: "Alper Tuna Özkan" }],
     publisher: {
       "@type": "Organization",
@@ -105,11 +128,9 @@ export default async function SlugPage({ params }: { params: ParamsPromise }) {
       logo: { "@type": "ImageObject", url: absoluteUrl("/logo/logo.png") },
     },
     articleSection: article.category?.name,
-    keywords: article.keywords?.join(", "),
+    // keywords kaldırıldı
     wordCount: estimatedWordCount,
-    timeRequired: article.readingMinutes
-      ? `PT${Math.max(1, Math.round(article.readingMinutes))}M`
-      : undefined,
+    timeRequired: minutesToISO(article.readingMinutes),
   };
 
   const breadcrumbJsonLd = {

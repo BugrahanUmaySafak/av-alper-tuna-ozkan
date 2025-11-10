@@ -12,12 +12,14 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { getDisplayDate } from "@/lib/date";
 
 type Props = {
   id: string;
   title: string;
   youtubeId: string;
   createdAt: string;
+  updatedAt?: string;
   priority?: boolean;
   coverUrl?: string;
   coverBlurDataUrl?: string;
@@ -27,22 +29,11 @@ type Props = {
   };
 };
 
-function formatTR(iso: string) {
-  try {
-    return new Date(iso).toLocaleDateString("tr-TR", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  } catch {
-    return iso;
-  }
-}
-
 export default function VideoCard({
   title,
   youtubeId,
   createdAt,
+  updatedAt,
   priority = false,
   coverUrl,
   coverBlurDataUrl,
@@ -92,6 +83,8 @@ export default function VideoCard({
   }
 
   const sizes = "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 640px";
+
+  const { text: dateLabel } = getDisplayDate(createdAt, updatedAt);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -149,7 +142,7 @@ export default function VideoCard({
         </CardHeader>
 
         <CardContent className="px-4 pb-4 space-y-3">
-          <p className="text-xs text-muted-foreground">{formatTR(createdAt)}</p>
+          <p className="text-xs text-muted-foreground">{dateLabel}</p>
           <Button variant="default" size="sm" className="w-full">
             Videoyu İzlemek İçin Tıklayın
           </Button>
@@ -182,7 +175,7 @@ export default function VideoCard({
               </Badge>
             ) : null}
             <DialogDescription className="text-sm text-muted-foreground">
-              {formatTR(createdAt)}
+              {dateLabel}
             </DialogDescription>
           </div>
         </div>

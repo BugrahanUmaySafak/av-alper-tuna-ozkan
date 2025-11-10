@@ -10,19 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { CalendarDays, Pencil, ArrowLeft, Tag, Timer } from "lucide-react";
 import type { Article } from "../types";
 import { useArticle } from "../hooks/useArticle";
-
-function formatTR(iso?: string) {
-  if (!iso) return "";
-  try {
-    return new Date(iso).toLocaleDateString("tr-TR", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  } catch {
-    return iso;
-  }
-}
+import { getDisplayDate } from "@/lib/date";
 
 function normalizeHtml(html: string): string {
   const hasParagraph = /<\s*p[\s>]/i.test(html);
@@ -47,6 +35,10 @@ export default function ArticleDetail({
 
   const heroSrc = article.image.url;
   const heroTiny = article.image.tinyUrl ?? heroSrc;
+  const { text: articleDateLabel, isUpdated } = getDisplayDate(
+    article.createdAt,
+    article.updatedAt
+  );
 
   return (
     <>
@@ -89,16 +81,13 @@ export default function ArticleDetail({
 
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground mb-6">
             <span className="inline-flex items-center gap-1.5">
-              <CalendarDays className="h-4 w-4" />
-              {formatTR(article.createdAt)}
-            </span>
-
-            {article.updatedAt && (
-              <span className="inline-flex items-center gap-1.5">
+              {isUpdated ? (
                 <Pencil className="h-4 w-4" />
-                Güncellendi: {formatTR(article.updatedAt)}
-              </span>
-            )}
+              ) : (
+                <CalendarDays className="h-4 w-4" />
+              )}
+              {articleDateLabel}
+            </span>
 
             {article.category && (
               <span className="inline-flex items-center gap-1.5 text-black">
