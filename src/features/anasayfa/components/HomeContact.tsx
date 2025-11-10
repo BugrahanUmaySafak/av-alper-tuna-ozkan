@@ -38,8 +38,8 @@ export default function HomeContact() {
             </h2>
 
             <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto leading-relaxed">
-              Danışmanlık hizmetleri ile ilgili sorularınız için ücretsiz ön
-              görüşme randevusu alın.
+              Randevu ve bilgi talebi için bizi arayın veya form üzerinden mesaj
+              bırakın.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
