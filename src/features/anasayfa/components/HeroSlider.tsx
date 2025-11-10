@@ -92,12 +92,24 @@ export default function HeroSlider() {
     };
   }, [tick]);
 
-  const drag = useRef({
+  const drag = useRef<{
+    active: boolean;
+    startX: number;
+    lastX: number;
+    width: number;
+    startedDragging: boolean;
+    activeType: "pointer" | "touch" | null;
+    pointerId: number | null;
+    pointerCaptured: boolean;
+  }>({
     active: false,
     startX: 0,
     lastX: 0,
     width: 1,
     startedDragging: false,
+    activeType: null,
+    pointerId: null,
+    pointerCaptured: false,
   });
 
   useEffect(() => {
@@ -117,11 +129,19 @@ export default function HeroSlider() {
     }
   };
 
-  const onPointerDown = (e: React.PointerEvent) => {
+  const startInteraction = (
+    clientX: number,
+    type: "pointer" | "touch",
+    pointerId: number | null = null
+  ) => {
     drag.current.active = true;
+    drag.current.activeType = type;
     drag.current.startedDragging = false;
-    drag.current.startX = e.clientX;
-    drag.current.lastX = e.clientX;
+    drag.current.startX = clientX;
+    drag.current.lastX = clientX;
+    drag.current.pointerId = pointerId;
+    drag.current.pointerCaptured = false;
+    draggingRef.current = false;
 
     clearHold();
     holdTimer.current = window.setTimeout(() => {
@@ -129,31 +149,81 @@ export default function HeroSlider() {
     }, HOLD_DELAY_MS);
   };
 
-  const onPointerMove = (e: React.PointerEvent) => {
-    if (!drag.current.active) return;
-    const dx = e.clientX - drag.current.startX;
-    drag.current.lastX = e.clientX;
+  const moveInteraction = (
+    clientX: number,
+    preventDefault?: () => void
+  ): boolean => {
+    if (!drag.current.active) return false;
+    const dx = clientX - drag.current.startX;
+    drag.current.lastX = clientX;
 
     if (!drag.current.startedDragging && Math.abs(dx) >= TAP_SLOP_PX) {
       drag.current.startedDragging = true;
       clearHold();
       pausedRef.current = true;
       draggingRef.current = true;
-      trackRef.current?.setPointerCapture(e.pointerId);
     }
 
     if (drag.current.startedDragging) {
-      e.preventDefault();
+      preventDefault?.();
       const offsetPercent = (dx / drag.current.width) * 100;
       setOffset(offsetPercent);
     }
+
+    return drag.current.startedDragging;
   };
 
-  const finishInteraction = (e?: React.PointerEvent) => {
-    if (!drag.current.active) return;
+  const releasePointerCapture = () => {
+    const el = trackRef.current;
+    if (
+      !drag.current.pointerCaptured ||
+      drag.current.pointerId === null ||
+      !el ||
+      typeof el.releasePointerCapture !== "function"
+    ) {
+      return;
+    }
+    try {
+      el.releasePointerCapture(drag.current.pointerId);
+    } catch {
+      // Safari iOS still lacks pointer capture; ignore errors.
+    }
+    drag.current.pointerCaptured = false;
+  };
 
-    if (e?.pointerId !== undefined) {
-      trackRef.current?.releasePointerCapture(e.pointerId);
+  const onPointerDown = (e: React.PointerEvent) => {
+    if (drag.current.active && drag.current.activeType === "touch") return;
+    startInteraction(e.clientX, "pointer", e.pointerId);
+  };
+
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (!drag.current.active || drag.current.activeType !== "pointer") return;
+    const startedNow = moveInteraction(e.clientX, () => e.preventDefault());
+
+    const el = trackRef.current;
+    if (
+      startedNow &&
+      !drag.current.pointerCaptured &&
+      drag.current.pointerId !== null &&
+      el &&
+      typeof el.setPointerCapture === "function"
+    ) {
+      try {
+        el.setPointerCapture(drag.current.pointerId);
+        drag.current.pointerCaptured = true;
+      } catch {
+        // pointer capture unavailable (Safari iOS <17), safe to ignore
+      }
+    }
+  };
+
+  const finishInteraction = (type?: "pointer" | "touch") => {
+    if (!drag.current.active) return;
+    if (type && drag.current.activeType && type !== drag.current.activeType)
+      return;
+
+    if (drag.current.pointerCaptured) {
+      releasePointerCapture();
     }
 
     const dx = drag.current.lastX - drag.current.startX;
@@ -179,7 +249,26 @@ export default function HeroSlider() {
     setOffset(0);
     pausedRef.current = false;
     clearHold();
+    drag.current.activeType = null;
+    drag.current.pointerId = null;
+    drag.current.pointerCaptured = false;
   };
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    if (drag.current.active || e.touches.length !== 1) return;
+    const touch = e.touches[0];
+    startInteraction(touch.clientX, "touch");
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    if (!drag.current.active || drag.current.activeType !== "touch") return;
+    const touch = e.touches[0];
+    if (!touch) return;
+    moveInteraction(touch.clientX, () => e.preventDefault());
+  };
+
+  const onTouchEnd = () => finishInteraction("touch");
+  const onTouchCancel = () => finishInteraction("touch");
 
   const jumpTo = (i: number) => {
     setIndex(i);
@@ -228,9 +317,13 @@ export default function HeroSlider() {
           }}
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
-          onPointerUp={finishInteraction}
-          onPointerCancel={finishInteraction}
-          onPointerLeave={finishInteraction}
+          onPointerUp={() => finishInteraction("pointer")}
+          onPointerCancel={() => finishInteraction("pointer")}
+          onPointerLeave={() => finishInteraction("pointer")}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+          onTouchCancel={onTouchCancel}
         >
           {SLIDES_DATA.map((slide, i) => {
             const imgSrc = isMobile
