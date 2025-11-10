@@ -163,10 +163,8 @@ export default function InformativeContent({
                               <Calendar className="w-4 h-4 mr-2 flex-shrink-0" />
                               <span className="truncate">
                                 {
-                                  getDisplayDate(
-                                    yazi.createdAt,
-                                    yazi.updatedAt
-                                  ).text
+                                  getDisplayDate(yazi.createdAt, yazi.updatedAt)
+                                    .text
                                 }
                               </span>
                             </div>
