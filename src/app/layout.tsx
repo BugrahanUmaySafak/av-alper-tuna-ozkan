@@ -11,6 +11,7 @@ import {
   organizationJsonLd,
   seoConfig,
 } from "@/config/seo";
+import PageTransition from "@/components/shared/PageTransition";
 
 const inter = Inter({
   subsets: ["latin", "latin-ext"],
@@ -95,7 +96,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1">
+            <PageTransition>{children}</PageTransition>
+          </main>
           <IletisimLazy />
           <FooterLazy />
           <Toaster
