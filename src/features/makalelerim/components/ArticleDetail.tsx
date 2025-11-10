@@ -54,7 +54,7 @@ export default function ArticleDetail({
       <div className="relative w-full h-[260px] sm:h-[340px] lg:h-[420px] overflow-hidden mt-2 sm:mt-4 lg:mt-6 rounded-xl">
         <Image
           src={heroTiny}
-          alt=""
+          alt={article.image.alt}
           aria-hidden
           fill
           sizes="100vw"
