@@ -14,7 +14,7 @@ export default async function VideoListWrapper() {
         extraContent={
           <p className="text-sm sm:text-base text-muted-foreground">
             <Link
-              href="www.youtube.com/@av.alpertunaözkan"
+              href="https://www.youtube.com/@av.alpertunaozkan"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 hover:underline font-medium"
