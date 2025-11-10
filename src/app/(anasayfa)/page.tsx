@@ -5,7 +5,7 @@ import { serviceLocationKeywords } from "@/data/service";
 export const metadata = buildMetadata({
   title: "Kırıkkale ve Ankara Gayrimenkul Avukatı",
   description:
-    "Avukat Alper Tuna Özkan, Kırıkkale ve Ankara’da tapu iptali, inşaat sözleşmeleri, kira uyuşmazlıkları ve kamulaştırma davalarında uzman gayrimenkul avukatlığı hizmeti sunar.",
+    "Avukat Alper Tuna Özkan, Kırıkkale ve Ankara’da gayrimenkul hukuku, tapu iptali, inşaat sözleşmeleri, kira uyuşmazlıkları ve kamulaştırma davalarında uzman gayrimenkul avukatlığı hizmeti sunar.",
   path: "/",
   keywords: [...serviceLocationKeywords],
 });
