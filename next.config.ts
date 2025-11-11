@@ -30,6 +30,16 @@ const nextConfig: NextConfig = {
         destination: "https://www.alpertunaozkan.com/:path*",
         permanent: true,
       },
+      {
+        source: "/kirikkale-gayrimenkul-avukati",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/ankara-gayrimenkul-avukati",
+        destination: "/",
+        permanent: true,
+      },
     ];
   },
 };
