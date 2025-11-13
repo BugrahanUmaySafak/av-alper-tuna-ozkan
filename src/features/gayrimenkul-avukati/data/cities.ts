@@ -59,7 +59,7 @@ export const cityContent: Record<CityKey, CityContent> = {
     heroHighlight:
       "Ankara'da gayrimenkul hukukuna dair dosyalarınızda 360° hukuki danışmanlık.",
     heroImage: "/alpertunaozkan-homePage-contact.webp",
-    metaTitle: "Ankara Gayrimenkul Avukatı | Özkan Hukuk",
+    metaTitle: "Ankara Gayrimenkul Avukatı",
     metaDescription:
       "Ankara’da tapu iptal ve tescil, kira artışı, kamulaştırma ve kat karşılığı inşaat sözleşmelerinde uzman gayrimenkul avukatı desteği alın.",
     keywords: ankaraKeywords,
@@ -143,7 +143,7 @@ export const cityContent: Record<CityKey, CityContent> = {
     heroHighlight:
       "Kırıkkale'de gayrimenkul hukukuna dair dosyalarınızda 360° hukuki danışmanlık.",
     heroImage: "/alpertunaozkan-homePage-contact.webp",
-    metaTitle: "Kırıkkale Gayrimenkul Avukatı | Özkan Hukuk",
+    metaTitle: "Kırıkkale Gayrimenkul Avukatı",
     metaDescription:
       "Kırıkkale’de miras paylaşımı, kira uyuşmazlıkları, kat karşılığı sözleşmeler ve kamulaştırma davaları için uzman gayrimenkul avukatı desteği.",
     keywords: kirikkaleKeywords,

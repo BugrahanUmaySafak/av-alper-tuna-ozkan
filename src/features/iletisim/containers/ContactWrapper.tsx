@@ -13,13 +13,13 @@ export default function ContactWrapper() {
         description="Hukuki sorularınız için hemen iletişime geçin."
       />
 
-      <Section>
+      <Section className="py-12 lg:py-16">
         <Container>
           <CityContactCTA />
         </Container>
       </Section>
 
-      <Section>
+      <Section className="py-12 lg:py-16">
         <Container>
           <ContactDetails />
         </Container>

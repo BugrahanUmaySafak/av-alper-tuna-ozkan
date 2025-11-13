@@ -94,7 +94,7 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
   return (
     <Container>
       <div id="iletisim-form">
-        <Section>
+        <Section className="py-12 lg:py-16">
         <div
           ref={formRef}
           className="rounded-xl shadow-xl overflow-hidden border border-border/50 bg-card h-full"
