@@ -66,7 +66,7 @@ export const cityContent: Record<CityKey, CityContent> = {
     heroImage: "/alpertunaozkan-homePage-contact.webp",
     metaTitle: "Ankara Gayrimenkul Avukatı",
     metaDescription:
-      "Ankara’da tapu iptal ve tescil, kira uyarlama–tahliye, kamulaştırma ve kat karşılığı inşaat sözleşmelerinde uzman avukat desteği alın.",
+      "Ankara Gayrimenkul Avukatı | Ankara’da tapu iptal, kira uyarlama, kamulaştırma ve kat karşılığı inşaat sözleşmelerinde uçtan uca hukuki danışmanlık.",
     keywords: ankaraKeywords,
     summary:
       "Ankara'da gayrimenkul hukuku, miras hukuku, kira hukuku, inşaat hukuku, kamulaştırma ve imar hukuku alanlarında tam profesyonel hizmet veriyoruz.",
@@ -149,7 +149,7 @@ export const cityContent: Record<CityKey, CityContent> = {
     heroImage: "/alpertunaozkan-homePage-contact.webp",
     metaTitle: "Kırıkkale Gayrimenkul Avukatı",
     metaDescription:
-      "Kırıkkale’de miras paylaşımı, kira uyuşmazlıkları, kat karşılığı sözleşmeler ve kamulaştırma davaları için uzman gayrimenkul avukatı desteği.",
+      "Kırıkkale Gayrimenkul Avukatı | Kırıkkale’de miras, kira, kamulaştırma ve kat karşılığı inşaat dosyalarında kapsamlı gayrimenkul hukuku hizmeti.",
     keywords: kirikkaleKeywords,
     summary:
       "Kırıkkale'de gayrimenkul hukuku, miras hukuku, kira hukuku, inşaat hukuku, kamulaştırma ve imar hukuku alanlarında tam profesyonel hizmet veriyoruz.",

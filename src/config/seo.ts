@@ -1,7 +1,3 @@
-// ============================================================================
-// SEO config + buildMetadata + (YENİ) organizationJsonLd (tarafsız Organization)
-// ============================================================================
-
 import type { Metadata } from "next";
 import { serviceLocationKeywords } from "@/data/service";
 
