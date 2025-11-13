@@ -1,14 +1,17 @@
-import HomePageWrapper from "@/features/anasayfa/containers/HomaPageWrapper";
 import { buildMetadata } from "@/config/seo";
+import CityPageWrapper from "@/features/gayrimenkul-avukati/CityPageWrapper";
+import { cityContent } from "@/features/gayrimenkul-avukati/data/cities";
+
+const CITY = cityContent.ankara;
 
 export const metadata = buildMetadata({
-  title: "Ankara Gayrimenkul Avukatı",
-  description:
-    "Ankara’da tapu iptal ve tescil, kira davaları, kamulaştırma ve inşaat sözleşmeleri alanlarında stratejik gayrimenkul avukatlığı hizmeti.",
-  path: "/ankara-gayrimenkul-avukati",
+  title: CITY.metaTitle,
+  description: CITY.metaDescription,
+  path: CITY.slug,
+  keywords: CITY.keywords,
   type: "article",
 });
 
 export default function Page() {
-  return <HomePageWrapper />;
+  return <CityPageWrapper city="ankara" />;
 }

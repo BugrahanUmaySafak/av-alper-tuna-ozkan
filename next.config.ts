@@ -29,17 +29,7 @@ const nextConfig: NextConfig = {
         has: [{ type: "host", value: "alpertunaozkan.com" }],
         destination: "https://www.alpertunaozkan.com/:path*",
         permanent: true,
-      },
-      {
-        source: "/kirikkale-gayrimenkul-avukati",
-        destination: "/",
-        permanent: true,
-      },
-      {
-        source: "/ankara-gayrimenkul-avukati",
-        destination: "/",
-        permanent: true,
-      },
+      }
     ];
   },
 };

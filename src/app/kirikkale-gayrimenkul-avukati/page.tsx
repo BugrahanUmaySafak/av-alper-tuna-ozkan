@@ -1,14 +1,17 @@
-import HomePageWrapper from "@/features/anasayfa/containers/HomaPageWrapper";
 import { buildMetadata } from "@/config/seo";
+import CityPageWrapper from "@/features/gayrimenkul-avukati/CityPageWrapper";
+import { cityContent } from "@/features/gayrimenkul-avukati/data/cities";
+
+const CITY = cityContent.kirikkale;
 
 export const metadata = buildMetadata({
-  title: "Kırıkkale Gayrimenkul Avukatı",
-  description:
-    "Kırıkkale’de tapu iptal ve tescil, kira uyuşmazlıkları, kamulaştırma ve inşaat sözleşmeleri alanlarında uzman gayrimenkul avukatlığı desteği.",
-  path: "/kirikkale-gayrimenkul-avukati",
+  title: CITY.metaTitle,
+  description: CITY.metaDescription,
+  path: CITY.slug,
+  keywords: CITY.keywords,
   type: "article",
 });
 
 export default function Page() {
-  return <HomePageWrapper />;
+  return <CityPageWrapper city="kirikkale" />;
 }
