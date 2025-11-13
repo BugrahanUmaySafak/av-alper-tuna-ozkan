@@ -30,7 +30,7 @@ export default function CityPageWrapper({ city }: { city: CityKey }) {
         }
       />
 
-      <Section className="py-12 lg:py-16">
+      <Section>
         <Container>
           <div className="grid gap-10 lg:grid-cols-2 items-center">
             <div className="space-y-6">
@@ -61,7 +61,7 @@ export default function CityPageWrapper({ city }: { city: CityKey }) {
         </Container>
       </Section>
 
-      <Section className="py-12 lg:py-16">
+      <Section>
         <Container>
           <div className="grid gap-4 md:grid-cols-2">
             <ContactInfoCard title={`${data.name} Adres`} icon={MapPin}>
@@ -129,7 +129,7 @@ export default function CityPageWrapper({ city }: { city: CityKey }) {
         </Container>
       </Section>
 
-      <Section className="py-12 lg:py-16">
+      <Section>
         <Container>
           <CityMapClient
             coords={data.coords}
@@ -139,7 +139,7 @@ export default function CityPageWrapper({ city }: { city: CityKey }) {
         </Container>
       </Section>
 
-      <Section className="py-12 lg:py-16">
+      <Section>
         <Container>
           <div className="flex items-center justify-between flex-wrap gap-4 mb-4">
             <h3 className="text-2xl font-semibold text-gray-900">
