@@ -9,6 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CheckCircle, MapPin, Phone, Mail, Clock } from "lucide-react";
 import { notFound } from "next/navigation";
+import CityMapClient from "./components/CityMapClient";
 
 export default function CityPageWrapper({ city }: { city: CityKey }) {
   const data = cityContent[city];
@@ -123,12 +124,11 @@ export default function CityPageWrapper({ city }: { city: CityKey }) {
 
       <Section>
         <Container>
-          <div className="grid gap-6 lg:grid-cols-2">
-            <div className="space-y-5">
-              <h3 className="text-2xl font-semibold text-gray-900">
-                Ofis İletişim Bilgileri
-              </h3>
-              <Card className="p-6 space-y-4">
+          <div className="space-y-5">
+            <h3 className="text-2xl font-semibold text-gray-900">
+              Ofis İletişim Bilgileri
+            </h3>
+            <Card className="p-6 space-y-4">
                 <div className="flex gap-3">
                   <MapPin className="h-6 w-6 text-red-600" />
                   <div>
@@ -199,59 +199,17 @@ export default function CityPageWrapper({ city }: { city: CityKey }) {
                   </div>
                 </div>
               </Card>
-            </div>
-
-            <Card className="p-0 overflow-hidden h-full flex flex-col">
-              <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
-                <p className="text-lg font-semibold text-gray-900">
-                  Harita ve Yol Tarifi
-                </p>
-                <div className="flex gap-2">
-                  <Button asChild size="sm">
-                    <a
-                      href={data.address.mapsLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Haritada Aç
-                    </a>
-                  </Button>
-                  <Button asChild size="sm" variant="outline">
-                    <a
-                      href={data.address.directionsLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Yol Tarifi
-                    </a>
-                  </Button>
-                </div>
-              </div>
-              <div className="relative flex-1">
-                <a
-                  href={data.address.mapsLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute inset-0 z-10"
-                  aria-label={`${data.name} ofisini haritada aç`}
-                >
-                  <span className="sr-only">
-                    {data.name} ofisini haritada aç
-                  </span>
-                </a>
-                <iframe
-                  src={data.mapEmbed}
-                  title={`${data.name} ofis haritası`}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="absolute inset-0 w-full h-full border-0 pointer-events-none"
-                />
-              </div>
-              <p className="text-sm text-center text-gray-500 py-3 border-t border-gray-100">
-                Haritaya tıklayarak Google Maps üzerinden tam ekran görüntüleyebilirsiniz.
-              </p>
-            </Card>
           </div>
+        </Container>
+      </Section>
+
+      <Section>
+        <Container>
+          <CityMapClient
+            coords={data.coords}
+            title={`${data.name} Ofis Konumu`}
+            mapsLink={data.address.mapsLink}
+          />
         </Container>
       </Section>
 

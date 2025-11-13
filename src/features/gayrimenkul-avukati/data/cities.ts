@@ -16,6 +16,7 @@ type CityContent = {
   summary: string;
   stats: { label: string; value: string }[];
   services: string[];
+  coords: [number, number];
   address: {
     title: string;
     lines: string[];
@@ -68,6 +69,7 @@ export const cityContent: Record<CityKey, CityContent> = {
       "Kat karşılığı inşaat sözleşmeleri ve yüklenici ihtilafları",
       "Ticari plaza ve AVM kiralarında kira uyarlama & tahliye süreçleri",
     ],
+    coords: [39.894828, 32.840317],
     address: {
       title: "Ankara Ofis",
       lines: [
@@ -134,6 +136,7 @@ export const cityContent: Record<CityKey, CityContent> = {
       "Muris muvazaası ve miras payı davalarında stratejik temsil",
       "Kat karşılığı inşaat ve arsa payı karşılığı projelerin hukuki yönetimi",
     ],
+    coords: [39.8413091, 33.5002971],
     address: {
       title: "Kırıkkale Ofis",
       lines: [
