@@ -65,33 +65,18 @@ export default function CityPageWrapper({ city }: { city: CityKey }) {
           <div className="grid gap-4 md:grid-cols-2">
             <ContactInfoCard title={`${data.name} Adres`} icon={MapPin}>
               <div className="text-center space-y-2">
-                <address className="not-italic font-medium text-foreground">
+                <a
+                  href={data.address.mapsLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block not-italic font-medium text-foreground hover:text-primary transition-colors"
+                >
                   {data.address.lines.map((line) => (
                     <span key={line} className="block">
                       {line}
                     </span>
                   ))}
-                </address>
-                <div className="flex justify-center gap-2 flex-wrap">
-                  <Button asChild size="sm" variant="outline">
-                    <a
-                      href={data.address.mapsLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Haritada Aç
-                    </a>
-                  </Button>
-                  <Button asChild size="sm" variant="ghost">
-                    <a
-                      href={data.address.directionsLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Yol Tarifi
-                    </a>
-                  </Button>
-                </div>
+                </a>
               </div>
             </ContactInfoCard>
 
@@ -160,28 +145,25 @@ export default function CityPageWrapper({ city }: { city: CityKey }) {
               <h3 className="text-2xl font-semibold text-gray-900">
                 Ofisten Kareler
               </h3>
-              <p className="text-gray-600">
-                Görseller placeholder olarak eklenmiştir, kısa süre içerisinde
-                güncellenecektir.
-              </p>
             </div>
           </div>
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {data.gallery.map((item) => (
-              <div
+              <a
                 key={item.title}
-                className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm bg-white"
+                href={item.image}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm bg-white block hover:shadow-lg transition"
               >
                 <div
                   className="h-48 bg-cover bg-center"
                   style={{ backgroundImage: `url(${item.image})` }}
-                  aria-label={item.title}
                 />
                 <div className="p-4">
-                  <h4 className="font-semibold text-gray-900">{item.title}</h4>
-                  <p className="text-sm text-gray-600">{item.description}</p>
+                  <p className="text-sm text-gray-600">Görseli büyütmek için tıklayın.</p>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         </Container>

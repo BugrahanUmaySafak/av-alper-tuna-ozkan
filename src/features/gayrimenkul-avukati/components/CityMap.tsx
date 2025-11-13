@@ -16,7 +16,7 @@ export type CityMapProps = {
   mapsLink: string;
 };
 
-export default function CityMap({ coords, title }: CityMapProps) {
+export default function CityMap({ coords, title, mapsLink }: CityMapProps) {
   const mapEl = useRef<HTMLDivElement>(null);
   const mapRef = useRef<LeafletMap | null>(null);
   const markerRef = useRef<LeafletMarker | null>(null);
@@ -90,13 +90,18 @@ export default function CityMap({ coords, title }: CityMapProps) {
 
   return (
     <div className="w-full">
-      <div className="flex flex-wrap items-center justify-between gap-3 pb-4">
-        <div>
-          <p className="text-lg font-semibold text-gray-900">{title}</p>
-          <p className="text-sm text-gray-500">
-            Haritayı yüklemek için tıklayın, Google Maps yeni sekmede açılır.
-          </p>
-        </div>
+      <div className="pb-4">
+        <p className="text-sm text-gray-500">
+          Haritayı yüklemek için tıklayın, Google Maps yeni sekmede açılır.{" "}
+          <a
+            href={mapsLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 underline"
+          >
+            Google Maps bağlantısı
+          </a>
+        </p>
       </div>
 
       <div className="relative z-0 h-96 rounded-xl overflow-hidden border border-gray-200 shadow">
