@@ -228,12 +228,17 @@ export default function CityPageWrapper({ city }: { city: CityKey }) {
                 </div>
               </div>
               <div className="relative flex-1">
-                <button
-                  type="button"
-                  onClick={() => window.open(data.address.mapsLink, "_blank")}
+                <a
+                  href={data.address.mapsLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="absolute inset-0 z-10"
                   aria-label={`${data.name} ofisini haritada aç`}
-                />
+                >
+                  <span className="sr-only">
+                    {data.name} ofisini haritada aç
+                  </span>
+                </a>
                 <iframe
                   src={data.mapEmbed}
                   title={`${data.name} ofis haritası`}
