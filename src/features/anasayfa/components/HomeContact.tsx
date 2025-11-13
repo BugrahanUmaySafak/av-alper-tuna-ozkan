@@ -67,22 +67,12 @@ export default function HomeContact() {
             </p>
 
             <div className="flex flex-wrap justify-center gap-3">
-              <Button
-                asChild
-                variant="secondary"
-                size="lg"
-                className="bg-white/90 text-blue-900 hover:bg-white"
-              >
+              <Button asChild variant="secondary" size="lg">
                 <Link href="/ankara-gayrimenkul-avukati" prefetch={false}>
                   Ankara Ofisi
                 </Link>
               </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="bg-white/20 text-white border-white/50 hover:bg-white hover:text-blue-900"
-              >
+              <Button asChild variant="outline" size="lg">
                 <Link href="/kirikkale-gayrimenkul-avukati" prefetch={false}>
                   Kırıkkale Ofisi
                 </Link>
