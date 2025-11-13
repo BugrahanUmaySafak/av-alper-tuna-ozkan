@@ -9,6 +9,7 @@ import Link from "next/link";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { notFound } from "next/navigation";
 import CityMapClient from "./components/CityMapClient";
+import CityGallery from "./components/CityGallery";
 import ContactInfoCard from "@/features/iletisim/components/ContactInfoCard";
 
 export default function CityPageWrapper({ city }: { city: CityKey }) {
@@ -140,32 +141,12 @@ export default function CityPageWrapper({ city }: { city: CityKey }) {
 
       <Section>
         <Container>
-          <div className="flex items-center justify-between flex-wrap gap-4 mb-6">
-            <div>
-              <h3 className="text-2xl font-semibold text-gray-900">
-                Ofisten Kareler
-              </h3>
-            </div>
+          <div className="flex items-center justify-between flex-wrap gap-4 mb-4">
+            <h3 className="text-2xl font-semibold text-gray-900">
+              Ofisten Kareler
+            </h3>
           </div>
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {data.gallery.map((item) => (
-              <a
-                key={item.title}
-                href={item.image}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm bg-white block hover:shadow-lg transition"
-              >
-                <div
-                  className="h-48 bg-cover bg-center"
-                  style={{ backgroundImage: `url(${item.image})` }}
-                />
-                <div className="p-4">
-                  <p className="text-sm text-gray-600">Görseli büyütmek için tıklayın.</p>
-                </div>
-              </a>
-            ))}
-          </div>
+          <CityGallery items={data.gallery} />
         </Container>
       </Section>
     </>

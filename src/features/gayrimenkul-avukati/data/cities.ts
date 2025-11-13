@@ -2,6 +2,13 @@ import { serviceLocationKeywords } from "@/data/service";
 
 export type CityKey = "ankara" | "kirikkale";
 
+type GalleryItem = {
+  title: string;
+  description: string;
+  image: string;
+  layout?: "square" | "wide" | "tall";
+};
+
 type CityContent = {
   key: CityKey;
   name: string;
@@ -27,7 +34,7 @@ type CityContent = {
   email: string;
   officeHours: string;
   mapEmbed: string;
-  gallery: { title: string; description: string; image: string }[];
+  gallery: GalleryItem[];
 };
 
 const COMMON_PHONE = "+90 (534) 018 19 33";
@@ -94,18 +101,35 @@ export const cityContent: Record<CityKey, CityContent> = {
           "Müvekkilleri karşıladığımız danışma alanının örnek görseli.",
         image:
           "https://images.unsplash.com/photo-1529429617124-aee711a7045d?auto=format&fit=crop&w=900&q=80",
+        layout: "wide",
       },
       {
         title: "Toplantı Odası",
         description: "Kat karşılığı sözleşmelere özel müzakere alanı.",
         image:
           "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=900&q=80",
+        layout: "square",
       },
       {
         title: "Dava Dosyaları",
         description: "Tapu ve kamulaştırma dosyalarının arşiv düzeni.",
         image:
           "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=900&q=80",
+        layout: "tall",
+      },
+      {
+        title: "Ofis Detayı",
+        description: "Ankara ofisinde çalışma alanından bir detay.",
+        image:
+          "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80",
+        layout: "wide",
+      },
+      {
+        title: "Sunum Hazırlığı",
+        description: "Duruşma dosyaları için hazırlık sürecinden kare.",
+        image:
+          "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=900&q=80",
+        layout: "square",
       },
     ],
   },
@@ -160,12 +184,14 @@ export const cityContent: Record<CityKey, CityContent> = {
         description: "Kırıkkale merkezdeki görüşme alanından örnek kare.",
         image:
           "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=80",
+        layout: "square",
       },
       {
         title: "Dosya Hazırlığı",
         description: "Kamulaştırma dosyaları için teknik hazırlık sürecimiz.",
         image:
           "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80",
+        layout: "wide",
       },
       {
         title: "Görüşme Alanı",
@@ -173,6 +199,21 @@ export const cityContent: Record<CityKey, CityContent> = {
           "Tahliye ve kira ihtilaflarında birebir değerlendirme ortamı.",
         image:
           "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=900&q=80",
+        layout: "tall",
+      },
+      {
+        title: "Arşiv",
+        description: "Bölgeye ait gayrimenkul dosyalarının düzeni.",
+        image:
+          "https://images.unsplash.com/photo-1468779036391-52341f60b55d?auto=format&fit=crop&w=900&q=80",
+        layout: "wide",
+      },
+      {
+        title: "Toplantı Notları",
+        description: "Müvekkil toplantılarında kullanılan hazırlık masası.",
+        image:
+          "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80",
+        layout: "square",
       },
     ],
   },
