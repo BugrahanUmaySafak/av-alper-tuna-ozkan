@@ -93,7 +93,8 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
 
   return (
     <Container>
-      <Section>
+      <div id="iletisim-form">
+        <Section>
         <div
           ref={formRef}
           className="rounded-xl shadow-xl overflow-hidden border border-border/50 bg-card h-full"
@@ -226,7 +227,8 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
             </Form>
           </div>
         </div>
-      </Section>
+        </Section>
+      </div>
     </Container>
   );
 }

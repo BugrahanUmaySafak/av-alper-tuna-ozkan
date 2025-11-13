@@ -16,7 +16,7 @@ export type CityMapProps = {
   mapsLink: string;
 };
 
-export default function CityMap({ coords, title, mapsLink }: CityMapProps) {
+export default function CityMap({ coords, title }: CityMapProps) {
   const mapEl = useRef<HTMLDivElement>(null);
   const mapRef = useRef<LeafletMap | null>(null);
   const markerRef = useRef<LeafletMarker | null>(null);
@@ -97,14 +97,6 @@ export default function CityMap({ coords, title, mapsLink }: CityMapProps) {
             Haritayı yüklemek için tıklayın, Google Maps yeni sekmede açılır.
           </p>
         </div>
-        <a
-          href={mapsLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-blue-700"
-        >
-        Google Maps&apos;te Aç
-        </a>
       </div>
 
       <div className="relative z-0 h-96 rounded-xl overflow-hidden border border-gray-200 shadow">

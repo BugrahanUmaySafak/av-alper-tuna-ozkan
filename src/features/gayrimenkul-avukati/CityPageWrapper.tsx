@@ -7,9 +7,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import Link from "next/link";
-import { CheckCircle, MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { notFound } from "next/navigation";
 import CityMapClient from "./components/CityMapClient";
+import ContactInfoCard from "@/features/iletisim/components/ContactInfoCard";
 
 export default function CityPageWrapper({ city }: { city: CityKey }) {
   const data = cityContent[city];
@@ -21,16 +22,11 @@ export default function CityPageWrapper({ city }: { city: CityKey }) {
         title={data.heroTitle}
         description={data.heroDescription}
         extraContent={
-          <div className="flex flex-wrap justify-center gap-3">
-            <Button asChild size="lg">
-              <a href="tel:+905340181933">Telefon: {data.phone}</a>
-            </Button>
-            <Button variant="outline" asChild size="lg">
-              <Link href="/iletisim" prefetch={false}>
-                İletişim Formu
-              </Link>
-            </Button>
-          </div>
+          <Button asChild size="lg">
+            <Link href="/iletisim#iletisim-form" prefetch={false}>
+              İletişim Formu
+            </Link>
+          </Button>
         }
       />
 
@@ -44,19 +40,11 @@ export default function CityPageWrapper({ city }: { city: CityKey }) {
               <p className="text-lg text-gray-700 leading-relaxed">
                 {data.summary}
               </p>
-              <div className="grid grid-cols-2 gap-4">
-                {data.stats.map((stat) => (
-                  <div
-                    key={stat.label}
-                    className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm"
-                  >
-                    <p className="text-3xl font-semibold text-gray-900">
-                      {stat.value}
-                    </p>
-                    <p className="text-sm text-gray-600">{stat.label}</p>
-                  </div>
-                ))}
-              </div>
+              <Button asChild size="lg" variant="outline">
+                <Link href="/faaliyet-alanlarim" prefetch={false}>
+                  Bütün Faaliyet Alanlarım
+                </Link>
+              </Button>
             </div>
             <div className="relative h-[360px] rounded-3xl overflow-hidden shadow-xl border border-gray-100">
               <Image
@@ -75,49 +63,75 @@ export default function CityPageWrapper({ city }: { city: CityKey }) {
 
       <Section>
         <Container>
-          <div className="grid gap-6 lg:grid-cols-[3fr_2fr]">
-            <Card className="p-6 lg:p-8 space-y-5 shadow-lg border-0">
-              <h2 className="text-2xl font-semibold text-gray-900">
-                Şehre Özel Hukuki Çözümler
-              </h2>
-              <p className="text-gray-600">
-                Ankara ve Kırıkkale’deki gayrimenkul uyuşmazlıkları benzer
-                görünse bile, belediye kararları, imar planları ve yatırım
-                dinamikleri tamamen farklıdır. Ekibimiz, yereldeki idarelerin
-                ve mahkemelerin çalışma alışkanlıklarını dikkate alarak dava ve
-                sözleşme stratejileri geliştirir.
-              </p>
-              <ul className="space-y-3">
-                {data.services.map((item) => (
-                  <li key={item} className="flex gap-3 text-gray-800">
-                    <CheckCircle className="h-5 w-5 text-emerald-600 flex-shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </Card>
+          <div className="grid gap-4 md:grid-cols-2">
+            <ContactInfoCard title={`${data.name} Adres`} icon={MapPin}>
+              <div className="text-center space-y-2">
+                <address className="not-italic font-medium text-foreground">
+                  {data.address.lines.map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
+                </address>
+                <div className="flex justify-center gap-2 flex-wrap">
+                  <Button asChild size="sm" variant="outline">
+                    <a
+                      href={data.address.mapsLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Haritada Aç
+                    </a>
+                  </Button>
+                  <Button asChild size="sm" variant="ghost">
+                    <a
+                      href={data.address.directionsLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Yol Tarifi
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </ContactInfoCard>
 
-            <Card className="p-6 lg:p-8 bg-gradient-to-br from-blue-50 to-white shadow-lg border border-blue-100">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                Hızlı Başvuru Adımları
-              </h3>
-              <ol className="space-y-3 text-gray-700 list-decimal list-inside">
-                <li>Dosyanızı ve hedefinizi özetleyen kısa bir mesaj gönderin.</li>
-                <li>
-                  Ön değerlendirme sonrası görüşme veya keşif planlamasını
-                  birlikte belirleyelim.
-                </li>
-                <li>
-                  Tüm süreç boyunca dava, uzlaşma ve sözleşme kararlarını yazılı
-                  olarak raporlayalım.
-                </li>
-              </ol>
-              <Button asChild className="w-full mt-5">
-                <Link href="/iletisim" prefetch={false}>
-                  Ön Görüşme Planla
-                </Link>
-              </Button>
-            </Card>
+            <ContactInfoCard title="Telefon" icon={Phone} iconColor="text-green-600">
+              <div className="text-center pt-2">
+                <a
+                  href={`tel:${data.phone.replace(/\s|\(|\)|-/g, "")}`}
+                  className="inline-flex items-center justify-center hover:text-primary transition-colors duration-200 text-lg md:text-xl font-semibold text-foreground"
+                >
+                  {data.phone}
+                </a>
+              </div>
+            </ContactInfoCard>
+
+            <ContactInfoCard title="E-posta" icon={Mail} iconColor="text-purple-600">
+              <div className="text-center pt-2">
+                <a
+                  href={`mailto:${data.email}`}
+                  className="inline-flex items-center justify-center hover:text-primary transition-colors duration-200 text-base md:text-lg font-semibold text-foreground break-all"
+                >
+                  {data.email}
+                </a>
+              </div>
+            </ContactInfoCard>
+
+            <ContactInfoCard
+              title="Çalışma Saatleri"
+              icon={Clock}
+              iconColor="text-orange-600"
+            >
+              <div className="text-center pt-2 space-y-1">
+                <p className="font-semibold text-foreground text-base md:text-lg">
+                  {data.officeHours}
+                </p>
+                <p className="text-muted-foreground text-xs md:text-sm">
+                  Hafta sonu: Kapalı
+                </p>
+              </div>
+            </ContactInfoCard>
           </div>
         </Container>
       </Section>
@@ -245,30 +259,6 @@ export default function CityPageWrapper({ city }: { city: CityKey }) {
         </Container>
       </Section>
 
-      <Section>
-        <Container>
-          <Card className="p-8 bg-gradient-to-br from-blue-900 to-blue-700 text-white text-center space-y-4">
-            <h3 className="text-2xl font-semibold">
-              Dosyanız için şehir özelinde strateji belirleyelim
-            </h3>
-            <p className="text-blue-100 max-w-2xl mx-auto">
-              Tapu devri, kira, kamulaştırma veya kat karşılığı sözleşme sürecinin
-              hangi aşamasında olursanız olun, belgelerinizi kısa sürede analiz edip
-              riskleri raporlayabiliriz.
-            </p>
-            <div className="flex flex-wrap justify-center gap-3">
-              <Button asChild variant="secondary" size="lg">
-                <a href="tel:+905340181933">Hemen Ara</a>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="text-white border-white/50 hover:bg-white hover:text-blue-900">
-                <Link href="/iletisim" prefetch={false}>
-                  Dosya Gönder
-                </Link>
-              </Button>
-            </div>
-          </Card>
-        </Container>
-      </Section>
     </>
   );
 }

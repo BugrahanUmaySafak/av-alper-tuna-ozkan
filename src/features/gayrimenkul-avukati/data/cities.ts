@@ -50,14 +50,14 @@ export const cityContent: Record<CityKey, CityContent> = {
     heroDescription:
       "Başkentteki gayrimenkul yatırımlarınızı sözleşmeden tahliye sürecine kadar uçtan uca yöneten hukuk ekibi.",
     heroHighlight:
-      "Çankaya ve çevresindeki yüksek hacimli tapu, kira ve kamulaştırma dosyalarında 360° hukuki danışmanlık.",
+      "Ankara'da gayrimenkul hukukuna dair dosyalarınızda 360° hukuki danışmanlık.",
     heroImage: "/alpertunaozkan-homePage-contact.webp",
     metaTitle: "Ankara Gayrimenkul Avukatı | Özkan Hukuk",
     metaDescription:
       "Ankara’da tapu iptal ve tescil, kira artışı, kamulaştırma ve kat karşılığı inşaat sözleşmelerinde uzman gayrimenkul avukatı desteği alın.",
     keywords: ankaraKeywords,
     summary:
-      "Ankara’da emlak yatırımları, ticari kiralamalar ve büyük ölçekli dönüşüm projeleri için mahkeme ve müzakere süreçlerini aynı anda yöneten disiplinli bir ekip.",
+      "Ankara'da gayrimenkul hukuku, miras hukuku, kira hukuku, inşaat hukuku, Kamulaştırma ve İmar Hukuku alanlarındaki bütün alanlarda sizlere tam profesyonel hizmet veriyoz.",
     stats: [
       { label: "Bölgesel Deneyim", value: "12+ yıl" },
       { label: "Gayrimenkul Dosyası", value: "650+ " },
@@ -117,14 +117,14 @@ export const cityContent: Record<CityKey, CityContent> = {
     heroDescription:
       "Kırıkkale’de konut, sanayi ve tarım arazilerine ilişkin ihtilaflarda hızlı çözüm odaklı gayrimenkul avukatlığı.",
     heroHighlight:
-      "Merkez ve çevre ilçelerdeki kamulaştırmasız el atma, kira ve miras kaynaklı davalarda yerel çözüm ortaklığı.",
+      "Kırıkkale'de gayrimenkul hukukuna dair dosyalarınızda 360° hukuki danışmanlık.",
     heroImage: "/alpertunaozkan-homePage-contact.webp",
     metaTitle: "Kırıkkale Gayrimenkul Avukatı | Özkan Hukuk",
     metaDescription:
       "Kırıkkale’de miras paylaşımı, kira uyuşmazlıkları, kat karşılığı sözleşmeler ve kamulaştırma davaları için uzman gayrimenkul avukatı desteği.",
     keywords: kirikkaleKeywords,
     summary:
-      "Kırıkkale’nin fabrika bölgeleri ve yeni konut projelerinde doğan tüm tapu, kira ve miras ihtilaflarını yerinde takip ediyoruz.",
+      "Kırıkkale'de gayrimenkul hukuku, miras hukuku, kira hukuku, inşaat hukuku, Kamulaştırma ve İmar Hukuku alanlarındaki bütün alanlarda sizlere tam profesyonel hizmet veriyoz.",
     stats: [
       { label: "Bölgedeki Dosya Sayısı", value: "480+" },
       { label: "Kamulaştırma Uyuşmazlığı", value: "90+" },
