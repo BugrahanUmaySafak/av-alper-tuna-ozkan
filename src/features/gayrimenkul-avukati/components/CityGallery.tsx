@@ -1,3 +1,7 @@
+// ============================================================================
+// Galeri – a11y iyileştirmeleri (aria-label)
+// ============================================================================
+
 "use client";
 
 import { useState, useCallback } from "react";
@@ -59,6 +63,7 @@ export default function CityGallery({ items }: { items: GalleryItem[] }) {
             className={`group relative overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm hover:shadow-lg transition ${sizeClass(
               item.layout
             )}`}
+            aria-label={`${item.title} görselini aç`}
           >
             <span className="sr-only">{item.title}</span>
             <div

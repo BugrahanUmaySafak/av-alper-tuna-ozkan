@@ -1,3 +1,7 @@
+// ============================================================================
+// UI – küçük metin düzeltmeleri ve a11y geliştirmeleri
+// ============================================================================
+
 import { cityContent, CityKey } from "./data/cities";
 import PageHeader from "@/components/page-header/PageHeader";
 import Section from "@/components/section/Section";
@@ -23,7 +27,11 @@ export default function CityPageWrapper({ city }: { city: CityKey }) {
         description={data.heroDescription}
         extraContent={
           <Button asChild size="lg">
-            <Link href="/iletisim#iletisim-form" prefetch={false}>
+            <Link
+              href="/iletisim#iletisim-form"
+              prefetch={false}
+              aria-label="İletişim formuna git"
+            >
               İletişim Formu
             </Link>
           </Button>
@@ -41,7 +49,11 @@ export default function CityPageWrapper({ city }: { city: CityKey }) {
                 {data.summary}
               </p>
               <Button asChild size="lg" variant="outline">
-                <Link href="/faaliyet-alanlarim" prefetch={false}>
+                <Link
+                  href="/faaliyet-alanlarim"
+                  prefetch={false}
+                  aria-label="Faaliyet alanlarını görüntüle"
+                >
                   Bütün Faaliyet Alanlarım
                 </Link>
               </Button>
@@ -49,7 +61,7 @@ export default function CityPageWrapper({ city }: { city: CityKey }) {
             <div className="relative h-[360px] rounded-3xl overflow-hidden shadow-xl border border-gray-100">
               <Image
                 src={data.heroImage}
-                alt={`${data.name} gayrimenkul hukuku`}
+                alt={`${data.name} gayrimenkul hukuku ofisi`}
                 fill
                 priority
                 sizes="(max-width: 768px) 100vw, 45vw"

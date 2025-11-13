@@ -1,3 +1,7 @@
+// ============================================================================
+// SEO config + buildMetadata + (YENİ) organizationJsonLd (tarafsız Organization)
+// ============================================================================
+
 import type { Metadata } from "next";
 import { serviceLocationKeywords } from "@/data/service";
 
@@ -28,7 +32,7 @@ export const seoConfig = {
     height: 1080,
     alt: "Özkan Hukuk & Danışmanlık",
   },
-};
+} as const;
 
 export type BuildMetadataOptions = {
   title?: string;
@@ -60,9 +64,11 @@ export function buildMetadata({
   noIndex = false,
 }: BuildMetadataOptions = {}): Metadata {
   const canonical = absoluteUrl(path);
+
+  // keywords'i daha derli toplu tutalım (ilk 20 özgün anahtar kelime)
   const mergedKeywords = Array.from(
     new Set([...seoConfig.baseKeywords, ...keywords])
-  );
+  ).slice(0, 20);
 
   const resolvedImages = (images ?? [seoConfig.defaultOgImage]).map((img) => ({
     ...img,
@@ -100,44 +106,27 @@ export function buildMetadata({
   };
 }
 
+// ============================================================================
+// Global Organization JSON-LD (tarafsız): adres/NAP içermez, çakışma yaratmaz
+// Şehir sayfalarında LocalBusiness/LegalService JSON-LD NAP sinyallerini verir.
+// ============================================================================
+
 export const organizationJsonLd = {
   "@context": "https://schema.org",
-  "@type": "LegalService",
+  "@type": "Organization", // Kurum düzeyi; NAP yok (adres şehir sayfalarına ait)
   name: seoConfig.siteName,
-  image: absoluteUrl(seoConfig.defaultOgImage.url),
   url: seoConfig.siteUrl,
-  priceRange: "$$",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Fabrikalar Mah. Ulubatlı Hasan Cad. No:22",
-    addressLocality: "Kırıkkale",
-    addressRegion: "Kırıkkale",
-    postalCode: "71100",
-    addressCountry: "TR",
-  },
-  areaServed: [
-    { "@type": "City", name: "Kırıkkale" },
-    { "@type": "City", name: "Ankara" },
-  ],
-  telephone: "+903188151010",
+  logo: absoluteUrl("/logo/logo.svg"),
+  image: absoluteUrl(seoConfig.defaultOgImage.url),
   sameAs: [
     "https://www.instagram.com/alpertunaozkan",
     "https://www.youtube.com/@alpertunaozkan",
   ],
-  makesOffer: [
-    {
-      "@type": "Offer",
-      itemOffered: {
-        "@type": "Service",
-        name: "Kırıkkale gayrimenkul avukatı hizmeti",
-      },
-    },
-    {
-      "@type": "Offer",
-      itemOffered: {
-        "@type": "Service",
-        name: "Ankara gayrimenkul avukatı hizmeti",
-      },
-    },
-  ],
-};
+  // İsterseniz iletişim için tarafsız bir contactPoint ekleyebilirsiniz:
+  // "contactPoint": [{
+  //   "@type": "ContactPoint",
+  //   "contactType": "customer service",
+  //   "email": "av.alpertunaozkan@gmail.com",
+  //   "availableLanguage": ["tr"]
+  // }]
+} as const;

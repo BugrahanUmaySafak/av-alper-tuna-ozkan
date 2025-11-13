@@ -1,15 +1,19 @@
+// ============================================================================
+// Şehir içerikleri – yazım düzeltmeleri, Türkçe küçük harf normalize
+// ============================================================================
+
 import { serviceLocationKeywords } from "@/data/service";
 
 export type CityKey = "ankara" | "kirikkale";
 
-type GalleryItem = {
+export type GalleryItem = {
   title: string;
   description: string;
   image: string;
   layout?: "square" | "wide" | "tall";
 };
 
-type CityContent = {
+export type CityContent = {
   key: CityKey;
   name: string;
   slug: string;
@@ -37,15 +41,16 @@ type CityContent = {
   gallery: GalleryItem[];
 };
 
-const COMMON_PHONE = "+90 (534) 018 19 33";
+const COMMON_PHONE = "+90 (534) 018 19 33"; // UI
 const COMMON_EMAIL = "av.alpertunaozkan@gmail.com";
 const COMMON_HOURS = "Pazartesi - Cuma 09:00 - 18:00";
 
+const trLower = (s: string) => s.toLocaleLowerCase("tr-TR");
 const ankaraKeywords = serviceLocationKeywords.filter((k) =>
-  k.toLowerCase().includes("ankara")
+  trLower(k).includes("ankara")
 );
 const kirikkaleKeywords = serviceLocationKeywords.filter((k) =>
-  k.toLowerCase().includes("kırıkkale")
+  trLower(k).includes("kırıkkale")
 );
 
 export const cityContent: Record<CityKey, CityContent> = {
@@ -61,13 +66,13 @@ export const cityContent: Record<CityKey, CityContent> = {
     heroImage: "/alpertunaozkan-homePage-contact.webp",
     metaTitle: "Ankara Gayrimenkul Avukatı",
     metaDescription:
-      "Ankara’da tapu iptal ve tescil, kira artışı, kamulaştırma ve kat karşılığı inşaat sözleşmelerinde uzman gayrimenkul avukatı desteği alın.",
+      "Ankara’da tapu iptal ve tescil, kira uyarlama–tahliye, kamulaştırma ve kat karşılığı inşaat sözleşmelerinde uzman avukat desteği alın.",
     keywords: ankaraKeywords,
     summary:
-      "Ankara'da gayrimenkul hukuku, miras hukuku, kira hukuku, inşaat hukuku, Kamulaştırma ve İmar Hukuku alanlarındaki bütün alanlarda sizlere tam profesyonel hizmet veriyoz.",
+      "Ankara'da gayrimenkul hukuku, miras hukuku, kira hukuku, inşaat hukuku, kamulaştırma ve imar hukuku alanlarında tam profesyonel hizmet veriyoruz.",
     stats: [
       { label: "Bölgesel Deneyim", value: "12+ yıl" },
-      { label: "Gayrimenkul Dosyası", value: "650+ " },
+      { label: "Gayrimenkul Dosyası", value: "650+" },
       { label: "Kat Karşılığı Proje", value: "45" },
     ],
     services: [
@@ -80,8 +85,7 @@ export const cityContent: Record<CityKey, CityContent> = {
     address: {
       title: "Ankara Ofis",
       lines: [
-        "Aşağı Öveçler Mahallesi 1328. Cadde",
-        "Demirağ Apartmanı No: 14/8",
+        "Aşağı Öveçler Mah. 1328. Cad. Demirağ Apt. No:14/8",
         "Çankaya / Ankara",
       ],
       mapsLink:
@@ -148,7 +152,7 @@ export const cityContent: Record<CityKey, CityContent> = {
       "Kırıkkale’de miras paylaşımı, kira uyuşmazlıkları, kat karşılığı sözleşmeler ve kamulaştırma davaları için uzman gayrimenkul avukatı desteği.",
     keywords: kirikkaleKeywords,
     summary:
-      "Kırıkkale'de gayrimenkul hukuku, miras hukuku, kira hukuku, inşaat hukuku, Kamulaştırma ve İmar Hukuku alanlarındaki bütün alanlarda sizlere tam profesyonel hizmet veriyoz.",
+      "Kırıkkale'de gayrimenkul hukuku, miras hukuku, kira hukuku, inşaat hukuku, kamulaştırma ve imar hukuku alanlarında tam profesyonel hizmet veriyoruz.",
     stats: [
       { label: "Bölgedeki Dosya Sayısı", value: "480+" },
       { label: "Kamulaştırma Uyuşmazlığı", value: "90+" },
@@ -164,8 +168,7 @@ export const cityContent: Record<CityKey, CityContent> = {
     address: {
       title: "Kırıkkale Ofis",
       lines: [
-        "Yaylacık Mahallesi Ulubatlıhasan Caddesi",
-        "Aydınlık Apartmanı No: 22/9",
+        "Yaylacık Mah. Ulubatlı Hasan Cad. Aydınlık Apt. No:22/9",
         "Merkez / Kırıkkale",
       ],
       mapsLink:
