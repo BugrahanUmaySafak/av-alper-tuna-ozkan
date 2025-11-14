@@ -20,7 +20,6 @@ export default function ContactDetails() {
           "Çankaya / Ankara",
         ]}
         mapsLink="https://www.google.com/maps/search/?api=1&query=Aşağı+Öveçler+Mahallesi+1328.+Cadde+Demirağ+Apt.+No:+14/8+Çankaya+ANKARA"
-        directionsLink="https://www.google.com/maps/dir/?api=1&destination=39.894828,32.840317"
       />
 
       <AddressCard
@@ -31,7 +30,6 @@ export default function ContactDetails() {
           "Merkez / Kırıkkale",
         ]}
         mapsLink="https://www.google.com/maps/place/Avukat+Alper+Tuna+Özkan/@39.8406944,33.4994228,17z/data=!3m1!4b1"
-        directionsLink="https://www.google.com/maps/dir/?api=1&destination=39.8413091,33.5002971"
       />
 
       <ContactInfoCard title="Telefon" icon={Phone} iconColor="text-green-600">
