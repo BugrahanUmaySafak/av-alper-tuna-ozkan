@@ -10,6 +10,7 @@ type AddressCardProps = {
 export default function AddressCard({
   title,
   lines,
+  mapsLink,
 }: AddressCardProps) {
   return (
     <ContactInfoCard title={title} icon={MapPin}>
