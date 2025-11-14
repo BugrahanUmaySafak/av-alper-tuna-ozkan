@@ -1,14 +1,37 @@
-import HomePageWrapper from "@/features/anasayfa/containers/HomaPageWrapper";
-import { buildMetadata } from "@/config/seo";
-import { serviceLocationKeywords } from "@/data/service";
+import type { Metadata } from "next";
+import HomePageWrapper from "@/features/anasayfa/containers/HomaPageWrapper"; // düzeltme: Homa -> Home
 
-export const metadata = buildMetadata({
-  title: "Kırıkkale ve Ankara Gayrimenkul Avukatı",
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.alpertunaozkan.com";
+
+export const metadata: Metadata = {
+  title: "Avukat Alper Tuna Özkan",
   description:
-    "Avukat Alper Tuna Özkan, Kırıkkale ve Ankara’da gayrimenkul hukuku, tapu iptali, inşaat sözleşmeleri, kira uyuşmazlıkları ve kamulaştırma davalarında uzman gayrimenkul avukatlığı hizmeti sunar.",
-  path: "/",
-  keywords: [...serviceLocationKeywords],
-});
+    "Ankara ve İç Anadolu’da gayrimenkul hukuku odağında danışmanlık ve dava takibi. Tapu, kira, inşaat sözleşmeleri ve kamulaştırma konuları hakkında bilgi alın.",
+  alternates: { canonical: `${SITE_URL}/` },
+  openGraph: {
+    type: "website",
+    url: `${SITE_URL}/`,
+    title: "Avukat Alper Tuna Özkan | Özkan Hukuk & Danışmanlık",
+    description: "Gayrimenkul hukuku odağında danışmanlık ve dava hizmetleri.",
+    images: [
+      {
+        url: `${SITE_URL}/og/og-default.jpg`,
+        width: 1200,
+        height: 630,
+        alt: "Özkan Hukuk & Danışmanlık",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Avukat Alper Tuna Özkan | Gayrimenkul Hukuku",
+    description: "Gayrimenkul hukuku odağında danışmanlık ve dava hizmetleri.",
+    images: [`${SITE_URL}/og/og-default.jpg`],
+    site: "@alpertunaozkan",
+    creator: "@alpertunaozkan",
+  },
+};
 
 export default function Anasayfa() {
   return <HomePageWrapper />;

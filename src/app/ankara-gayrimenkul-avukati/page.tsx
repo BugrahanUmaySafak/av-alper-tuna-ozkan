@@ -1,14 +1,18 @@
+import type { Metadata } from "next";
 import HomePageWrapper from "@/features/anasayfa/containers/HomaPageWrapper";
-import { buildMetadata } from "@/config/seo";
 
-export const metadata = buildMetadata({
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.alpertunaozkan.com";
+
+export const metadata: Metadata = {
   title: "Ankara Gayrimenkul Avukatı | Özkan Hukuk",
   description:
     "Ankara’da tapu iptal ve tescil, kira uyuşmazlıkları, kamulaştırma ve kat karşılığı inşaat sözleşmelerinde uzman gayrimenkul avukatı desteği alın.",
-  path: "/ankara-gayrimenkul-avukati",
   keywords: ["Ankara gayrimenkul avukatı"],
-  type: "article",
-});
+  alternates: {
+    canonical: `${SITE_URL}/ankara-gayrimenkul-avukati`,
+  },
+};
 
 export default function Page() {
   return <HomePageWrapper />;

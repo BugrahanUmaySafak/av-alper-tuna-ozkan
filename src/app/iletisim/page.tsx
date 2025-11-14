@@ -1,23 +1,60 @@
+import type { Metadata } from "next";
 import ContactWrapper from "@/features/iletisim/containers/ContactWrapper";
-import { buildMetadata } from "@/config/seo";
-import { serviceLocationKeywords } from "@/data/service";
 
-export const metadata = buildMetadata({
-  title: "İletişim",
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.alpertunaozkan.com";
+const PAGE_URL = `${SITE_URL}/iletisim`;
+
+export const metadata: Metadata = {
+  title: "İletişim | Özkan Hukuk",
   description:
-    "Kırıkkale ve Ankara gayrimenkul avukatı olarak tapu, kira, inşaat ve kamulaştırma uyuşmazlıkları için randevu ve danışmanlık talep edin.",
-  path: "/iletisim",
-  keywords: [
-    "gayrimenkul avukatı iletişim",
-    "hukuki danışmanlık randevusu",
-    ...serviceLocationKeywords,
-  ],
-});
+    "Randevu ve danışmanlık talepleriniz için iletişim bilgileri. Ofis başvuru kanalları ve çalışma saatleri.",
+  alternates: { canonical: PAGE_URL },
+  openGraph: {
+    type: "website",
+    url: PAGE_URL,
+    title: "İletişim | Özkan Hukuk",
+    description: "İletişim kanalları ve çalışma saatleri.",
+    images: [
+      { url: `${SITE_URL}/og/og-contact.jpg`, width: 1200, height: 630 },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "İletişim | Özkan Hukuk",
+    description: "İletişim kanalları ve çalışma saatleri.",
+    images: [`${SITE_URL}/og/og-contact.jpg`],
+  },
+};
 
-// SSG + bfcache dostu
 export const revalidate = 900;
 export const dynamic = "force-static";
 
 export default function Iletisim() {
-  return <ContactWrapper />;
+  const contactJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${SITE_URL}/#org`,
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "customer service",
+        telephone: "+903188151010",
+        availableLanguage: ["tr"],
+        areaServed: "TR",
+      },
+    ],
+    url: PAGE_URL,
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactJsonLd) }}
+      />
+      <ContactWrapper />
+    </>
+  );
 }

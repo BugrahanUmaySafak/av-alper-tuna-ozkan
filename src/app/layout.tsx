@@ -6,7 +6,6 @@ import IletisimLazy from "@/components/contact/ContactLazy";
 import FooterLazy from "@/components/footer/FooterLazy";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "next-themes";
-import { buildMetadata, organizationJsonLd, seoConfig } from "@/config/seo";
 import PageTransition from "@/components/shared/PageTransition";
 
 const inter = Inter({
@@ -15,16 +14,35 @@ const inter = Inter({
   display: "swap",
 });
 
-const baseMetadata = buildMetadata({ path: "/" });
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.alpertunaozkan.com";
+
+// ---- GLOBAL: Organization JSON-LD (yalın) ----
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": `${SITE_URL}/#org`,
+  name: "Özkan Hukuk & Danışmanlık",
+  url: SITE_URL,
+  logo: { "@type": "ImageObject", url: `${SITE_URL}/logo/logo.png` },
+  sameAs: [
+    "https://www.instagram.com/alpertunaozkan",
+    "https://www.youtube.com/@alpertunaozkan",
+  ],
+};
+
+const DEFAULT_TITLE = "Özkan Hukuk & Danışmanlık";
+const DEFAULT_DESCRIPTION =
+  "Ankara ve İç Anadolu’da gayrimenkul hukuku odağında danışmanlık ve dava takibi. Tapu, kira, inşaat sözleşmeleri ve kamulaştırma konuları hakkında bilgi alın.";
 
 export const metadata: Metadata = {
-  ...baseMetadata,
-  metadataBase: new URL(seoConfig.siteUrl),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: seoConfig.defaultTitle,
-    template: `%s | ${seoConfig.shortName}`,
+    default: DEFAULT_TITLE,
+    template: "%s | Özkan Hukuk & Danışmanlık",
   },
-  applicationName: seoConfig.siteName,
+  description: DEFAULT_DESCRIPTION,
+  applicationName: "Özkan Hukuk & Danışmanlık",
   manifest: "/site.webmanifest",
   category: "legal",
   icons: {

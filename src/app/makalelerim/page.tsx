@@ -1,33 +1,68 @@
+import type { Metadata } from "next";
 import ArticlesWrapper from "@/features/makalelerim/containers/ArticlesWrapper";
 import { getArticles } from "@/features/makalelerim/actions/articles";
-import { buildMetadata } from "@/config/seo";
+import type { Article } from "@/features/makalelerim/types";
 
-export async function generateMetadata() {
-  const articles = await getArticles();
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.alpertunaozkan.com";
+const PAGE_URL = `${SITE_URL}/makalelerim`;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const articles: Article[] = await getArticles();
   const summaryText = articles
-    .map((article) => article.summary || article.title)
+    .map((a) => a.summary || a.title)
     .filter(Boolean)
     .slice(0, 3)
     .join(" · ");
-  const keywordPool = Array.from(
-    new Set(
-      articles
-        .flatMap((article) => article.keywords || [])
-        .concat(["makale", "hukuk makalesi"])
-    )
-  ).slice(0, 10);
 
-  return buildMetadata({
+  return {
     title: "Gayrimenkul Hukuku Makaleleri",
-    description:
-      summaryText ||
-      "Kırıkkale ve Ankara gayrimenkul avukatı tarafından hazırlanan güncel hukuki makaleleri okuyun.",
-    path: "/makalelerim",
-    keywords: keywordPool,
-  });
+    description: summaryText || "Gayrimenkul hukuku üzerine güncel makaleler.",
+    alternates: { canonical: PAGE_URL },
+    openGraph: {
+      type: "website",
+      url: PAGE_URL,
+      title: "Gayrimenkul Hukuku Makaleleri",
+      description: summaryText || "Güncel makaleler.",
+      images: [
+        { url: `${SITE_URL}/og/og-articles.jpg`, width: 1200, height: 630 },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Gayrimenkul Hukuku Makaleleri",
+      description: summaryText || "Güncel makaleler.",
+      images: [`${SITE_URL}/og/og-articles.jpg`],
+    },
+  };
 }
 
 export default async function Makalelerim() {
-  const items = await getArticles();
-  return <ArticlesWrapper initialItems={items} />;
+  const items: Article[] = await getArticles();
+
+  const itemListJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: items.map((a, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      url: `${SITE_URL}/makalelerim/${a.slug}`,
+      item: {
+        "@type": "Article",
+        "@id": `${SITE_URL}/makalelerim/${a.slug}#article`,
+        headline: a.title,
+      },
+    })),
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+      />
+      <ArticlesWrapper initialItems={items} />
+    </>
+  );
 }

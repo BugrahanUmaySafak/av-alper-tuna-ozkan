@@ -1,4 +1,3 @@
-// src/app/makalelerim/[slug]/page.tsx
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import ArticleDetailWrapper from "@/features/makalelerim/containers/ArticleDetailWrapper";
@@ -6,7 +5,7 @@ import {
   getArticleBySlug,
   getArticles,
 } from "@/features/makalelerim/actions/articles";
-import { absoluteUrl, buildMetadata } from "@/config/seo";
+import type { Article as ArticleType } from "@/features/makalelerim/types";
 
 type ParamsPromise = Promise<{ slug: string }>;
 
@@ -19,7 +18,7 @@ function normalizeSpaces(s: string) {
 function clampDescription(input?: string, max = 155) {
   if (!input) return undefined;
   const s = normalizeSpaces(input);
-  if (s.length <= max) return s; 
+  if (s.length <= max) return s;
   const cut = s.slice(0, max - 1);
   const i = cut.lastIndexOf(" ");
   return (i > 120 ? cut.slice(0, i) : cut) + "…";
@@ -31,7 +30,7 @@ function minutesToISO(minutes?: number) {
 /* ---------- SSG ---------- */
 export async function generateStaticParams() {
   try {
-    const articles = await getArticles();
+    const articles: ArticleType[] = await getArticles();
     return articles.map((article) => ({ slug: article.slug }));
   } catch (error) {
     console.warn("[makalelerim][slug] Failed to prebuild articles:", error);
@@ -40,21 +39,26 @@ export async function generateStaticParams() {
 }
 
 /* ---------- Metadata ---------- */
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.alpertunaozkan.com";
+const absoluteUrl = (path: string) => new URL(path, SITE_URL).toString();
+
 export async function generateMetadata({
   params,
 }: {
   params: ParamsPromise;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const article = await getArticleBySlug(slug);
+  const article: ArticleType | null = await getArticleBySlug(slug);
 
   if (!article) {
-    return buildMetadata({
+    const canonical = absoluteUrl(`/makalelerim/${slug}`);
+    return {
       title: "Makale Bulunamadı",
       description: "Aradığınız makale yayından kaldırılmış olabilir.",
-      path: `/makalelerim/${slug}`,
-      noIndex: true,
-    });
+      alternates: { canonical },
+      robots: { index: false, follow: false },
+    };
   }
 
   const { title, image, createdAt, updatedAt, summary } = article;
@@ -62,34 +66,43 @@ export async function generateMetadata({
   const path = `/makalelerim/${slug}`;
   const url = absoluteUrl(path);
 
-  // buildMetadata: keywords gönderilmez; meta keywords kaldırıldı.
-  const base = buildMetadata({
-    title,
-    description,
-    path,
-    type: "article",
-    images: image?.url
-      ? [{ url: image.url, width: 1200, height: 630, alt: image.alt || title }]
-      : undefined,
-  });
-
   return {
-    ...base,
-    alternates: { canonical: url, languages: { tr: url } },
+    title,
+    description: description || title,
+    alternates: { canonical: url },
     robots: { index: true, follow: true },
     openGraph: {
-      ...base.openGraph,
       type: "article",
       url,
       publishedTime: createdAt,
       modifiedTime: updatedAt ?? createdAt,
-      // OG tags alanına keywords/tags eklenmiyor
+      title,
+      description: description || title,
+      images: image?.url
+        ? [
+            {
+              url: absoluteUrl(image.url),
+              width: 1200,
+              height: 630,
+              alt: image.alt || title,
+            },
+          ]
+        : [
+            {
+              url: absoluteUrl("/og/og-articles.jpg"),
+              width: 1200,
+              height: 630,
+              alt: title,
+            },
+          ],
     },
     twitter: {
       card: "summary_large_image",
-      title: (base.title as string) || title,
-      description: description,
-      images: image?.url ? [image.url] : undefined,
+      title,
+      description: description || title,
+      images: image?.url
+        ? [absoluteUrl(image.url)]
+        : [absoluteUrl("/og/og-articles.jpg")],
       site: "@alpertunaozkan",
       creator: "@alpertunaozkan",
     },
@@ -99,11 +112,10 @@ export async function generateMetadata({
 /* ---------- Page ---------- */
 export default async function SlugPage({ params }: { params: ParamsPromise }) {
   const { slug } = await params;
-  const article = await getArticleBySlug(slug);
+  const article: ArticleType | null = await getArticleBySlug(slug);
   if (!article) notFound();
 
   const canonicalUrl = absoluteUrl(`/makalelerim/${slug}`);
-
   const estimatedWordCount = article.content
     ? article.content
         .replace(/<[^>]+>/g, " ")
@@ -114,6 +126,7 @@ export default async function SlugPage({ params }: { params: ParamsPromise }) {
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
+    "@id": `${canonicalUrl}#article`,
     headline: article.title,
     description: clampDescription(article.summary || article.title),
     image: article.image?.url ? [absoluteUrl(article.image.url)] : undefined,
@@ -121,14 +134,15 @@ export default async function SlugPage({ params }: { params: ParamsPromise }) {
     dateModified: article.updatedAt ?? article.createdAt,
     url: canonicalUrl,
     mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },
-    author: [{ "@type": "Person", name: "Alper Tuna Özkan" }],
-    publisher: {
-      "@type": "Organization",
-      name: "Özkan Hukuk & Danışmanlık",
-      logo: { "@type": "ImageObject", url: absoluteUrl("/logo/logo.png") },
-    },
+    author: [
+      {
+        "@type": "Person",
+        name: "Alper Tuna Özkan",
+        url: absoluteUrl("/hakkimda"),
+      },
+    ],
+    publisher: { "@type": "Organization", "@id": `${SITE_URL}/#org` },
     articleSection: article.category?.name,
-    // keywords kaldırıldı
     wordCount: estimatedWordCount,
     timeRequired: minutesToISO(article.readingMinutes),
   };

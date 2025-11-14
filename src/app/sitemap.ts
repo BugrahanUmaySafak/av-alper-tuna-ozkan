@@ -1,11 +1,13 @@
 import type { MetadataRoute } from "next";
-import { absoluteUrl } from "@/config/seo";
 import { getArticles } from "@/features/makalelerim/actions/articles";
 
 export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date(); // Date veya ISO string kabul edilir
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.alpertunaozkan.com";
+  const absoluteUrl = (path: string) => new URL(path, siteUrl).toString();
 
   const staticPages: MetadataRoute.Sitemap = [
     { path: "/", priority: 1 },
