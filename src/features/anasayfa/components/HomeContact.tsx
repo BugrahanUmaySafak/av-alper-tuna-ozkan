@@ -62,22 +62,9 @@ export default function HomeContact() {
               </Button>
             </div>
 
-            <p className="text-sm text-blue-100 mb-6">
+            <p className="text-sm text-blue-100">
               Mesai saatleri: Pazartesi - Cuma 09:00 - 18:00
             </p>
-
-            <div className="flex flex-wrap justify-center gap-3">
-              <Button asChild variant="secondary" size="lg">
-                <Link href="/ankara-gayrimenkul-avukati" prefetch={false}>
-                  Ankara Ofisi
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg">
-                <Link href="/kirikkale-gayrimenkul-avukati" prefetch={false}>
-                  Kırıkkale Ofisi
-                </Link>
-              </Button>
-            </div>
           </div>
         </Card>
       </Container>
