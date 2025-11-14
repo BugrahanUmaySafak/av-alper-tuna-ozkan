@@ -94,139 +94,139 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
   return (
     <Container>
       <div id="iletisim-form">
-        <Section className="py-12 lg:py-16">
-        <div
-          ref={formRef}
-          className="rounded-xl shadow-xl overflow-hidden border border-border/50 bg-card h-full"
-        >
-          <div className="bg-primary/10 text-primary font-medium text-center py-3 border-b border-border/50 px-2">
-            Hukuki sorularınız için formu doldurun, kısa sürede dönüş yapalım.
-          </div>
+        <Section>
+          <div
+            ref={formRef}
+            className="rounded-xl shadow-xl overflow-hidden border border-border/50 bg-card h-full"
+          >
+            <div className="bg-primary/10 text-primary font-medium text-center py-3 border-b border-border/50 px-2">
+              Hukuki sorularınız için formu doldurun, kısa sürede dönüş yapalım.
+            </div>
 
-          <div className="p-8 lg:p-10">
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit, onInvalid)}
-                className="space-y-6"
-                noValidate
-              >
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-sm font-semibold text-foreground">
-                        Adınız Soyadınız *
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          className={`${invalidOverride} h-11 bg-background/50`}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-sm font-semibold text-foreground">
-                          E-posta
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            type="email"
-                            {...field}
-                            className={`${invalidOverride} h-11 bg-background/50`}
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="phone"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-sm font-semibold text-foreground">
-                          Telefon
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            type="tel"
-                            {...field}
-                            className={`${invalidOverride} h-11 bg-background/50`}
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                </div>
-
-                <FormField
-                  control={form.control}
-                  name="title"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-sm font-semibold text-foreground">
-                        Konu *
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          className={`${invalidOverride} h-11 bg-background/50`}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="content"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-sm font-semibold text-foreground">
-                        Mesajınız *
-                      </FormLabel>
-                      <FormControl>
-                        <Textarea
-                          rows={6}
-                          {...field}
-                          className={`${invalidOverride} bg-background/50 resize-none`}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-
-                <Button
-                  variant="default"
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full h-12 gap-2 text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+            <div className="p-8 lg:p-10">
+              <Form {...form}>
+                <form
+                  onSubmit={form.handleSubmit(onSubmit, onInvalid)}
+                  className="space-y-6"
+                  noValidate
                 >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="h-5 w-5 animate-spin" />
-                      Gönderiliyor...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="h-5 w-5" />
-                      Mesajı Gönder
-                    </>
-                  )}
-                </Button>
-              </form>
-            </Form>
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-semibold text-foreground">
+                          Adınız Soyadınız *
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            className={`${invalidOverride} h-11 bg-background/50`}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sm font-semibold text-foreground">
+                            E-posta
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              type="email"
+                              {...field}
+                              className={`${invalidOverride} h-11 bg-background/50`}
+                            />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="phone"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sm font-semibold text-foreground">
+                            Telefon
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              type="tel"
+                              {...field}
+                              className={`${invalidOverride} h-11 bg-background/50`}
+                            />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <FormField
+                    control={form.control}
+                    name="title"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-semibold text-foreground">
+                          Konu *
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            className={`${invalidOverride} h-11 bg-background/50`}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="content"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-semibold text-foreground">
+                          Mesajınız *
+                        </FormLabel>
+                        <FormControl>
+                          <Textarea
+                            rows={6}
+                            {...field}
+                            className={`${invalidOverride} bg-background/50 resize-none`}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+
+                  <Button
+                    variant="default"
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full h-12 gap-2 text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="h-5 w-5 animate-spin" />
+                        Gönderiliyor...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="h-5 w-5" />
+                        Mesajı Gönder
+                      </>
+                    )}
+                  </Button>
+                </form>
+              </Form>
+            </div>
           </div>
-        </div>
         </Section>
       </div>
     </Container>

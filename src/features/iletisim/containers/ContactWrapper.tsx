@@ -3,7 +3,7 @@ import Container from "@/components/container/Container";
 import Section from "@/components/section/Section";
 import ContactForm from "../components/ContactForm";
 import ContactDetails from "../components/ContactDetails";
-import CityContactCTA from "../components/CityContactCTA";
+import ContactMapClient from "../components/ContactMapClient";
 
 export default function ContactWrapper() {
   return (
@@ -15,15 +15,11 @@ export default function ContactWrapper() {
 
       <Section>
         <Container>
-          <CityContactCTA />
-        </Container>
-      </Section>
-
-      <Section>
-        <Container>
           <ContactDetails />
         </Container>
       </Section>
+
+      <ContactMapClient />
 
       <ContactForm />
     </>
