@@ -4,6 +4,7 @@ import Container from "@/components/container/Container";
 import ServicesPreview from "@/features/anasayfa/components/ServicesPreview";
 import InformativeContentWrapper from "@/components/shared/InformativeContentWrapper";
 import HomeContact from "@/features/anasayfa/components/HomeContact";
+import LocationsPromo from "../components/LocationsPromo";
 
 export default function HomePageWrapper() {
   return (
@@ -11,6 +12,8 @@ export default function HomePageWrapper() {
       <HeroSlider />
 
       <ServicesPreview />
+
+      <LocationsPromo />
 
       <Container>
         <Separator />

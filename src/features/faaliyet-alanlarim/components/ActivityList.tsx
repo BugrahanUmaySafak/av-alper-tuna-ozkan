@@ -3,6 +3,9 @@ import Container from "@/components/container/Container";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import Section from "@/components/section/Section";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ankaraLocation, kirikkaleLocation } from "@/data/locations";
 
 function slugify(str: string) {
   return str
@@ -23,12 +26,25 @@ export default function ActivityList() {
       <Container className="mx-auto w-full">
         <div className="flex flex-wrap justify-center gap-6">
           {services.map((service) => {
-            const Icon = service.icon;
             const id = slugify(service.title);
+            const Icon = service.icon;
+            const cityLinks = [
+              {
+                href: ankaraLocation.slug,
+                label: "Ankara Gayrimenkul Avukatı",
+                aria: `Ankara Gayrimenkul Avukatı - ${service.title}`,
+              },
+              {
+                href: kirikkaleLocation.slug,
+                label: "Kırıkkale Gayrimenkul Avukatı",
+                aria: `Kırıkkale Gayrimenkul Avukatı - ${service.title}`,
+              },
+            ];
 
             return (
               <article
                 key={id}
+                id={id}
                 aria-labelledby={`${id}-title`}
                 className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
               >
@@ -58,6 +74,25 @@ export default function ActivityList() {
                         </li>
                       ))}
                     </ul>
+
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {cityLinks.map((city) => (
+                        <Link
+                          key={city.href}
+                          href={city.href}
+                          prefetch={false}
+                          className="text-sm px-3 py-1.5 rounded-full border border-blue-200 text-blue-700 hover:border-blue-500 hover:text-blue-800 transition"
+                          aria-label={city.aria}
+                        >
+                          {city.label}
+                        </Link>
+                      ))}
+                      <Button asChild variant="outline" className="ml-auto">
+                        <Link href="/iletisim" prefetch={false}>
+                          İletişim
+                        </Link>
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
               </article>
