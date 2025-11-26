@@ -1,10 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import Section from "@/components/section/Section";
 import Container from "@/components/container/Container";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MapPin } from "lucide-react";
 import { kirikkaleLocation } from "@/data/locations";
@@ -12,87 +10,96 @@ import { kirikkaleLocation } from "@/data/locations";
 const LOCATIONS = [kirikkaleLocation];
 
 export default function LocationsPromo() {
+  const loc = LOCATIONS[0];
+  const teaser = loc.intro.split(/(?<=\.)\s+/)[0] ?? loc.intro;
+
   return (
     <Section>
       <Container>
         <div className="text-center mb-8">
-          <Badge className="mb-3">Hizmet Bölgeleri</Badge>
           <h2
             id="hizmet-bolgeleri"
             className="text-2xl md:text-3xl font-semibold text-gray-900"
           >
             Kırıkkale Odaklı Gayrimenkul Hukuku
           </h2>
-          <p className="mt-2 text-gray-600">
-            Şehrinize özel süreç, evrak ve yol haritası için Kırıkkale açılış
-            sayfasına gidin.
-          </p>
         </div>
 
-        <div
-          className={`grid gap-6 ${
-            LOCATIONS.length > 1 ? "md:grid-cols-2" : "md:grid-cols-1"
-          }`}
-          role="list"
+        <article
+          role="listitem"
           aria-labelledby="hizmet-bolgeleri"
+          className="group relative overflow-hidden rounded-3xl border border-gray-200 bg-gradient-to-br from-slate-50 via-white to-white shadow-sm"
         >
-          {LOCATIONS.map((loc, index) => {
-            const teaser =
-              loc.intro.split(/(?<=\.)\s+/)[0] ?? loc.intro;
-            return (
-            <article
-              key={loc.slug}
-              role="listitem"
-              className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm"
-            >
-              <div className="relative h-56 sm:h-64">
-                <Image
-                  src={loc.heroImage}
-                  alt={loc.heroAlt}
-                  fill
-                  sizes="(max-width:768px) 100vw, 50vw"
-                  className="object-cover"
-                  loading={index === 0 ? "eager" : "lazy"}
-                  priority={index === 0}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" />
+          <div className="absolute -top-16 -right-16 h-48 w-48 bg-blue-100 rounded-full blur-3xl opacity-60" />
+          <div className="absolute -bottom-10 -left-12 h-40 w-40 bg-amber-100 rounded-full blur-3xl opacity-60" />
+
+          <div className="relative p-6 sm:p-8 lg:p-10 grid gap-8 lg:grid-cols-[1.6fr_1fr] items-start">
+            <div className="space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-100">
+                <MapPin className="h-4 w-4" aria-hidden />
+                <span>{loc.city} ve çevresi</span>
               </div>
 
-              <div className="p-5 sm:p-6">
-                <div className="flex items-center gap-2 text-gray-600 text-sm mb-2">
-                  <MapPin className="h-4 w-4" aria-hidden />
-                  <span>{loc.city}</span>
-                </div>
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
+                {loc.city} Gayrimenkul Avukatı
+              </h3>
 
-                {/* SEO-dostu, tam eşleşen anchor */}
-                <h3 className="text-xl font-semibold text-gray-900">
-                  <Link
-                    href={loc.slug}
-                    prefetch={false}
-                    className="hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 rounded"
-                    aria-label={`${loc.city} sayfasını aç (${loc.city} Gayrimenkul Avukatı)`}
+              <p className="text-gray-700 text-base leading-relaxed">
+                {teaser}
+              </p>
+
+              <div className="flex flex-wrap gap-2">
+                {loc.services.slice(0, 4).map((s) => (
+                  <span
+                    key={s.title}
+                    className="text-xs px-3 py-2 rounded-full bg-white border border-gray-200 text-gray-800 shadow-sm"
                   >
-                    {loc.city} Gayrimenkul Avukatı
-                  </Link>
-                </h3>
-
-                <p className="mt-2 text-gray-700 text-sm leading-relaxed line-clamp-3">
-                  {teaser}
-                </p>
-
-                <div className="mt-4">
-                  <Button asChild className="group/btn">
-                    <Link href={loc.slug} prefetch={false}>
-                      Detayları Gör
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-0.5" />
-                    </Link>
-                  </Button>
-                </div>
+                    {s.title}
+                  </span>
+                ))}
               </div>
-            </article>
-          );
-          })}
-        </div>
+
+              <div className="flex flex-wrap gap-3 items-center">
+                <Button asChild className="group/btn">
+                  <Link href={loc.slug} prefetch={false}>
+                    Detayları Gör
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-0.5" />
+                  </Link>
+                </Button>
+                <Link
+                  href="/iletisim"
+                  prefetch={false}
+                  className="text-sm font-semibold text-blue-700 hover:text-blue-800"
+                >
+                  İletişim ve randevu
+                </Link>
+              </div>
+            </div>
+
+            <div className="relative">
+              <div className="rounded-2xl border border-gray-200 bg-white shadow-sm p-6 space-y-4">
+                <p className="text-sm font-semibold text-gray-600">
+                  Kırıkkale’de neler yapıyoruz?
+                </p>
+                <ul className="space-y-3 text-sm text-gray-800">
+                  {loc.process.slice(0, 3).map((step) => (
+                    <li key={step.title} className="flex gap-2">
+                      <span className="mt-[6px] h-2 w-2 rounded-full bg-blue-600 inline-block" />
+                      <div>
+                        <p className="font-semibold text-gray-900">
+                          {step.title}
+                        </p>
+                        <p className="text-gray-700 leading-relaxed">
+                          {step.description}
+                        </p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
       </Container>
     </Section>
   );

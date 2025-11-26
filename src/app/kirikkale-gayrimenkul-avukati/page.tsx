@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import LocationLanding from "@/features/locations/LocationLanding";
 import { kirikkaleLocation } from "@/data/locations";
+import PageHeader from "@/components/page-header/PageHeader";
 
 const locationData = kirikkaleLocation;
 
@@ -53,6 +54,8 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function Page() {
   const heroImageAbsolute = toAbsoluteUrl(locationData.heroImage);
   const mapPlaceAbsolute = toAbsoluteUrl(locationData.mapPlaceUrl);
+  const headerDescription =
+    "Kamulaştırma, kira, miras paylaşımı ve kat karşılığı projelerde Kırıkkale’deki yerel dinamiklere uygun hukuki yol haritası.";
 
   const legalServiceJsonLd = {
     "@context": "https://schema.org",
@@ -144,7 +147,11 @@ export default function Page() {
         suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
-      <LocationLanding location={locationData} />
+      <PageHeader
+        title="Kırıkkale Gayrimenkul Avukatı"
+        description={headerDescription}
+      />
+      <LocationLanding location={locationData} showTitle={false} />
     </>
   );
 }

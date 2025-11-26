@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import Section from "@/components/section/Section";
 import Container from "@/components/container/Container";
 import { Button } from "@/components/ui/button";
@@ -27,28 +26,33 @@ export default function CityLinks() {
           {items.map((loc) => (
             <Card
               key={loc.slug}
-              className="overflow-hidden border border-gray-200"
+              className="border border-gray-200 bg-gradient-to-br from-slate-50 via-white to-white shadow-sm"
             >
-              <div className="relative h-44">
-                <Image
-                  src={loc.heroImage}
-                  alt={loc.heroAlt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  priority={false}
-                />
-              </div>
-              <CardContent className="p-5">
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <CardContent className="p-5 sm:p-6 space-y-3">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-100">
+                  <span className="text-sm font-semibold">
+                    {loc.city} Odaklı Hizmet
+                  </span>
+                </div>
+
+                <h3 className="text-xl font-semibold text-gray-900">
                   {loc.city} Gayrimenkul Avukatı
                 </h3>
 
-                <ul className="text-sm text-gray-700 mb-4 list-disc pl-5">
-                  {loc.services.slice(0, 3).map((s) => (
-                    <li key={s.title}>{s.title}</li>
+                <p className="text-gray-700 text-sm leading-relaxed">
+                  {loc.intro.split(/(?<=\.)\s+/)[0] ?? loc.intro}
+                </p>
+
+                <div className="flex flex-wrap gap-2">
+                  {loc.services.slice(0, 4).map((s) => (
+                    <span
+                      key={s.title}
+                      className="text-xs px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-800 shadow-sm"
+                    >
+                      {s.title}
+                    </span>
                   ))}
-                </ul>
+                </div>
 
                 <Button asChild>
                   <Link
@@ -56,7 +60,7 @@ export default function CityLinks() {
                     prefetch={false}
                     aria-label={`${loc.city} Gayrimenkul Avukatı sayfasına git`}
                   >
-                    {loc.city} Gayrimenkul Avukatı
+                    {loc.city} sayfasına git
                   </Link>
                 </Button>
               </CardContent>
