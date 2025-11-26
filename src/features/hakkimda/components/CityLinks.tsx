@@ -6,10 +6,10 @@ import Section from "@/components/section/Section";
 import Container from "@/components/container/Container";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ankaraLocation, kirikkaleLocation } from "@/data/locations";
+import { kirikkaleLocation } from "@/data/locations";
 
 export default function CityLinks() {
-  const items = [ankaraLocation, kirikkaleLocation];
+  const items = [kirikkaleLocation];
 
   return (
     <Section className="bg-gradient-to-br from-gray-50 to-white">
@@ -19,11 +19,11 @@ export default function CityLinks() {
             Şehir Bazlı Hizmetler
           </h2>
           <p className="text-gray-600 mt-2">
-            Ankara ve Kırıkkale için odaklı gayrimenkul hukuku sayfalarımız.
+            Kırıkkale için odaklı gayrimenkul hukuku sayfamız.
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-1">
           {items.map((loc) => (
             <Card
               key={loc.slug}

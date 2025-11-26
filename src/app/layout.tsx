@@ -33,7 +33,7 @@ const organizationJsonLd = {
 
 const DEFAULT_TITLE = "Özkan Hukuk & Danışmanlık";
 const DEFAULT_DESCRIPTION =
-  "Ankara ve İç Anadolu’da gayrimenkul hukuku odağında danışmanlık ve dava takibi. Tapu, kira, inşaat sözleşmeleri ve kamulaştırma konuları hakkında bilgi alın.";
+  "Kırıkkale'de gayrimenkul hukuku odağında danışmanlık ve dava takibi. Tapu, kira, inşaat sözleşmeleri ve kamulaştırma konuları hakkında bilgi alın.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import Section from "@/components/section/Section";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ankaraLocation, kirikkaleLocation } from "@/data/locations";
+import { kirikkaleLocation } from "@/data/locations";
 
 function slugify(str: string) {
   return str
@@ -29,11 +29,6 @@ export default function ActivityList() {
             const id = slugify(service.title);
             const Icon = service.icon;
             const cityLinks = [
-              {
-                href: ankaraLocation.slug,
-                label: "Ankara Gayrimenkul Avukatı",
-                aria: `Ankara Gayrimenkul Avukatı - ${service.title}`,
-              },
               {
                 href: kirikkaleLocation.slug,
                 label: "Kırıkkale Gayrimenkul Avukatı",

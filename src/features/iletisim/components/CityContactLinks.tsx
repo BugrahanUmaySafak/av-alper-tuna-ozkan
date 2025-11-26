@@ -5,10 +5,10 @@ import Section from "@/components/section/Section";
 import Container from "@/components/container/Container";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ankaraLocation, kirikkaleLocation } from "@/data/locations";
+import { kirikkaleLocation } from "@/data/locations";
 
 export default function CityContactLinks() {
-  const items = [ankaraLocation, kirikkaleLocation];
+  const items = [kirikkaleLocation];
 
   return (
     <Section className="bg-gradient-to-br from-gray-50 to-white">
@@ -18,11 +18,11 @@ export default function CityContactLinks() {
             Şehir Bazlı Hizmet Sayfaları
           </h2>
           <p className="text-gray-600 mt-2">
-            Bölgenize özel süreç, SSS ve yol haritası için ilgili sayfaya geçin.
+            Bölgenize özel süreç, SSS ve yol haritası için sayfaya geçin.
           </p>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-4 md:grid-cols-1">
           {items.map((loc) => (
             <Card key={loc.slug} className="border border-gray-200">
               <CardContent className="p-5">

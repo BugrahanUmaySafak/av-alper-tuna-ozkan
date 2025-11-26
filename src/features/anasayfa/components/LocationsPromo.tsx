@@ -7,9 +7,9 @@ import Container from "@/components/container/Container";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MapPin } from "lucide-react";
-import { ankaraLocation, kirikkaleLocation } from "@/data/locations";
+import { kirikkaleLocation } from "@/data/locations";
 
-const LOCATIONS = [ankaraLocation, kirikkaleLocation];
+const LOCATIONS = [kirikkaleLocation];
 
 export default function LocationsPromo() {
   return (
@@ -21,16 +21,18 @@ export default function LocationsPromo() {
             id="hizmet-bolgeleri"
             className="text-2xl md:text-3xl font-semibold text-gray-900"
           >
-            Ankara ve Kırıkkale Odaklı Gayrimenkul Hukuku
+            Kırıkkale Odaklı Gayrimenkul Hukuku
           </h2>
           <p className="mt-2 text-gray-600">
-            Şehrinize özel süreç, evrak ve yol haritası için ilgili açılış
+            Şehrinize özel süreç, evrak ve yol haritası için Kırıkkale açılış
             sayfasına gidin.
           </p>
         </div>
 
         <div
-          className="grid gap-6 md:grid-cols-2"
+          className={`grid gap-6 ${
+            LOCATIONS.length > 1 ? "md:grid-cols-2" : "md:grid-cols-1"
+          }`}
           role="list"
           aria-labelledby="hizmet-bolgeleri"
         >

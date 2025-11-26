@@ -5,17 +5,12 @@ import type { Map as LeafletMap, Marker as LeafletMarker } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import Section from "@/components/section/Section";
 import Container from "@/components/container/Container";
-import { Button } from "@/components/ui/button";
 
-type LocationKey = "ankara" | "kirikkale";
 type Coords = [number, number];
 
-const LOCATIONS: Record<LocationKey, { center: Coords; title: string }> = {
-  ankara: { center: [39.9208, 32.8541], title: "Ankara Ofis" },
-  kirikkale: {
-    center: [39.8413024, 33.4980931],
-    title: "DEVA Avukatlık & Danışmanlık (Kırıkkale)",
-  },
+const LOCATION: { center: Coords; title: string } = {
+  center: [39.8413024, 33.4980931],
+  title: "DEVA Avukatlık & Danışmanlık (Kırıkkale)",
 };
 
 const ICON_URL = {
@@ -30,7 +25,6 @@ export default function ContactMap() {
   const markerRef = useRef<LeafletMarker | null>(null);
   const leafletRef = useRef<typeof import("leaflet") | null>(null);
 
-  const [key, setKey] = useState<LocationKey>("ankara");
   const [isLoading, setIsLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
@@ -53,9 +47,8 @@ export default function ContactMap() {
 
     try {
       const L = await ensureLeaflet();
-      const initial = LOCATIONS[key];
 
-      const map = L.map(mapEl.current, { center: initial.center, zoom: 15 });
+      const map = L.map(mapEl.current, { center: LOCATION.center, zoom: 15 });
       mapRef.current = map;
 
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -74,10 +67,10 @@ export default function ContactMap() {
         shadowSize: [41, 41],
       });
 
-      markerRef.current = L.marker(initial.center, { icon }).addTo(map);
-      const [lat, lng] = initial.center;
+      markerRef.current = L.marker(LOCATION.center, { icon }).addTo(map);
+      const [lat, lng] = LOCATION.center;
       markerRef.current.bindPopup(
-        `<b>${initial.title}</b><br><a href="https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}" target="_blank" rel="noopener noreferrer">Yol Tarifi Al</a>`
+        `<b>${LOCATION.title}</b><br><a href="https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}" target="_blank" rel="noopener noreferrer">Yol Tarifi Al</a>`
       );
 
       requestAnimationFrame(() => {
@@ -89,37 +82,6 @@ export default function ContactMap() {
       console.error("Harita yüklenemedi:", e);
       setIsLoading(false);
     }
-  }
-
-  async function handleLocationChange(next: LocationKey) {
-    setKey(next);
-    if (!mapRef.current) return;
-
-    const L = leafletRef.current!;
-    const loc = LOCATIONS[next];
-    mapRef.current.setView(loc.center, 15, { animate: true });
-
-    const icon = new L.Icon({
-      iconUrl: ICON_URL.icon,
-      iconRetinaUrl: ICON_URL.icon2x,
-      shadowUrl: ICON_URL.shadow,
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41],
-    });
-
-    if (!markerRef.current) {
-      markerRef.current = L.marker(loc.center, { icon }).addTo(mapRef.current);
-    } else {
-      markerRef.current.setLatLng(loc.center);
-      markerRef.current.setIcon(icon);
-    }
-
-    const [lat, lng] = loc.center;
-    markerRef.current.bindPopup(
-      `<b>${loc.title}</b><br><a href="https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}" target="_blank" rel="noopener noreferrer">Yol Tarifi Al</a>`
-    );
   }
 
   // temizle
@@ -137,36 +99,15 @@ export default function ContactMap() {
     <Section>
       <Container>
         <div className="flex items-center gap-2 pb-4">
-          <Button
-            variant="outline"
-            aria-pressed={key === "ankara"}
-            className={
-              key === "ankara"
-                ? "bg-blue-600 text-white border-blue-600 hover:bg-blue-700"
-                : ""
-            }
-            onClick={() => handleLocationChange("ankara")}
-          >
-            Ankara
-          </Button>
-          <Button
-            variant="outline"
-            aria-pressed={key === "kirikkale"}
-            className={
-              key === "kirikkale"
-                ? "bg-blue-600 text-white border-blue-600 hover:bg-blue-700"
-                : ""
-            }
-            onClick={() => handleLocationChange("kirikkale")}
-          >
-            Kırıkkale
-          </Button>
+          <h2 className="text-xl font-semibold text-gray-900">
+            Kırıkkale Ofis Haritası
+          </h2>
         </div>
 
         <div className="relative z-0 h-96 rounded-xl overflow-hidden shadow-md border border-gray-200">
-          <h2 id="map-title" className="sr-only">
+          <h3 id="map-title" className="sr-only">
             Harita
-          </h2>
+          </h3>
 
           <div
             ref={mapEl}

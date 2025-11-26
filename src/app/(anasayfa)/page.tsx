@@ -7,7 +7,7 @@ const SITE_URL =
 export const metadata: Metadata = {
   title: "Avukat Alper Tuna Özkan",
   description:
-    "Ankara ve İç Anadolu’da gayrimenkul hukuku odağında danışmanlık ve dava takibi. Tapu, kira, inşaat sözleşmeleri ve kamulaştırma konuları hakkında bilgi alın.",
+    "Kırıkkale'de gayrimenkul hukuku odağında danışmanlık ve dava takibi. Tapu, kira, inşaat sözleşmeleri ve kamulaştırma konuları hakkında bilgi alın.",
   alternates: { canonical: `${SITE_URL}/` },
   openGraph: {
     type: "website",

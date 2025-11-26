@@ -13,16 +13,6 @@ export default function ContactDetails() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
       <AddressCard
-        title="Ankara Adres"
-        lines={[
-          "Aşağı Öveçler Mahallesi 1328. Cadde",
-          "Demirağ Apartmanı, No: 14/8",
-          "Çankaya / Ankara",
-        ]}
-        mapsLink="https://www.google.com/maps/search/?api=1&query=Aşağı+Öveçler+Mahallesi+1328.+Cadde+Demirağ+Apt.+No:+14/8+Çankaya+ANKARA"
-      />
-
-      <AddressCard
         title="Kırıkkale Adres"
         lines={[
           "Yaylacık Mahallesi Ulubatlıhasan Caddesi",

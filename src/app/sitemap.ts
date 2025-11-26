@@ -16,7 +16,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/hakkimda", priority: 0.8 },
     { path: "/videolarim", priority: 0.8 },
     { path: "/iletisim", priority: 0.8 },
-    { path: "/ankara-gayrimenkul-avukati", priority: 0.9 },
     { path: "/kirikkale-gayrimenkul-avukati", priority: 0.9 },
   ].map(({ path, priority }) => ({
     url: absoluteUrl(path),

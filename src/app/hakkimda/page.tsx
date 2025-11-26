@@ -8,7 +8,7 @@ const PAGE_URL = `${SITE_URL}/hakkimda`;
 export const metadata: Metadata = {
   title: "Avukat Alper Tuna Özkan | Hakkımda",
   description:
-    "Kırıkkale doğumlu Av. Alper Tuna Özkan; Ankara ve İç Anadolu’da gayrimenkul, inşaat ve kira uyuşmazlıklarında danışmanlık sağlar.",
+    "Kırıkkale doğumlu Av. Alper Tuna Özkan; Kırıkkale'de gayrimenkul, inşaat ve kira uyuşmazlıklarında danışmanlık sağlar.",
   alternates: { canonical: PAGE_URL },
   openGraph: {
     type: "profile",

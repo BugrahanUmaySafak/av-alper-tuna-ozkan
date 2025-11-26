@@ -35,152 +35,6 @@ export type LocationLandingData = {
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.alpertunaozkan.com";
 
-export const ankaraLocation: LocationLandingData = {
-  slug: "/ankara-gayrimenkul-avukati",
-  city: "Ankara",
-  title: "Ankara Gayrimenkul Avukatı – Özkan Hukuk & Danışmanlık",
-  heroImage: "/alpertunaozkan-homePage-contact.webp",
-  heroAlt: "Ankara kent silueti ve hukuki danışmanlık ofisi",
-  intro:
-    "Konut ve ticari gayrimenkul yatırımlarının yoğun olduğu Ankara’da tapu iptal ve tescil davalarından kira uyarlama taleplerine, kamulaştırma bedel artırımlarından kat karşılığı inşaat sözleşmelerine kadar uzanan süreçleri aynı çatı altında yönetiyoruz. Bu sayfa, başkentte yer alan projeleriniz ve ihtiyaçlarınız için hangi adımları izlemeniz gerektiğini, hangi belgelerin kritik olduğunu ve her aşamada nasıl bir yol haritası çizdiğimizi anlatır.",
-  ogImage: "/og/ankara.jpg",
-  ogAlt: "Ankara ofisinin danışma alanı",
-  pageUrl: `${SITE_URL}/ankara-gayrimenkul-avukati`,
-  services: [
-    {
-      title: "Tapu İptal ve Tescil",
-      description:
-        "Çankaya ve Yenimahalle’de tapu devri sonrası ortaya çıkan muvazaa iddiaları, vekâlet kötüye kullanımı veya paylı mülkiyet ihtilaflarında delil toplama ve bilirkişi sürecini planlarız.",
-    },
-    {
-      title: "Kira Uyarlama ve Tahliye",
-      description:
-        "Kurumsal plaza kiralamalarında TÜFE sınırı, tahliye taahhüdü, ihtiyaç nedeniyle boşaltma ve tahliye taahhüdü davalarını Ankara Sulh Hukuk Mahkemeleri pratiğine göre yönetiriz.",
-    },
-    {
-      title: "Kat Karşılığı İnşaat",
-      description:
-        "Kat karşılığı sözleşme taslakları, yüklenicinin temerrüdü, eksik iş tespitleri ve teminat mektuplarının kullanımı gibi konuları projeye özel planlarız.",
-    },
-    {
-      title: "Kamulaştırma ve Bedel Artırımı",
-      description:
-        "Ankara’daki hızlı kamulaştırma kararlarında bilirkişi raporlarının denetlenmesi, Emsal değerlerin toplanması ve bedel artırım davaları için keşif planları hazırlarız.",
-    },
-    {
-      title: "Ecrimisil ve Haksız İşgal",
-      description:
-        "Ortaklığa konu taşınmazlarda uzun süreli işgallerde ecrimisil hesabı ve tahsil stratejileri geliştirir, tahliye ile birlikte yürütürüz.",
-    },
-    {
-      title: "Şufa ve Ortaklığın Giderilmesi",
-      description:
-        "Paydaşlardan birinin satış yapması veya elbirliği mülkiyetinin paylı mülkiyete çevrilmesi gereken durumlarda açılması gereken davaları koordine ederiz.",
-    },
-  ],
-  process: [
-    {
-      title: "Ön Değerlendirme",
-      description:
-        "İhtilafa konu taşınmaz, sözleşme veya kira ilişkisine ait mevcut belgeleri inceler, eksikleri listeleriz.",
-    },
-    {
-      title: "Belge ve Delil Toplama",
-      description:
-        "Tapu kayıtları, ekspertiz raporları, kira ödeme dekontları, keşif dosyaları ve belediye yazışmalarını temin ederiz.",
-    },
-    {
-      title: "Müzakere / Arabuluculuk",
-      description:
-        "Kira ve kat karşılığı uyuşmazlıklarda zorunlu arabuluculuk süreçlerini organize ederek anlaşma zeminini test ederiz.",
-    },
-    {
-      title: "Dava Takibi",
-      description:
-        "Görevli mahkemede dava açar, bilirkişi incelemelerini takip eder, tanık ve uzman görüşlerini dosyaya kazandırırız.",
-    },
-    {
-      title: "Karar Sonrası İzleme",
-      description:
-        "Karar kesinleştikten sonra tapu işlemleri, tahliye, icra veya bedel tahsili adımlarını tamamlayıp dosyayı kapatırız.",
-    },
-  ],
-  faqs: [
-    {
-      question: "Ankara’da kira tespit davası açmadan önce hangi belgeler gerekir?",
-      answer:
-        "Mevcut kira sözleşmesi, ödendi belgeleri ve bağımsız bölüm tapu kaydı gerekir; taraflar arabuluculuk sürecini tamamladıktan sonra dava açılabilir.",
-    },
-    {
-      question: "Kat karşılığı sözleşmede teslim gecikirse hangi haklar doğar?",
-      answer:
-        "Sözleşmedeki cezai şart ve gecikme hükümleri uygulanır; arsa sahibinin tescil talebi ve fesih hakkı durumun ağırlığına göre değerlendirilir.",
-    },
-    {
-      question: "Kamulaştırma bedeline itiraz süresi ne kadardır?",
-      answer:
-        "Bedel tebliğinden itibaren 30 gün içinde itiraz davası açılmalıdır; süre geçerse karar kesinleşir.",
-    },
-    {
-      question: "Tahliye taahhüdü noter onaylı olmak zorunda mı?",
-      answer:
-        "Yazılı ve tarihli olması yeterlidir; noter onayı ispat kolaylığı sağlar ancak zorunlu değildir.",
-    },
-    {
-      question: "Ecrimisil davasında geçmişe dönük kaç yıl talep edilir?",
-      answer:
-        "Genelde 5 yıllık zamanaşımı uygulanır; her yıl için ayrı hesaplama yapılır ve faiz talep edilebilir.",
-    },
-  ],
-  addressLines: [
-    "Aşağı Öveçler Mahallesi 1328. Cadde",
-    "Demirağ Apartmanı No: 14/8",
-    "Çankaya / Ankara",
-    "06800",
-  ],
-  address: {
-    street: "Aşağı Öveçler Mah. 1328. Cad. Demirağ Apt. No:14/8",
-    district: "Çankaya",
-    city: "Ankara",
-    postalCode: "06800",
-    country: "TR",
-  },
-  phone: "+905340181933",
-  phoneDisplay: "+90 (534) 018 19 33",
-  email: "av.alpertunaozkan@gmail.com",
-  workingHours: "Pazartesi – Cuma 09:00 – 18:00",
-  mapEmbed: "https://www.google.com/maps?q=39.894828,32.840317&z=16&output=embed",
-  mapLink:
-    "https://www.google.com/maps/search/?api=1&query=Aşağı+Öveçler+Mahallesi+1328.+Cadde+Demirağ+Apt.+No:+14/8+Çankaya+ANKARA",
-  directionsLink:
-    "https://www.google.com/maps/dir/?api=1&destination=39.894828,32.840317",
-  mapPlaceUrl:
-    "https://www.google.com/maps/place/Aşağı+Öveçler+Mahallesi+1328.+Cadde+Demirağ+Apt.+No:14%2F8+Çankaya+ANKARA",
-  geo: { lat: 39.894828, lng: 32.840317 },
-  supportingLinks: [
-    {
-      href: "/faaliyet-alanlarim",
-      label: "Faaliyet Alanları",
-      description: "Tapu, kira, kamulaştırma ve inşaat uyuşmazlıklarına dair tüm hizmetlerimiz.",
-    },
-    {
-      href: "/makalelerim",
-      label: "Güncel Makaleler",
-      description: "Gayrimenkul hukukuna dair makaleler ve karar özetleri.",
-    },
-    {
-      href: "/videolarim",
-      label: "Video Kütüphanesi",
-      description: "Kira artışından kamulaştırmaya kadar kısa anlatımlar.",
-    },
-  ],
-  crossLink: {
-    href: "/kirikkale-gayrimenkul-avukati",
-    label: "Kırıkkale Gayrimenkul Avukatı",
-    description: "Kırıkkale’de yürüttüğümüz taşınmaz ve kamulaştırma dosyalarını inceleyin.",
-  },
-};
-
 export const kirikkaleLocation: LocationLandingData = {
   slug: "/kirikkale-gayrimenkul-avukati",
   city: "Kırıkkale",
@@ -319,13 +173,12 @@ export const kirikkaleLocation: LocationLandingData = {
     },
   ],
   crossLink: {
-    href: "/ankara-gayrimenkul-avukati",
-    label: "Ankara Gayrimenkul Avukatı",
-    description: "Başkentte yürütülen tapu ve kira süreçleri hakkında bilgi alın.",
+    href: "/iletisim",
+    label: "İletişim ve Randevu",
+    description: "Kırıkkale ofisiyle görüşmek için iletişim formunu kullanın veya arayın.",
   },
 };
 
 export const locationPages = {
-  ankara: ankaraLocation,
   kirikkale: kirikkaleLocation,
 };
