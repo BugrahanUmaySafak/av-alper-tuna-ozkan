@@ -5,10 +5,22 @@ import Section from "@/components/section/Section";
 import Container from "@/components/container/Container";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { kirikkaleLocation } from "@/data/locations";
 
 export default function CityLinks() {
-  const items = [kirikkaleLocation];
+  const items = [
+    {
+      city: "Kırıkkale",
+      slug: "/kirikkale-gayrimenkul-avukati",
+      intro:
+        "Fabrikalar Mahallesi ve çevre ilçelerde yürütülen kamulaştırma, miras paylaşımı, kira ve kat karşılığı inşaat projelerinde yerel dinamikleri yakından takip ediyoruz. Bu açılış sayfası, Kırıkkale’de taşınmaz süreciyle karşılaşan kişiler için hangi hukuki başvuruların gündeme geldiğini, hangi belgelerin toplanması gerektiğini ve nasıl bir yol haritası izlediğimizi özetler.",
+      services: [
+        { title: "Kamulaştırma ve Bedel Artırımı" },
+        { title: "Kamulaştırmasız El Atma" },
+        { title: "Miras Paylaşımı ve Muris Muvazaası" },
+        { title: "Kira ve Tahliye Uyuşmazlıkları" },
+      ],
+    },
+  ];
 
   return (
     <Section className="bg-gradient-to-br from-gray-50 to-white">

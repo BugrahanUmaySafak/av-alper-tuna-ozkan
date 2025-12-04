@@ -5,7 +5,40 @@ import Container from "@/components/container/Container";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Phone, MapPin } from "lucide-react";
-import type { LocationLandingData } from "@/data/locations";
+
+export type LocationLandingData = {
+  slug: string;
+  city: string;
+  title: string;
+  heroImage: string;
+  heroAlt: string;
+  intro: string;
+  ogImage: string;
+  ogAlt: string;
+  pageUrl: string;
+  services: { title: string; description: string }[];
+  process: { title: string; description: string }[];
+  faqs: { question: string; answer: string }[];
+  addressLines: string[];
+  address: {
+    street: string;
+    district?: string;
+    city: string;
+    postalCode?: string;
+    country: string;
+  };
+  phone: string;
+  phoneDisplay: string;
+  email?: string;
+  workingHours: string;
+  mapEmbed: string;
+  mapLink: string;
+  directionsLink: string;
+  mapPlaceUrl: string;
+  geo: { lat: number; lng: number };
+  supportingLinks: { href: string; label: string; description: string }[];
+  crossLink: { href: string; label: string; description: string };
+};
 
 const slugify = (str: string) =>
   str

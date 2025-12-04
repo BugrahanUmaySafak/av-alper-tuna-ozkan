@@ -5,7 +5,6 @@ import { Separator } from "@/components/ui/separator";
 import Section from "@/components/section/Section";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { kirikkaleLocation } from "@/data/locations";
 
 function slugify(str: string) {
   return str
@@ -30,7 +29,7 @@ export default function ActivityList() {
             const Icon = service.icon;
             const cityLinks = [
               {
-                href: kirikkaleLocation.slug,
+                href: "/kirikkale-gayrimenkul-avukati",
                 label: "Kırıkkale Gayrimenkul Avukatı",
                 aria: `Kırıkkale Gayrimenkul Avukatı - ${service.title}`,
               },

@@ -5,12 +5,15 @@ import Section from "@/components/section/Section";
 import Container from "@/components/container/Container";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MapPin } from "lucide-react";
-import { kirikkaleLocation } from "@/data/locations";
-
-const LOCATIONS = [kirikkaleLocation];
+import { locationPromoData } from "@/data/LocationServices";
 
 export default function LocationsPromo() {
-  const loc = LOCATIONS[0];
+  const loc = {
+    city: "Kırıkkale",
+    intro: locationPromoData.teaser,
+    services: locationPromoData.services,
+    process: locationPromoData.process,
+  };
   const teaser = loc.intro.split(/(?<=\.)\s+/)[0] ?? loc.intro;
 
   return (
@@ -37,11 +40,11 @@ export default function LocationsPromo() {
             <div className="space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-100">
                 <MapPin className="h-4 w-4" aria-hidden />
-                <span>{loc.city} ve çevresi</span>
+                <span>Kırıkkale ve çevresi</span>
               </div>
 
               <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
-                {loc.city} Gayrimenkul Avukatı
+                Kırıkkale’de Gayrimenkul Hukuku Desteği
               </h3>
 
               <p className="text-gray-700 text-base leading-relaxed">
@@ -61,7 +64,7 @@ export default function LocationsPromo() {
 
               <div className="flex flex-wrap gap-3 items-center">
                 <Button asChild className="group/btn">
-                  <Link href={loc.slug} prefetch={false}>
+                  <Link href="/kirikkale-gayrimenkul-avukati" prefetch={false}>
                     Detayları Gör
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-0.5" />
                   </Link>
