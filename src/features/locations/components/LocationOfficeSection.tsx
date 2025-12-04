@@ -16,7 +16,7 @@ type LocationOfficeSectionProps = {
   mapEmbed: string;
   mapPlaceUrl: string;
   directionsLink: string;
-  mapImage?: { src: string; alt: string };
+  mapImage?: { src: string; alt: string; width?: number; height?: number; priority?: boolean };
 };
 
 export default function LocationOfficeSection({
