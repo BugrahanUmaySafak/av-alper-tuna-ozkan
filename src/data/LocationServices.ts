@@ -155,13 +155,16 @@ export const kirikkaleLocationPageData: LocationPageData = {
       question:
         "Tapuda adıma kayıtlı taşınmazın imar planında yol, park, okul gibi kamu alanında görünmesi veya fiilen kamu tarafından kullanılması halinde ne yapmam gerekiyor?",
       answer: `Taşınmazınız imar planında yol, park, okul gibi bir kamu hizmetine ayrılmışsa veya idare taşınmazınızı fiilen kullanıyorsa, bu durum kamulaştırmasız el atma olarak değerlendirilir.
+
 - Fiilî el atma: İdarenin taşınmazı fiziksel olarak kullanması (yol yapılması, park alanı açılması vb.).
 - Hukukî el atma: Taşınmazın imar planında kamu alanına ayrılması nedeniyle uzun süre tasarruf edilemez hâle gelmesi.
+
 Her iki durumda da ilgili idareye karşı taşınmaz bedeli için tazminat davası açabilirsiniz. Süreç, taşınmazın niteliği, kullanım şekli ve plan kararlarının tarihine göre değiştiğinden, önce idarenin hangi tür el atmayı gerçekleştirdiğinin tespiti yapılır; ardından uygun dava türü ile tazminat talep edilir.`,
     },
     {
       question: "Kiracıyı hangi durumlarda tahliye edebilirim?",
       answer: `Kiracının tahliyesi ancak kanunda belirtilen sınırlı sebeplerden biri varsa mümkündür. En sık karşılaşılan tahliye nedenleri şunlardır:
+
 - Ev sahibinden kaynaklanan tahliye sebepleri:
   - Gerçek ihtiyaç: Ev sahibi veya yakınları taşınmazı konut ya da işyeri olarak gerçekten kullanacaksa.
   - Esaslı tadilat / yeniden inşa: Taşınmaz kapsamlı bir tadilata girecek ve bu süreçte kullanılamayacaksa.
@@ -179,35 +182,42 @@ Her iki durumda da ilgili idareye karşı taşınmaz bedeli için tazminat davas
       question:
         "Müteahhit inşaatı zamanında bitirmedi veya işi terk etti. Ne yapabilirim?",
       answer: `Müteahhidin sözleşmede belirlenen süreye uymaması veya inşaatı tamamen bırakması durumunda arsa sahiplerinin Türk Borçlar Kanunu’ndan doğan önemli hakları vardır:
+
 - Gecikmeden kaynaklanan zararlar (kira kaybı, ek masraflar vb.) tazmin edilebilir.
 - İnşaatın seviyesi tespit edilerek sözleşme feshedilebilir ve inşaat başka bir müteahhide tamamlatılabilir.
 - Yarım kalan işin tamamlanması için yapılan tüm masraflar önceki müteahhitten talep edilebilir.
+
 Somut olayda hangi yolun daha doğru olduğu; sözleşmenin içeriğine, gecikme süresine ve inşaatın mevcut seviyesine göre değişir. Bu süreç teknik olduğu için arsa sahiplerinin hak kaybı yaşamaması adına profesyonel destek alınması önemlidir.`,
     },
     {
       question:
         "Hisseli bir taşınmazımız var. Diğer ortaklarla anlaşamıyoruz. Bu durumda taşınmazı nasıl satabilir veya paylaşabiliriz? Tek başıma işlem yapabilir miyim?",
       answer: `Taşınmazın hangi mülkiyet türüne tabi olduğu, tek başına işlem yapıp yapamayacağınızı belirler.
+
 - Paylı mülkiyet: Herkesin payı bellidir ve bu nedenle paydaş, kendi payını tek başına devredebilir; ancak bu tasarruf sadece kendi payını kapsar ve tüm taşınmaz üzerinde yetki vermez.
 - Elbirliği mülkiyeti: Paylar belirli olmadığından ortakların birlikte hareket etmesi zorunludur; bir ortak kendi hissesini tek başına satamaz veya devredemez.
+
 Ortakların anlaşamaması nedeniyle satış veya paylaşım yapılamıyorsa çözüm, ortaklığın giderilmesi (izale-i şuyu) davasıdır. Mahkeme önce taşınmazın fiilen taksiminin mümkün olup olmadığını değerlendirir; taksim mümkünse bölüştürme yapılır, teknik olarak mümkün değilse taşınmaz ihale yoluyla satışa çıkarılır ve satış bedeli ortaklara payları oranında dağıtılır. Bu yolla tıkanıklık giderilir ve herkes taşınmazdaki hakkı oranında parasal karşılığını almış olur.`,
     },
     {
       question:
         "Müteahhitle yazılı bir sözleşme yaptım, daireyi aldım ama inşaat bittiği hâlde teslim etmiyor. Ne yapabilirim?",
       answer: `Taşınmaz satışları kanunen şekle tabiidir ve normalde geçerli olabilmesi için resmi şekilde yapılması gerekir. Ancak tüketiciyi koruyan düzenlemeler sayesinde, müteahhit ile yapılan adi yazılı sözleşmeler çoğu durumda ön ödemeli konut satış sözleşmesi olarak kabul edilir ve satıcının şekle aykırılık iddiasıyla sorumluluktan kaçınmasına izin verilmez.
+
 Müteahhit daireyi teslim etmezse, tüketici tapu iptal ve tescil davası açarak hem sözleşmenin geçerliliğinin tanınmasını hem de bağımsız bölümün kendi adına tescilini talep edebilir. Bu süreç teknik ve ayrıntılı olduğundan, hem sözleşme yapılmadan önce hem de uyuşmazlık ortaya çıktığında hak kaybı yaşamamak için gayrimenkul alanında uzman bir avukattan destek alınması büyük önem taşır.`,
     },
     {
       question:
         "Birine verdiğim vekâlet kötüye kullanılarak taşınmazım başkasına devredilmiş. Böyle bir durumda ne yapabilirim?",
       answer: `Vekâletin kötüye kullanılması hâlinde, yapılan işlem hukuken geçersiz sayılabileceği için tapu iptal ve tescil davası açılması mümkündür.
+
 Ancak taşınmazın şu anda kimin üzerinde olduğu, devrin kaç el değiştirdiği ve özellikle sonraki alıcının iyi niyetli olup olmadığı davanın seyrini doğrudan etkiler. Türk hukukunda iyi niyetli üçüncü kişilerin korunması esastır; bu nedenle işlem zinciri dikkatle incelenmeli, vekâletnamenin kapsamı ve kötüye kullanma olgusu somut delillerle ortaya konmalıdır. Süreç teknik olduğundan, hak kaybına uğramamak için uzman bir avukattan destek alınması önemlidir.`,
     },
     {
       question:
         "Taşınmazımın imar planında konut alanından park, yol, okul gibi bir donatı alanına dönüştürüldüğünü ya da imar uygulamasında hukuka aykırı bir değişiklik yapıldığını düşünüyorum. Bu durumda ne yapabilirim?",
       answer: `İmar planının taşınmazınızı konut alanından park, yol, okul gibi bir donatı alanına dönüştürmesi veya yapılan imar uygulamasının hukuka aykırı şekilde yer değiştirme, düzenleme hatası ya da mülkiyet hakkını ölçüsüz biçimde kısıtlama sonucunu doğurması hâlinde, öncelikle işlemin hukuka uygunluğu teknik ve hukuki açıdan incelenir; aykırılık tespit edilirse ilgili imar planının veya imar uygulamasının iptali talebiyle dava açılabilir.
+
 Bu tür davalar şehir plancılığı ilkeleri, kamu yararı, eşitlik ve ölçülülük gibi teknik kriterler içerdiğinden, hem plan kararının hem de taşınmaz üzerindeki etkisinin uzman raporlarıyla ortaya konulması gerekir. Bu nedenle sürecin başından itibaren gayrimenkul ve imar hukuku alanında deneyimli bir avukatla çalışmak, davanın sağlıklı şekilde yürütülmesi için önemlidir.`,
     },
     {
@@ -216,6 +226,7 @@ Bu tür davalar şehir plancılığı ilkeleri, kamu yararı, eşitlik ve ölç�
       answer: `Kadastro yenilemesi sonrasında taşınmazın yüzölçümünde eksilme görülmesi hâlinde öncelikle azalmanın kaynağı teknik olarak belirlenmelidir; bunun için eski–yeni kadastro paftaları, ölçüm belgeleri ve sınırlandırma tutanakları uzman harita mühendisleri ve bu konuda deneyimli avukatlar tarafından karşılaştırılır.
 - Eğer yüzölçüm kaybı kadastro yenilemesindeki ölçüm/tespit hatalarından kaynaklanıyorsa, bu durum tapu sicilinin hatalı tutulmasından doğan zarar niteliğindedir ve TMK m. 1007 uyarınca Devlete karşı tazminat davası açılır; tazminat taşınmazın dava tarihi itibarıyla emsal satışlara göre gerçek değeri üzerinden hesaplanır.
 - Buna karşılık azalma komşu parseller lehine hatalı sınır kaymasından doğmuşsa, bu kez ilgili komşu parsele karşı tapu iptal ve tescil davası açılması gerekir.
+
 Bu nedenle kaybın kaynağının doğru tespiti sürecin en kritik aşamasıdır ve teknik-hukuki incelemenin uzmanlık gerektirmesi sebebiyle bu tür durumlarda profesyonel destek alınması önemlidir.`,
     },
   ],
