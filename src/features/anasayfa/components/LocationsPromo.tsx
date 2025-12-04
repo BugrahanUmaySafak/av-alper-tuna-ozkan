@@ -84,7 +84,7 @@ export default function LocationsPromo() {
             </div>
 
             <div className="relative">
-              <div className="rounded-2xl border border-gray-200 bg-white shadow-sm p-6 space-y-4">
+              <div className="rounded-2xl border border-gray-200 bg-white shadow-sm p-6 space-y-4 mb-4">
                 <p className="text-sm font-semibold text-gray-600">
                   Kırıkkale’de neler yapıyoruz?
                 </p>
@@ -102,6 +102,28 @@ export default function LocationsPromo() {
                           {step.description}
                         </p>
                       </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="rounded-2xl border border-gray-200 bg-white shadow-sm p-6 space-y-3">
+                <p className="text-sm font-semibold text-gray-600">
+                  Süreç ve Yol Haritası
+                </p>
+                <ul className="space-y-3 text-sm text-gray-800">
+                  {[
+                    "Bilgi Toplama",
+                    "Ön Görüşme ve Yol Haritası",
+                    "Arabuluculuk / Uzlaşma",
+                    "Dava Takini",
+                    "Karar sonrası İşlemler",
+                  ].map((item, idx) => (
+                    <li key={item} className="flex gap-3">
+                      <span className="mt-[2px] text-sm font-semibold text-blue-700">
+                        {idx + 1}.
+                      </span>
+                      <p className="font-semibold text-gray-900">{item}</p>
                     </li>
                   ))}
                 </ul>
