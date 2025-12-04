@@ -4,7 +4,7 @@ import Section from "@/components/section/Section";
 import ContactForm from "../components/ContactForm";
 import ContactDetails from "../components/ContactDetails";
 import ContactMapClient from "../components/ContactMapClient";
-import CityContactLinks from "../components/CityContactLinks";
+import CitiesPromo from "@/components/cities/CitiesPromo";
 
 export default function ContactWrapper() {
   return (
@@ -20,7 +20,7 @@ export default function ContactWrapper() {
         </Container>
       </Section>
 
-      <CityContactLinks />
+      <CitiesPromo />
 
       <ContactMapClient />
       <ContactForm />

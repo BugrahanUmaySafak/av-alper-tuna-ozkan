@@ -1,9 +1,9 @@
 import PageHeader from "@/components/page-header/PageHeader";
 import AboutMe from "../components/AboutMe";
 import InformativeContentWrapper from "@/components/shared/InformativeContentWrapper";
-import CityLinks from "../components/CityLinks";
 import Container from "@/components/container/Container";
 import { Separator } from "@/components/ui/separator";
+import CitiesPromo from "@/components/cities/CitiesPromo";
 
 export default function AboutWrapper() {
   return (
@@ -14,7 +14,7 @@ export default function AboutWrapper() {
       />
       <AboutMe />
 
-      <CityLinks />
+      <CitiesPromo />
 
       <Container>
         <Separator />
