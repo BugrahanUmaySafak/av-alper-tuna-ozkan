@@ -89,11 +89,9 @@ export default function LocationsPromo() {
                   Kırıkkale’de neler yapıyoruz?
                 </p>
                 <ul className="space-y-3 text-sm text-gray-800">
-                  {loc.process.map((step, idx) => (
+                  {loc.process.map((step) => (
                     <li key={step.title} className="flex gap-2">
-                      <span className="mt-[2px] text-sm font-semibold text-blue-700">
-                        {idx + 1}.
-                      </span>
+                      <span className="mt-[6px] inline-block h-1.5 w-1.5 rounded-full bg-blue-600" />
                       <div>
                         <p className="font-semibold text-gray-900">
                           {step.title}
