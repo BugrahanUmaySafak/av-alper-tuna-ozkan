@@ -61,13 +61,12 @@ export default function AboutMe() {
                 çıkarmıştır.
               </p>
               <p>
-                Özkan Hukuk ve Danışmanlık Bürosu’nun kurucusu olarak
-                faaliyetlerini sürdüren Alper Tuna Özkan, özellikle gayrimenkul
-                ve miras hukuku alanlarında müvekkillerine rehberlik etmekte,
-                taşınmaz mülkiyeti, tapu iptali ve tescil ile miras yoluyla
-                intikal eden taşınmazlardaki paydaş ihtilaflarını etkin biçimde
-                çözmektedir. Aynı zamanda kira hukuku ve mülkiyetle bağlantılı
-                diğer uyuşmazlıklarda da stratejik ve pratik çözümler üreterek
+                Alper Tuna Özkan, özellikle gayrimenkul ve miras hukuku
+                alanlarında müvekkillerine rehberlik etmekte, taşınmaz
+                mülkiyeti, tapu iptali ve tescil ile miras yoluyla intikal eden
+                taşınmazlardaki paydaş ihtilaflarını etkin biçimde çözmektedir.
+                Aynı zamanda kira hukuku ve mülkiyetle bağlantılı diğer
+                uyuşmazlıklarda da stratejik ve pratik çözümler üreterek
                 müvekkillerinin haklarını güvence altına almaktadır.
               </p>
               <p>

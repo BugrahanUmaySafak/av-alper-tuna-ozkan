@@ -114,7 +114,7 @@ export default function LocationsPromo() {
                     "Bilgi Toplama",
                     "Ön Görüşme ve Yol Haritası",
                     "Arabuluculuk / Uzlaşma",
-                    "Dava Takini",
+                    "Dava Takibi",
                     "Karar sonrası İşlemler",
                   ].map((item, idx) => (
                     <li key={item} className="flex gap-3">

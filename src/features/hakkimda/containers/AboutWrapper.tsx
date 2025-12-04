@@ -14,6 +14,10 @@ export default function AboutWrapper() {
       />
       <AboutMe />
 
+      <Container>
+        <Separator />
+      </Container>
+
       <CitiesPromo />
 
       <Container>
