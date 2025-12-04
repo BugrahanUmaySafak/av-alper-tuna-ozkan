@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import Section from "@/components/section/Section";
 import Container from "@/components/container/Container";
