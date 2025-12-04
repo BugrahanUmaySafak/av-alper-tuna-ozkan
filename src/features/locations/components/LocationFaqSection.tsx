@@ -28,7 +28,7 @@ export default function LocationFaqSection({
                 <summary className="cursor-pointer px-4 py-3 font-semibold text-gray-900">
                   {faq.question}
                 </summary>
-                <p className="px-4 pb-4 text-gray-700 text-sm leading-relaxed">
+                <p className="px-4 pb-4 text-gray-700 text-sm leading-relaxed whitespace-pre-line">
                   {faq.answer}
                 </p>
               </details>
