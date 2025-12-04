@@ -12,7 +12,7 @@ const roadMapSteps = [
   "Bilgi Toplama",
   "Ön Görüşme ve Yol Haritası",
   "Arabuluculuk / Uzlaşma",
-  "Dava Takini",
+  "Dava Takibi",
   "Karar sonrası İşlemler",
 ];
 
