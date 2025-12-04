@@ -14,7 +14,6 @@ export default function LocationsPromo() {
     services: locationPromoData.services,
     process: locationPromoData.process,
   };
-  const teaser = loc.intro.split(/(?<=\.)\s+/)[0] ?? loc.intro;
 
   return (
     <Section>
@@ -48,17 +47,22 @@ export default function LocationsPromo() {
               </h3>
 
               <p className="text-gray-700 text-base leading-relaxed">
-                {teaser}
+                {loc.intro}
               </p>
 
-              <div className="flex flex-wrap gap-2">
-                {loc.services.slice(0, 4).map((s) => (
-                  <span
+              <div className="flex flex-col gap-3">
+                {loc.services.map((s) => (
+                  <div
                     key={s.title}
-                    className="text-xs px-3 py-2 rounded-full bg-white border border-gray-200 text-gray-800 shadow-sm"
+                    className="flex flex-col gap-2 rounded-xl bg-white border border-gray-200 p-3 shadow-sm"
                   >
-                    {s.title}
-                  </span>
+                    <span className="w-fit inline-flex items-center px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-100 text-xs font-semibold">
+                      {s.title}
+                    </span>
+                    <p className="text-sm text-gray-700 leading-relaxed">
+                      {s.description}
+                    </p>
+                  </div>
                 ))}
               </div>
 
@@ -85,9 +89,11 @@ export default function LocationsPromo() {
                   Kırıkkale’de neler yapıyoruz?
                 </p>
                 <ul className="space-y-3 text-sm text-gray-800">
-                  {loc.process.slice(0, 3).map((step) => (
+                  {loc.process.map((step, idx) => (
                     <li key={step.title} className="flex gap-2">
-                      <span className="mt-[6px] h-2 w-2 rounded-full bg-blue-600 inline-block" />
+                      <span className="mt-[2px] text-sm font-semibold text-blue-700">
+                        {idx + 1}.
+                      </span>
                       <div>
                         <p className="font-semibold text-gray-900">
                           {step.title}
