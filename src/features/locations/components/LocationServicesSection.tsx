@@ -3,13 +3,11 @@ import Container from "@/components/container/Container";
 
 type LocationServicesSectionProps = {
   id: string;
-  city: string;
   services: { title: string; description: string }[];
 };
 
 export default function LocationServicesSection({
   id,
-  city,
   services,
 }: LocationServicesSectionProps) {
   return (
@@ -17,7 +15,7 @@ export default function LocationServicesSection({
       <Section>
         <Container>
           <h2 className="text-2xl font-semibold mb-4 text-gray-900">
-            {city} Hizmet Kapsamı
+            Hizmetlerimiz
           </h2>
           <div className="grid gap-4 md:grid-cols-2">
             {services.map((service) => (

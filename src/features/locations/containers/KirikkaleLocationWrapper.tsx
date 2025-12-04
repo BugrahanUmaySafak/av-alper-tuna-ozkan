@@ -1,6 +1,9 @@
 import Container from "@/components/container/Container";
 import { Separator } from "@/components/ui/separator";
-import type { LocationPageData } from "@/data/LocationServices";
+import {
+  kirikkaleLocationPageData,
+  type LocationPageData,
+} from "@/data/LocationServices";
 import LocationHeroSection from "../components/LocationHeroSection";
 import LocationTableOfContents, {
   TocItem,
@@ -9,6 +12,7 @@ import LocationServicesSection from "../components/LocationServicesSection";
 import LocationProcessSection from "../components/LocationProcessSection";
 import LocationFaqSection from "../components/LocationFaqSection";
 import LocationOfficeSection from "../components/LocationOfficeSection";
+import PageHeader from "@/components/page-header/PageHeader";
 
 const slugify = (str: string) =>
   str
@@ -24,7 +28,7 @@ const slugify = (str: string) =>
     .replace(/\s+/g, "-");
 
 const tocLabels = [
-  "Hizmet Kapsamı",
+  "Hizmetlerimiz",
   "Süreç & Yol Haritası",
   "Sık Sorulan Sorular",
   "Ofis İletişimi",
@@ -44,6 +48,10 @@ export default function KirikkaleLocationWrapper({
 }) {
   return (
     <>
+      <PageHeader
+        title="Kırıkkale Gayrimenkul Avukatı"
+        description={kirikkaleLocationPageData.headerDescription}
+      />
       <LocationHeroSection
         title={data.title}
         city={data.city}
@@ -58,13 +66,8 @@ export default function KirikkaleLocationWrapper({
 
       <LocationTableOfContents items={tocItems} />
 
-      <Container>
-        <Separator />
-      </Container>
-
       <LocationServicesSection
         id={servicesToc.id}
-        city={data.city}
         services={data.services}
       />
 

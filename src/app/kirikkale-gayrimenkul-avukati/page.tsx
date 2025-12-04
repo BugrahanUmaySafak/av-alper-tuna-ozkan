@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import PageHeader from "@/components/page-header/PageHeader";
 import KirikkaleLocationWrapper from "@/features/locations/containers/KirikkaleLocationWrapper";
 import {
   kirikkaleLocationPageData,
@@ -149,10 +148,6 @@ export default function Page() {
         type="application/ld+json"
         suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-      />
-      <PageHeader
-        title="Kırıkkale Gayrimenkul Avukatı"
-        description={locationData.headerDescription}
       />
       <KirikkaleLocationWrapper data={locationData} />
     </>

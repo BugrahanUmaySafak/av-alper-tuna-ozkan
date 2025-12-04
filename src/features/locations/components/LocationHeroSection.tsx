@@ -27,7 +27,7 @@ export default function LocationHeroSection({
               {title}
             </h1>
             <Badge className="w-fit bg-blue-900 text-blue-100">
-              {city} taşınmaz uyuşmazlıkları
+              {city} Gayrimenkul Hukuku Hizmetleri
             </Badge>
             <p className="text-gray-700 leading-relaxed">{intro}</p>
           </div>
