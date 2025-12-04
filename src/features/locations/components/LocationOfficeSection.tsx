@@ -37,7 +37,7 @@ export default function LocationOfficeSection({
       <Section>
         <Container>
           <div className="grid gap-6 lg:grid-cols-2 lg:items-stretch">
-            <div className="space-y-4 border border-gray-200 rounded-2xl p-5 bg-white">
+            <div className="space-y-4 border border-gray-200 rounded-2xl p-5 bg-white lg:h-full">
               <h2 className="text-lg font-semibold text-gray-900">
                 {city} Ofis İletişimi
               </h2>
@@ -103,20 +103,15 @@ export default function LocationOfficeSection({
                 </a>
               </div>
             </div>
-            <div className="rounded-2xl overflow-hidden border border-gray-200 shadow h-full flex">
+            <div className="rounded-2xl overflow-hidden border border-gray-200 shadow h-full max-h-[540px] flex">
               {mapImage ? (
                 <Image
                   src={mapImage.src}
                   alt={mapImage.alt}
                   width={mapImage.width ?? 800}
                   height={mapImage.height ?? 1020}
-                  className="w-full h-auto min-h-[360px] object-cover"
+                  className="w-full h-full object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  style={{
-                    aspectRatio: `${mapImage.width ?? 4} / ${
-                      mapImage.height ?? 5
-                    }`,
-                  }}
                   priority={mapImage.priority}
                 />
               ) : (
