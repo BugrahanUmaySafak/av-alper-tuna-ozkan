@@ -13,6 +13,10 @@ export default function HomePageWrapper() {
 
       <ServicesPreview />
 
+      <Container>
+        <Separator />
+      </Container>
+
       <LocationsPromo />
 
       <Container>

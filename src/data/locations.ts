@@ -82,17 +82,17 @@ export const kirikkaleLocation: LocationLandingData = {
     {
       title: "Bilgi Toplama",
       description:
-        "Taşınmazın tapu kaydı, imar planı, belediye yazıları ve varsa kamulaştırma evraklarını toplarız.",
+        "Taşınmazın tapu kayıtları, imar durumu, belediye yazıları, varsa kamulaştırma belgeleri ve veraset ilamı detaylı şekilde incelenir. Böylece dava veya müzakere sürecinde tüm hukuki zemin netleşir.",
     },
     {
-      title: "Ön Görüşme ve Yol Haritası",
+      title: "Strateji Belirleme",
       description:
-        "Dosyanın hedefini belirler, arabuluculuk zorunluluğu olup olmadığını inceler, süreleri planlarız.",
+        "Toplanan bilgiler ışığında, müvekkilin hak kayıplarına uğramaması için en doğru çözüm yolu belirlenir. Süreç boyunca olası riskler açıklanır, yapılacaklar net şekilde paylaşılır ve her adım müvekkile açık şekilde anlatılır, süreçten haberdar olması sağlanır.",
     },
     {
-      title: "Arabuluculuk / Uzlaşma",
+      title: "Sürecin Yönetimi",
       description:
-        "Tahliye, kira ve kat karşılığı uyuşmazlıklarda zorunlu veya ihtiyari arabuluculuk sürecini yönetiriz.",
+        "Seçilen strateji doğrultusunda, dava takibi, bilirkişi incelemeleri ve gerekli hukuki adımlar baştan sona yönetilir. Süreç boyunca müvekkil bilgilendirilir ve haklarının korunması sağlanır..",
     },
     {
       title: "Dava ve Takip",
@@ -147,7 +147,8 @@ export const kirikkaleLocation: LocationLandingData = {
   phone: "+903188151010",
   phoneDisplay: "+90 (318) 815 10 10",
   workingHours: "Pazartesi – Cuma 09:00 – 18:00",
-  mapEmbed: "https://www.google.com/maps?q=39.8413091,33.5002971&z=16&output=embed",
+  mapEmbed:
+    "https://www.google.com/maps?q=39.8413091,33.5002971&z=16&output=embed",
   mapLink:
     "https://www.google.com/maps/place/Avukat+Alper+Tuna+Özkan/@39.8406944,33.4994228,17z/data=!3m1!4b1",
   directionsLink:
@@ -159,12 +160,14 @@ export const kirikkaleLocation: LocationLandingData = {
     {
       href: "/faaliyet-alanlarim",
       label: "Faaliyet Alanları",
-      description: "Kamulaştırma, miras ve kira dosyalarına dair hizmetlerimizin tamamı.",
+      description:
+        "Kamulaştırma, miras ve kira dosyalarına dair hizmetlerimizin tamamı.",
     },
     {
       href: "/makalelerim",
       label: "Makaleler",
-      description: "Kırıkkale’de sık rastlanan uyuşmazlıklara dair makale özetleri.",
+      description:
+        "Kırıkkale’de sık rastlanan uyuşmazlıklara dair makale özetleri.",
     },
     {
       href: "/videolarim",
@@ -175,7 +178,8 @@ export const kirikkaleLocation: LocationLandingData = {
   crossLink: {
     href: "/iletisim",
     label: "İletişim ve Randevu",
-    description: "Kırıkkale ofisiyle görüşmek için iletişim formunu kullanın veya arayın.",
+    description:
+      "Kırıkkale ofisiyle görüşmek için iletişim formunu kullanın veya arayın.",
   },
 };
 

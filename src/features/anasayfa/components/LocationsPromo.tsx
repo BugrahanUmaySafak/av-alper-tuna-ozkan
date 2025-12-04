@@ -21,7 +21,7 @@ export default function LocationsPromo() {
             id="hizmet-bolgeleri"
             className="text-2xl md:text-3xl font-semibold text-gray-900"
           >
-            Kırıkkale Odaklı Gayrimenkul Hukuku
+            Kırıkkale’de Gayrimenkul Hukukunda Uzman Avukat
           </h2>
         </div>
 
