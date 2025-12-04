@@ -59,7 +59,7 @@ export default function ActivityList() {
                     <Separator className="mt-4 h-[3px] w-16 bg-yellow-600 rounded" />
                   </CardHeader>
 
-                  <CardContent>
+                  <CardContent className="flex h-full flex-col">
                     <ul className="mt-4 space-y-3 text-[17px] leading-8 text-gray-800">
                       {service.features.map((feature, i) => (
                         <li key={i} className="flex items-start gap-2">
@@ -69,19 +69,21 @@ export default function ActivityList() {
                       ))}
                     </ul>
 
-                    <div className="mt-5 flex flex-wrap gap-2">
-                      {cityLinks.map((city) => (
-                        <Link
-                          key={city.href}
-                          href={city.href}
-                          prefetch={false}
-                          className="text-sm px-3 py-1.5 rounded-full border border-blue-200 text-blue-700 hover:border-blue-500 hover:text-blue-800 transition"
-                          aria-label={city.aria}
-                        >
-                          {city.label}
-                        </Link>
-                      ))}
-                      <Button asChild variant="outline" className="ml-auto">
+                    <div className="mt-auto pt-5 flex flex-wrap items-center gap-3 justify-between">
+                      <div className="flex flex-wrap gap-2">
+                        {cityLinks.map((city) => (
+                          <Link
+                            key={city.href}
+                            href={city.href}
+                            prefetch={false}
+                            className="text-sm px-3 py-1.5 rounded-full border border-blue-200 text-blue-700 hover:border-blue-500 hover:text-blue-800 transition"
+                            aria-label={city.aria}
+                          >
+                            {city.label}
+                          </Link>
+                        ))}
+                      </div>
+                      <Button asChild variant="outline">
                         <Link href="/iletisim" prefetch={false}>
                           İletişim
                         </Link>
