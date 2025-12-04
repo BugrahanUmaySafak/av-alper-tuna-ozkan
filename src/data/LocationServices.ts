@@ -164,16 +164,17 @@ Her iki durumda da ilgili idareye karşı taşınmaz bedeli için tazminat davas
     {
       question: "Kiracıyı hangi durumlarda tahliye edebilirim?",
       answer: `Kiracının tahliyesi ancak kanunda belirtilen sınırlı sebeplerden biri varsa mümkündür. En sık karşılaşılan tahliye nedenleri şunlardır:
-
-- Ev sahibinden kaynaklanan tahliye sebepleri:
+Ev sahibinden kaynaklanan tahliye sebepleri:
   - Gerçek ihtiyaç: Ev sahibi veya yakınları taşınmazı konut ya da işyeri olarak gerçekten kullanacaksa.
   - Esaslı tadilat / yeniden inşa: Taşınmaz kapsamlı bir tadilata girecek ve bu süreçte kullanılamayacaksa.
   - Yeni malikin ihtiyacı: Evi satın alan yeni malik kendisi veya yakınları için kullanacaksa.
-- Kiracıdan kaynaklanan tahliye sebepleri:
+
+Kiracıdan kaynaklanan tahliye sebepleri:
   - Yazılı tahliye taahhüdü: Kiracı belirli bir tarihte çıkacağını yazılı olarak taahhüt etmişse.
   - İki haklı ihtar: Kiracı kira bedelini düzenli ödemediği için aynı kira döneminde iki kez ihtar gönderilmişse.
   - Kiranın ödenmemesi: Kiracı kira bedelini ödemezse icra yoluyla tahliye istenebilir.
-- Diğer tahliye sebepleri:
+  
+Diğer tahliye sebepleri:
   - Kiracının taşınmaza veya komşulara zarar veren davranışları
   - Kira ilişkisinin taraf için çekilmez hâle gelmesi
   - 10 yıllık uzama süresinin dolması`,
@@ -224,6 +225,7 @@ Bu tür davalar şehir plancılığı ilkeleri, kamu yararı, eşitlik ve ölç�
       question:
         "Kadastro yenilemesi (22/a uygulaması) sonrasında taşınmazımın yüzölçümünde azalma olduğunu fark ettim. Bu durumda ne yapabilirim?",
       answer: `Kadastro yenilemesi sonrasında taşınmazın yüzölçümünde eksilme görülmesi hâlinde öncelikle azalmanın kaynağı teknik olarak belirlenmelidir; bunun için eski–yeni kadastro paftaları, ölçüm belgeleri ve sınırlandırma tutanakları uzman harita mühendisleri ve bu konuda deneyimli avukatlar tarafından karşılaştırılır.
+
 - Eğer yüzölçüm kaybı kadastro yenilemesindeki ölçüm/tespit hatalarından kaynaklanıyorsa, bu durum tapu sicilinin hatalı tutulmasından doğan zarar niteliğindedir ve TMK m. 1007 uyarınca Devlete karşı tazminat davası açılır; tazminat taşınmazın dava tarihi itibarıyla emsal satışlara göre gerçek değeri üzerinden hesaplanır.
 - Buna karşılık azalma komşu parseller lehine hatalı sınır kaymasından doğmuşsa, bu kez ilgili komşu parsele karşı tapu iptal ve tescil davası açılması gerekir.
 
