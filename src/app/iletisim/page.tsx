@@ -39,7 +39,7 @@ export default function Iletisim() {
       {
         "@type": "ContactPoint",
         contactType: "customer service",
-        telephone: "+903188151010",
+        telephone: "+905340181933",
         availableLanguage: ["tr"],
         areaServed: "TR",
       },

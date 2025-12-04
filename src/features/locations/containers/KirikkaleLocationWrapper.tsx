@@ -13,6 +13,7 @@ import LocationProcessSection from "../components/LocationProcessSection";
 import LocationFaqSection from "../components/LocationFaqSection";
 import LocationOfficeSection from "../components/LocationOfficeSection";
 import PageHeader from "@/components/page-header/PageHeader";
+import ContactMapClient from "@/features/iletisim/components/ContactMapClient";
 
 const slugify = (str: string) =>
   str
@@ -98,7 +99,19 @@ export default function KirikkaleLocationWrapper({
         mapEmbed={data.mapEmbed}
         mapPlaceUrl={data.mapPlaceUrl}
         directionsLink={data.directionsLink}
+        mapImage={{
+          src: "/kitaplik.webp",
+          alt: "Özkan Hukuk & Danışmanlık ofisinde kitaplık",
+          width: 800,
+          height: 1020,
+        }}
       />
+
+      <Container>
+        <Separator />
+      </Container>
+
+      <ContactMapClient />
     </>
   );
 }

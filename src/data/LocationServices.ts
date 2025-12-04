@@ -84,8 +84,8 @@ export const kirikkaleLocationPageData: LocationPageData = {
   title: "Kırıkkale Gayrimenkul Hukuku Hizmetleri",
   headerDescription:
     "Kamulaştırma, kira, miras paylaşımı ve kat karşılığı projelerde Kırıkkale’deki yerel dinamiklere uygun hukuki yol haritası.",
-  heroImage: "/alpertunaozkan-homePage-contact.webp",
-  heroAlt: "Kırıkkale şehir merkezi ve hukuk bürosu",
+  heroImage: "/oda.webp",
+  heroAlt: "Özkan Hukuk & Danışmanlık ofisinde toplantı odası",
   intro:
     "Kırıkkale’de gayrimenkul hukuku alanında uzman bir avukat olarak, müvekkillerime kamulaştırma, miras paylaşımı, kira ve kat karşılığı inşaat projelerinde hukuki destek sağlıyorum. Karmaşık hukuki süreçlerde haklarınızı koruyor ve stratejik çözümler sunuyorum. Bu sayfa, Kırıkkale’de taşınmaz süreçleriyle karşılaşan kişiler için gerekli hukuki başvuruları, toplanması gereken belgeleri ve izlenmesi gereken adımları özetlemektedir.",
   ogImage: "/og/kirikkale.jpg",
@@ -164,6 +164,7 @@ Her iki durumda da ilgili idareye karşı taşınmaz bedeli için tazminat davas
     {
       question: "Kiracıyı hangi durumlarda tahliye edebilirim?",
       answer: `Kiracının tahliyesi ancak kanunda belirtilen sınırlı sebeplerden biri varsa mümkündür. En sık karşılaşılan tahliye nedenleri şunlardır:
+      
 Ev sahibinden kaynaklanan tahliye sebepleri:
   - Gerçek ihtiyaç: Ev sahibi veya yakınları taşınmazı konut ya da işyeri olarak gerçekten kullanacaksa.
   - Esaslı tadilat / yeniden inşa: Taşınmaz kapsamlı bir tadilata girecek ve bu süreçte kullanılamayacaksa.
@@ -244,8 +245,8 @@ Bu nedenle kaybın kaynağının doğru tespiti sürecin en kritik aşamasıdır
     postalCode: "71100",
     country: "TR",
   },
-  phone: "+903188151010",
-  phoneDisplay: "+90 (318) 815 10 10",
+  phone: "+905340181933",
+  phoneDisplay: "+90 (534) 018 19 33",
   workingHours: "Pazartesi – Cuma 09:00 – 18:00",
   mapEmbed:
     "https://www.google.com/maps?q=39.8413091,33.5002971&z=16&output=embed",

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import Section from "@/components/section/Section";
 import Container from "@/components/container/Container";
 import { Button } from "@/components/ui/button";
@@ -15,6 +16,7 @@ type LocationOfficeSectionProps = {
   mapEmbed: string;
   mapPlaceUrl: string;
   directionsLink: string;
+  mapImage?: { src: string; alt: string };
 };
 
 export default function LocationOfficeSection({
@@ -28,12 +30,13 @@ export default function LocationOfficeSection({
   mapEmbed,
   mapPlaceUrl,
   directionsLink,
+  mapImage,
 }: LocationOfficeSectionProps) {
   return (
     <div id={id}>
       <Section>
         <Container>
-          <div className="grid gap-6 lg:grid-cols-2">
+          <div className="grid gap-6 lg:grid-cols-2 lg:items-stretch">
             <div className="space-y-4 border border-gray-200 rounded-2xl p-5 bg-white">
               <h2 className="text-lg font-semibold text-gray-900">
                 {city} Ofis İletişimi
@@ -74,7 +77,7 @@ export default function LocationOfficeSection({
                   <a href={`tel:${phone}`}>Hemen Ara</a>
                 </Button>
                 <Button variant="outline" asChild>
-                  <Link href="/iletisim">Danışmanlık Formu</Link>
+                  <Link href="/iletisim">İletişim Formu</Link>
                 </Button>
               </div>
               <div className="text-sm text-gray-600 space-y-1">
@@ -100,14 +103,26 @@ export default function LocationOfficeSection({
                 </a>
               </div>
             </div>
-            <div className="rounded-2xl overflow-hidden border border-gray-200 shadow">
-              <iframe
-                src={mapEmbed}
-                title={`${city} ofis haritası`}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="w-full h-[320px]"
-              />
+            <div className="rounded-2xl overflow-hidden border border-gray-200 shadow h-full">
+              {mapImage ? (
+                <Image
+                  src={mapImage.src}
+                  alt={mapImage.alt}
+                  width={mapImage.width ?? 800}
+                  height={mapImage.height ?? 1020}
+                  className="w-full h-full min-h-[360px] object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority={mapImage.priority}
+                />
+              ) : (
+                <iframe
+                  src={mapEmbed}
+                  title={`${city} ofis haritası`}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="w-full h-full min-h-[360px]"
+                />
+              )}
             </div>
           </div>
         </Container>
