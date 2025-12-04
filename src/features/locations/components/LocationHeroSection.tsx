@@ -12,7 +12,6 @@ type LocationHeroSectionProps = {
 };
 
 export default function LocationHeroSection({
-  title,
   city,
   intro,
   heroImage,
@@ -23,9 +22,6 @@ export default function LocationHeroSection({
       <Container>
         <div className="grid gap-8 lg:grid-cols-2 items-center">
           <div className="space-y-4">
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-              {title}
-            </h1>
             <Badge className="w-fit bg-blue-900 text-blue-100">
               {city} Gayrimenkul Hukuku Hizmetleri
             </Badge>
