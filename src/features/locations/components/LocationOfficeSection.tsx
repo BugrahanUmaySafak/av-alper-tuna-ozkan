@@ -103,15 +103,20 @@ export default function LocationOfficeSection({
                 </a>
               </div>
             </div>
-            <div className="rounded-2xl overflow-hidden border border-gray-200 shadow h-full">
+            <div className="rounded-2xl overflow-hidden border border-gray-200 shadow h-full flex">
               {mapImage ? (
                 <Image
                   src={mapImage.src}
                   alt={mapImage.alt}
                   width={mapImage.width ?? 800}
                   height={mapImage.height ?? 1020}
-                  className="w-full h-full min-h-[360px] object-cover"
+                  className="w-full h-auto min-h-[360px] object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
+                  style={{
+                    aspectRatio: `${mapImage.width ?? 4} / ${
+                      mapImage.height ?? 5
+                    }`,
+                  }}
                   priority={mapImage.priority}
                 />
               ) : (
