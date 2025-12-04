@@ -63,6 +63,7 @@ export default function ContactDetails() {
         title="Sosyal Medya"
         icon={Users}
         iconColor="text-indigo-600"
+        className="md:col-span-2 md:justify-self-center md:w-3/4"
       >
         <div className="flex justify-center gap-3 pt-3 flex-wrap">
           {[
