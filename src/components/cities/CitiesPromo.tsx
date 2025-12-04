@@ -62,10 +62,16 @@ export default function CitiesPromo() {
                 Kırıkkale’de neler yapıyoruz?
               </p>
               <ul className="space-y-2 text-sm text-gray-800">
-                {loc.process.map((step) => (
-                  <li key={step.title} className="flex items-center gap-2">
-                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-blue-600" />
-                    <span className="font-semibold">{step.title}</span>
+                {[
+                  "Kamulaştırma ve Kamulaştırmasız El Atma – Taşınmazlarınız üzerindeki hak kayıplarını önlüyoruz.",
+                  "Tapu İptal ve Tescil Davaları – Tapu uyuşmazlıklarında haklarınızı koruyoruz.",
+                  "Miras Paylaşımı ve Muris Muvazaası – Adil ve hukuka uygun paylaşım süreçleri yönetiyoruz.",
+                  "Kira ve Tahliye Uyuşmazlıkları – Kiracı ve mal sahibi haklarını dengede tutan çözümler sağlıyoruz.",
+                  "İnşaat Hukuku – Kat karşılığı inşaat ve sözleşmelerde hukuki danışmanlık sunuyoruz.",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2">
+                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-blue-600 mt-1" />
+                    <span className="font-semibold">{item}</span>
                   </li>
                 ))}
               </ul>
