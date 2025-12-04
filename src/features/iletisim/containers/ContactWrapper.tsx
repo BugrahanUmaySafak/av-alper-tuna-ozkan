@@ -5,6 +5,7 @@ import ContactForm from "../components/ContactForm";
 import ContactDetails from "../components/ContactDetails";
 import ContactMapClient from "../components/ContactMapClient";
 import CitiesPromo from "@/components/cities/CitiesPromo";
+import { Separator } from "@/components/ui/separator";
 
 export default function ContactWrapper() {
   return (
@@ -20,9 +21,22 @@ export default function ContactWrapper() {
         </Container>
       </Section>
 
+      <Container>
+        <Separator />
+      </Container>
+
       <CitiesPromo />
 
+      <Container>
+        <Separator />
+      </Container>
+
       <ContactMapClient />
+
+      <Container>
+        <Separator />
+      </Container>
+
       <ContactForm />
     </>
   );
