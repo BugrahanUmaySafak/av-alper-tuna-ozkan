@@ -10,7 +10,7 @@ const PAGE_URL = `${SITE_URL}/videolarim`;
 const abs = (path: string) => new URL(path, SITE_URL).toString();
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = "Gayrimenkul Hukuku Videoları";
+  const title = "Gayrimenkul Hukuku Videoları | Avukat Alper Tuna Özkan";
   const description =
     "Gayrimenkul hukukuna dair kısa ve açıklayıcı videolar. Kira, tapu, inşaat sözleşmeleri ve kamulaştırma hakkında bilgilendirici içerikler.";
 

@@ -63,11 +63,12 @@ export async function generateMetadata({
 
   const { title, image, createdAt, updatedAt, summary } = article;
   const description = summary ? clampDescription(summary) : title;
+  const pageTitle = `${title} | Kırıkkale Gayrimenkul Avukatı Alper Tuna Özkan`;
   const path = `/makalelerim/${slug}`;
   const url = absoluteUrl(path);
 
   return {
-    title,
+    title: pageTitle,
     description: description || title,
     alternates: { canonical: url },
     robots: { index: true, follow: true },
@@ -76,7 +77,7 @@ export async function generateMetadata({
       url,
       publishedTime: createdAt,
       modifiedTime: updatedAt ?? createdAt,
-      title,
+      title: pageTitle,
       description: description || title,
       images: image?.url
         ? [
@@ -98,7 +99,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: pageTitle,
       description: description || title,
       images: image?.url
         ? [absoluteUrl(image.url)]

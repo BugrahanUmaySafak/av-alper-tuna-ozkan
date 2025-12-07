@@ -14,15 +14,16 @@ export async function generateMetadata(): Promise<Metadata> {
     .filter(Boolean)
     .slice(0, 3)
     .join(" · ");
+  const title = "Gayrimenkul Hukuku Makaleleri | Avukat Alper Tuna Özkan";
 
   return {
-    title: "Gayrimenkul Hukuku Makaleleri",
+    title,
     description: summaryText || "Gayrimenkul hukuku üzerine güncel makaleler.",
     alternates: { canonical: PAGE_URL },
     openGraph: {
       type: "website",
       url: PAGE_URL,
-      title: "Gayrimenkul Hukuku Makaleleri",
+      title,
       description: summaryText || "Güncel makaleler.",
       images: [
         { url: `${SITE_URL}/og/og-articles.jpg`, width: 1200, height: 630 },
@@ -30,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: "Gayrimenkul Hukuku Makaleleri",
+      title,
       description: summaryText || "Güncel makaleler.",
       images: [`${SITE_URL}/og/og-articles.jpg`],
     },

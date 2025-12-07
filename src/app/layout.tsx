@@ -37,10 +37,7 @@ const DEFAULT_DESCRIPTION =
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: {
-    default: DEFAULT_TITLE,
-    template: "%s | Avukat Alper Tuna Özkan",
-  },
+  title: DEFAULT_TITLE,
   description: DEFAULT_DESCRIPTION,
   applicationName: "Avukat Alper Tuna Özkan",
   manifest: "/site.webmanifest",

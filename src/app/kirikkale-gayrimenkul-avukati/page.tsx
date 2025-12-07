@@ -19,9 +19,10 @@ export const dynamic = "force-static";
 export async function generateMetadata(): Promise<Metadata> {
   const pageUrlAbsolute = toAbsoluteUrl(locationData.pageUrl);
   const ogImageAbsolute = toAbsoluteUrl(locationData.ogImage);
+  const pageTitle = "Kırıkkale Gayrimenkul Avukatı | Avukat Alper Tuna Özkan";
 
   return {
-    title: "Kırıkkale Gayrimenkul Avukatı | Avukat Alper Tuna Özkan",
+    title: pageTitle,
     description:
       "Kırıkkale’de kamulaştırma, miras paylaşımı, kira ve kat karşılığı inşaat sözleşmeleri süreçlerinde hukuki yol haritası.",
     alternates: { canonical: pageUrlAbsolute },
@@ -30,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
       url: pageUrlAbsolute,
       siteName: "Alper Tuna Özkan",
       locale: "tr_TR",
-      title: "Kırıkkale Gayrimenkul Avukatı | Avukat Alper Tuna Özkan",
+      title: pageTitle,
       description:
         "Kırıkkale’de kamulaştırma, kira ve kat karşılığı inşaat uyuşmazlıklarının nasıl yönetildiğini öğrenin.",
       images: [
@@ -44,7 +45,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: "Kırıkkale Gayrimenkul Avukatı",
+      title: pageTitle,
       description:
         "Kamulaştırma, miras payı ve kira dosyaları için yerel hukuki bilgiler.",
       images: [ogImageAbsolute],
