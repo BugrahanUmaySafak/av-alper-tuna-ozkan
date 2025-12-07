@@ -91,7 +91,7 @@ export default function KirikkaleLocationWrapper({
       <LocationOfficeSection
         id={officeToc.id}
         city={data.city}
-        addressLines={data.addressLines}
+        addressLines={data.addressLines}  
         phone={data.phone}
         phoneDisplay={data.phoneDisplay}
         email={data.email}
@@ -101,7 +101,7 @@ export default function KirikkaleLocationWrapper({
         directionsLink={data.directionsLink}
         mapImage={{
           src: "/kitaplik.webp",
-          alt: "Özkan Hukuk & Danışmanlık ofisinde kitaplık",
+          alt: "Kırıkkale gayrimenkul avukatı ofisinde kitaplık",
           width: 800,
           height: 1020,
         }}

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: `${SITE_URL}/faaliyet-alanlarim`,
-    title: "Faaliyet Alanları | Özkan Hukuk",
+    title: "Faaliyet Alanları | Avukat Alper Tuna Özkan",
     description:
       "Gayrimenkul hukuku ve ilişkili alanlarda sunduğumuz hizmet kapsamı.",
     images: [
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Faaliyet Alanları | Özkan Hukuk",
+    title: "Faaliyet Alanları | Avukat Alper Tuna Özkan",
     description: "Gayrimenkul hukuku ve ilişkili alanlarda hizmet kapsamı.",
     images: [`${SITE_URL}/og/og-services.jpg`],
   },

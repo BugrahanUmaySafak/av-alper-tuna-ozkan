@@ -85,7 +85,7 @@ export const kirikkaleLocationPageData: LocationPageData = {
   headerDescription:
     "Kamulaştırma, kira, miras paylaşımı ve kat karşılığı projelerde Kırıkkale’deki yerel dinamiklere uygun hukuki yol haritası.",
   heroImage: "/oda.webp",
-  heroAlt: "Özkan Hukuk & Danışmanlık ofisinde toplantı odası",
+  heroAlt: "Kırıkkale gayrimenkul avukatı ofisinde toplantı odası",
   intro:
     "Kırıkkale’de gayrimenkul hukuku alanında uzman bir avukat olarak, müvekkillerime kamulaştırma, miras paylaşımı, kira ve kat karşılığı inşaat projelerinde hukuki destek sağlıyorum. Karmaşık hukuki süreçlerde haklarınızı koruyor ve stratejik çözümler sunuyorum. Bu sayfa, Kırıkkale’de taşınmaz süreçleriyle karşılaşan kişiler için gerekli hukuki başvuruları, toplanması gereken belgeleri ve izlenmesi gereken adımları özetlemektedir.",
   ogImage: "/og/kirikkale.jpg",

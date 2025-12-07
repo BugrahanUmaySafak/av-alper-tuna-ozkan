@@ -22,7 +22,7 @@ const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "@id": `${SITE_URL}/#org`,
-  name: "Özkan Hukuk & Danışmanlık",
+  name: "Avukat Alper Tuna Özkan",
   url: SITE_URL,
   logo: { "@type": "ImageObject", url: `${SITE_URL}/logo/logo.png` },
   sameAs: [
@@ -31,7 +31,7 @@ const organizationJsonLd = {
   ],
 };
 
-const DEFAULT_TITLE = "Özkan Hukuk & Danışmanlık";
+const DEFAULT_TITLE = "Avukat Alper Tuna Özkan";
 const DEFAULT_DESCRIPTION =
   "Kırıkkale'de gayrimenkul hukuku odağında danışmanlık ve dava takibi. Tapu, kira, inşaat sözleşmeleri ve kamulaştırma konuları hakkında bilgi alın.";
 
@@ -39,10 +39,10 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: DEFAULT_TITLE,
-    template: "%s | Özkan Hukuk & Danışmanlık",
+    template: "%s | Avukat Alper Tuna Özkan",
   },
   description: DEFAULT_DESCRIPTION,
-  applicationName: "Özkan Hukuk & Danışmanlık",
+  applicationName: "Avukat Alper Tuna Özkan",
   manifest: "/site.webmanifest",
   category: "legal",
   icons: {

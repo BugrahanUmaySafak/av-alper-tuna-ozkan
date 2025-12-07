@@ -21,16 +21,16 @@ export async function generateMetadata(): Promise<Metadata> {
   const ogImageAbsolute = toAbsoluteUrl(locationData.ogImage);
 
   return {
-    title: "Kırıkkale Gayrimenkul Avukatı | Özkan Hukuk & Danışmanlık",
+    title: "Kırıkkale Gayrimenkul Avukatı | Avukat Alper Tuna Özkan",
     description:
       "Kırıkkale’de kamulaştırma, miras paylaşımı, kira ve kat karşılığı inşaat sözleşmeleri süreçlerinde hukuki yol haritası.",
     alternates: { canonical: pageUrlAbsolute },
     openGraph: {
       type: "website",
       url: pageUrlAbsolute,
-      siteName: "Özkan Hukuk & Danışmanlık",
+      siteName: "Alper Tuna Özkan",
       locale: "tr_TR",
-      title: "Kırıkkale Gayrimenkul Avukatı | Özkan Hukuk & Danışmanlık",
+      title: "Kırıkkale Gayrimenkul Avukatı | Avukat Alper Tuna Özkan",
       description:
         "Kırıkkale’de kamulaştırma, kira ve kat karşılığı inşaat uyuşmazlıklarının nasıl yönetildiğini öğrenin.",
       images: [
@@ -63,7 +63,7 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "LegalService",
     "@id": `${pageUrlAbsolute}#legalservice`,
-    name: "Özkan Hukuk & Danışmanlık",
+    name: "Avukat Alper Tuna Özkan",
     url: pageUrlAbsolute,
     image: heroImageAbsolute,
     areaServed: { "@type": "City", name: locationData.city },

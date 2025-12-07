@@ -12,14 +12,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: `${SITE_URL}/`,
-    title: "Avukat Alper Tuna Özkan | Özkan Hukuk & Danışmanlık",
+    title: "Avukat Alper Tuna Özkan | Avukat Alper Tuna Özkan",
     description: "Gayrimenkul hukuku odağında danışmanlık ve dava hizmetleri.",
     images: [
       {
         url: `${SITE_URL}/og/og-default.jpg`,
         width: 1200,
         height: 630,
-        alt: "Özkan Hukuk & Danışmanlık",
+        alt: "Avukat Alper Tuna Özkan",
       },
     ],
   },

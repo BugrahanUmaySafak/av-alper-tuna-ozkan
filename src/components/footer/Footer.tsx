@@ -21,7 +21,7 @@ export default function Footer() {
       <Container className="py-6 flex flex-col sm:flex-row flex-wrap items-center justify-between gap-x-4 gap-y-4">
         {/* Telif Bilgisi */}
         <p className="text-center sm:text-left text-gray-700 text-sm md:text-base">
-          © 2025 Özkan Hukuk & Danışmanlık. Tüm hakları saklıdır.
+          © 2025 Alper Tuna Özkan. Tüm hakları saklıdır.
         </p>
 
         {/* Navigasyon Menüsü */}
